@@ -1,0 +1,14 @@
+.DS_Store
+themes/Kidztime/node_modules
+plugins/kt_product_designer_plugin/node_modules
+themes/Kidztime/npm-debug.log
+dist
+themes/Kidztime/config.yml
+debug.log
+themes/Kidztime/*.sass-cache*
+themes/Kidztime/*.log
+.idea/
+*.swp
+themes/Kidztime/packaged/
+themes/Kidztime/wpcs/
+themes/Kidztime/vendor/
