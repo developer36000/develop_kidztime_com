@@ -59,17 +59,21 @@
 */
 
 // Global
+@import "global/fonts";
+@import "global/global";
 @import "global/accessibility";
-@import "global/colors";
 @import "global/wp-admin";
 @import "global/wp-overrides";
 @import "global/gutenberg";
+@import "global/svg-animation";
+
 
 // Modules
 @import "modules/navigation";
 @import "modules/content";
 @import "modules/footer";
 @import "modules/editor-style";
+@import "modules/widgets";
 
 // Components
 @import "components/buttons";
@@ -77,8 +81,12 @@
 @import "components/featured-image";
 @import "components/dividers";
 @import "components/links";
+@import "components/modals";
 
 // Templates
 @import "templates/front";
-@import "templates/kitchen-sink";
-@import "templates/home";
+@import "templates/contact";
+@import "templates/page";
+
+// Woocommerce
+@import "woocommerce/login";

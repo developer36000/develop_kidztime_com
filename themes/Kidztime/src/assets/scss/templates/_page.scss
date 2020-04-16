@@ -1,0 +1,241 @@
+body {
+  &.about_tmpl {
+    .entry-title {
+      font-style: normal;
+      font-weight: 900;
+      font-size: rem-calc(40);
+      line-height: 130%;
+      margin-bottom: rem-calc(52);
+      @include breakpoint(small down) {
+        margin-bottom: rem-calc(32);
+        font-size: 24px;
+      }
+      &:after {
+        content: '';
+        display: block;
+        width: 32px;
+        height: 4px;
+        background: $carrot;
+        border-radius: 32px;
+        margin-top: 25px;
+        @include breakpoint(small down) {
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+}
+.simple-title {
+  font-style: normal;
+  font-weight: 900;
+  font-size: rem-calc(40);
+  line-height: 130%;
+  margin-bottom: rem-calc(52);
+  @include breakpoint(small down) {
+    margin-bottom: rem-calc(32);
+    font-size: 24px;
+  }
+  &:after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 4px;
+    background: $carrot;
+    border-radius: 32px;
+    margin-top: 25px;
+    @include breakpoint(small down) {
+      margin-top: 16px;
+    }
+  }
+}
+.entry-title {
+  font-weight: 900;
+  //font-size: rem-calc();
+  line-height: 130%;
+  margin-bottom: rem-calc(64);
+  text-align: center;
+}
+.entry-content,
+.simple-text {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 157%;
+  * {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+  }
+}
+
+// ACF Goal Section
+.goal-section {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 22%;
+  @include breakpoint(medium down) {
+    margin-bottom: 19%;
+  }
+  .goal-title {
+    flex: 1 0 auto;
+    font-weight: 900;
+    font-size: rem-calc(40);
+    line-height: 130%;
+    margin-right: 62px;
+    @include breakpoint(small down) {
+      margin-right: 28px;
+      flex: 1;
+      font-size: 24px;
+    }
+  }
+  blockquote {
+    flex: auto;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 150%;
+    padding: 0;
+    padding-left: 28px;
+    border: none;
+    position: relative;
+    color: $purpl;
+    @include breakpoint(small down) {
+      padding-left: 16px;
+    }
+    &:before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: calc( 100% - 12px );
+      position: absolute;
+      left: 2px;
+      top: 7px;
+      bottom: 0;
+      background: $carrot;
+      border-radius: 32px;
+      @include breakpoint(small down) {
+        left: 0;
+      }
+    }
+    * {
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      font-weight: inherit;
+      font-style: inherit;
+    }
+  }
+}
+
+// ACF Simple Text Section
+.simple-text-section {
+  margin-bottom: 22%;
+  @include breakpoint(medium down) {
+    margin-bottom: 19%;
+  }
+}
+
+// ACF Why Section
+.why-section {
+  .why-title {
+    flex: 1 0 auto;
+    font-weight: 900;
+    font-size: rem-calc(40);
+    line-height: 130%;
+    margin-bottom: 60px;
+    @include breakpoint(small down) {
+      margin-bottom: 44px;
+      font-size: 24px;
+    }
+  }
+}
+.why_items {
+  .why-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    @include breakpoint(small down) {
+     flex-wrap: wrap;
+    }
+    &__img {
+      flex: 1 0 auto;
+      width: 100%;
+      max-width: 180px;
+      min-height: 167px;
+      background: url("../images/icons/icon-bg.svg") no-repeat 50% 50%;
+      background-size: contain;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 44px;
+      @include breakpoint(small down) {
+        max-width: 110px;
+        min-height: 102px;
+        margin-right: 16px;
+      }
+      img {
+        max-width: 90px;
+        margin: 0 auto;
+        display: block;
+      }
+    }
+    &__content {
+      flex: auto;
+      max-width: 360px;
+      width: 100%;
+      @include breakpoint(small down) {
+        flex: 1;
+      }
+    }
+    &__title {
+      font-weight: 900;
+      font-size: 18px;
+      line-height: 150%;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      padding-bottom: 0;
+    }
+    &__text {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 150%;
+      display: block;
+      @include breakpoint(small down) {
+        display: none;
+      }
+      &.mobile {
+        display: none;
+        @include breakpoint(small down) {
+          margin-top: 16px;
+          display: block;
+        }
+      }
+    }
+    &:not(:last-of-type) {
+      margin-bottom: 60px;
+      @include breakpoint(small down) {
+        margin-bottom: 44px;
+      }
+    }
+    &:nth-child(even) {
+      margin-left: 22%;
+      @include breakpoint(medium down) {
+        margin-left: 19%;
+      }
+      @include breakpoint(small down) {
+        margin-left: 0;
+      }
+    }
+    &:nth-child(odd) {
+      margin-left: 10%;
+      @include breakpoint(small down) {
+        margin-left: 0;
+      }
+    }
+    &:first-of-type {
+      margin-left: 0;
+    }
+  }
+}

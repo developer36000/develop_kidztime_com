@@ -1,18 +1,13 @@
 <?php
-/**
- * Author: Ole Fredrik Lie
- * URL: http://olefredrik.com
- *
- * FoundationPress functions and definitions
- *
- * Set up the theme and provides some helper functions, which are used in the
- * theme as custom template tags. Others are attached to action and filter
- * hooks in WordPress to change core functionality.
- *
- * @link https://codex.wordpress.org/Theme_Development
- * @package FoundationPress
- * @since FoundationPress 1.0.0
- */
+if (!defined('kt_textdomain')) {
+	define('kt_textdomain', 'kt_theme');
+}
+if (!defined('kt_meta_option')) {
+	define('kt_meta_option', kt_textdomain . '_meta_option');
+}
+if (!defined('kt_img_base_path')) {
+	define('kt_img_base_path', get_stylesheet_directory_uri() . '/dist/assets/images/');
+}
 
 /** Various clean up functions */
 require_once( 'library/cleanup.php' );
@@ -85,3 +80,8 @@ include_once 'library/opengraph_doctype.php';
  * Custom Hooks for Theme
  * */
 include_once 'library/custom-hooks.php';
+
+/*
+ * Woocommerce Custom Hooks
+ * */
+include_once 'library/woocommerce-custom-hooks.php';

@@ -1,0 +1,164 @@
+// CTA
+.btn-cta {
+  padding: 10px 15px;
+  min-height: 36px;
+  background: #FFFFFF;
+  border: 1px solid #333333;
+  box-sizing: border-box;
+  border-radius: 3px;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: $medium-gray;
+  display: inline-block;
+  max-width: max-content;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  transition: all .3s ease-in-out;
+  position: relative;
+  z-index: 1;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 100%;
+    background: $medium-gray;
+    z-index: -1;
+    transition: all .3s ease-in-out;
+  }
+  + .btn-cta {
+    margin-top: 0;
+  }
+  &:hover,
+  &:focus {
+    color: $white;
+    background: transparent;
+    &:before {
+      right: 0;
+    }
+  }
+}
+.cta-wrap {
+  width: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  color: $white;
+  text-align: center;
+  padding: rem-calc(40px) 0;
+  * {
+    width: 100%;
+  }
+}
+
+// CTA MODAl
+#cta_overlay {
+  opacity: 0;
+  z-index: -60;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(43, 42, 50, 0.25);
+  display: block;
+  @include transition-basics(all .3s);
+  &.show {
+    opacity: 1;
+    z-index: 999;
+  }
+}
+
+.cta_modal {
+  width: 100%;
+  max-width: rem-calc(556);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% ,-50%);
+  opacity: 0;
+  z-index: -50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background: $white;
+  padding: rem-calc(30);
+  @include transition-basics(all .3s);
+  @include breakpoint(medium) {
+    min-height: rem-calc(476);
+  }
+  @include breakpoint(small down) {
+    width: calc(100% - 32px);
+    padding-top: rem-calc(60);
+  }
+  .modal_title {
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 130%;
+    text-align: center;
+    max-width: rem-calc(380);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .modal_notification {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: #A5A3B8;
+    margin-bottom: 40px;
+    display: block;
+  }
+  .modal-entry {
+    img {
+      max-width: 349px;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+  }
+  .cta-close {
+    width: 32px;
+    height: 32px;
+    background: #EBEBF2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: rem-calc(12);
+    right: rem-calc(12);
+    opacity: 1;
+    &:before {
+      content: '';
+      background: url("../images/icons/close.svg") no-repeat 50% 50%;
+      background-size: contain;
+      width: 12px;
+      height: 12px;
+      display: block;
+      transform: rotate(0deg);
+      @include transition-basics(all .3s ease-in-out);
+    }
+    &:hover,
+    &:focus {
+      cursor: pointer;
+      &:before {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  &.show {
+    opacity: 1;
+    z-index: 1000;
+    @include breakpoint(small down) {
+      overflow: auto;
+      max-height: 100%;
+    }
+  }
+
+}

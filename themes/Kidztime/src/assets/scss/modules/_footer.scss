@@ -1,17 +1,142 @@
+#site-footer {
+  margin-top: 7%;
+  position: relative;
+  @include breakpoint(medium) {
+    padding: 0 24px;
+  }
+  @include breakpoint(small down) {
+    padding: 0 20px;
+    margin-top: 15%;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #353564;
+    z-index: -1;
+    height: 137px;
+    width: 100%;
+  }
+}
+
+body {
+  &.default_tmpl,
+  &.contacts_tmpl {
+
+  }
+  &.homepage_tmpl {
+    #site-footer {
+      margin-top: 0;
+    }
+  }
+}
+
 .footer-container {
   @include xy-grid-container;
-  border-top: 1px solid $medium-gray;
-  margin-top: rem-calc(60);
+  max-width: rem-calc(1144);
+  background: #2C2B57;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .footer-grid {
   @include xy-grid;
-  padding: rem-calc(30) 0;
-
+  padding: rem-calc(45) rem-calc(10);
+  @include breakpoint(small down) {
+    justify-content: center;
+  }
   section {
     @include xy-cell();
     @include breakpoint(large) {
       @include xy-cell(auto);
+    }
+    &.widget_media_image {
+      max-width: 120px;
+      width: 100%;
+      align-self: center;
+      @include breakpoint(large down) {
+        max-width: 95px;
+      }
+      @include breakpoint(small down) {
+        max-width: 100%;
+      }
+      a {
+        display: block;
+        @include breakpoint(small down) {
+          text-align: center;
+          max-width: rem-calc(121);
+          margin: 0 auto;
+          margin-bottom: 35px;
+        }
+      }
+    }
+    &.widget_nav_menu {
+      max-width: 213px;
+      width: 100%;
+      align-self: center;
+      margin-left: 49px;
+      @include breakpoint(small down) {
+        max-width: 100%;
+        margin-bottom: rem-calc(28);
+        margin-left: 0.625rem;
+      }
+      ul.menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin: 0;
+        padding: 0;
+        li {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 19px;
+          color: $white;
+          margin-bottom: 13px;
+          flex: 1 0 50%;
+          text-align: left;
+          @include breakpoint(small down) {
+            flex: 1 0 100%;
+            text-align: center;
+            margin-bottom: 16px;
+            &:nth-child(1) {
+              order: 1;
+            }
+            &:nth-child(2) {
+              order: 3;
+            }
+            &:nth-child(3) {
+              order: 2;
+            }
+            &:nth-child(4) {
+              order: 4;
+            }
+          }
+          a {
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            font-weight: inherit;
+            font-style: inherit;
+            text-align: inherit;
+            padding: 0;
+          }
+          &.current_page_item {
+            background: transparent;
+            a {
+              background: inherit;
+            }
+          }
+        }
+      }
+    }
+    &.widget_ktwidgetsocials {
+      width: auto;
+      flex: auto;
+      align-self: center;
     }
   }
 

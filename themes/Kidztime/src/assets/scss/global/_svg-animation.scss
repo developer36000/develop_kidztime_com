@@ -1,0 +1,46 @@
+#offcanvas-bottom-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-height: 191px;
+  display: block;
+  background: url("../images/icons/offcanvas-bottom-bg.svg") no-repeat 50% 50%;
+  background-size: cover;
+  #svg-blue-planet {
+    position: absolute;
+    left: 9.6%;
+    top: initial;
+    bottom: 0;
+    transition: all .3s;
+    .paint8_radial_class {
+      animation: 3s linear 0s infinite alternate blue-planet-rotate-1;
+    }
+    .paint7_radial_class {
+      animation: 2s linear 0s infinite alternate blue-planet-rotate-2;
+    }
+  }
+}
+#svg-blue-planet {
+  .paint8_radial_class {
+    // transform: rotate(-3deg);
+  }
+}
+@keyframes blue-planet-rotate-1 {
+  from {
+    transform: rotate(-2deg) translate(0, 0);
+  }
+  to {
+    transform: rotate(3deg) translate(1px, 1px);;
+  }
+}
+@keyframes blue-planet-rotate-2 {
+  from {
+    transform: rotate(-1deg) translate(0, 0);
+  }
+  to {
+    transform: rotate(1deg) translate(1px, 1px);;
+  }
+}
+

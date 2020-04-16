@@ -140,32 +140,6 @@ add_filter( 'comment_class', function( $classes, $class, $comment_id, $post_id )
 	return $classes;
 }, 10, 4 );
 
-function get_countries_select_list() {
-	ob_start();
-	$args = array(
-		'taxonomy'      => array( 'category' ),
-		'hide_empty'    => false,
-		'orderby'       => 'name',
-		'order'         => 'ASC',
-	);
-	$terms = get_terms( $args ); ?>
-	<form action="/" method="post" class="article_select_box">
-		<label for="article_select"><?php echo __('Categories'); ?></label>
-		<div class="select-box">
-			<select name="article_select" id="article_select">
-				<option selected value="0"><?php echo __('TOUS LES ARTICLES'); ?></option>
-				<?php foreach ( $terms as $term ) : ?>
-					<option value="<?php echo $term->term_id; ?>"><?php echo $term->name; ?></option>
-				<?php endforeach; ?>
-			</select>
-		</div>
-	</form>
-
-	<?php
-	$article_select = ob_get_clean();
-	return $article_select;
-}
-
 
 /**
  * Estimate time required to read the article
@@ -181,15 +155,111 @@ function bm_estimated_reading_time() {
 	$seconds = floor( $words % 120 / ( 120 / 60 ) );
 
 	if ( 1 <= $minutes ) {
-		$estimated_time = $minutes . ' minutes de lecture';
+		$estimated_time = $minutes . ' minutes' . ($minutes == 1 ? '' : 's');
 		//$estimated_time .= ', ' . $seconds . ' second' . ($seconds == 1 ? '' : 's');
 	} else {
-		$estimated_time = $seconds . ' second de lecture';
+		$estimated_time = $seconds . ' second' . ($seconds == 1 ? '' : 's');
 	}
 
 	return $estimated_time;
 
 }
+
+/*
+FIND WHAT IS THE NEXT MENU ITEM FROM A GIVEN PAGE TEMPLATE
+used in The School pages to present teaser (bottom of the pages)
+
+usage: $next_post = get_next_menu_item('menu-id-name');
+*/
+function get_next_menu_item_id( $menu_name ){
+	global $post;
+	$locations = get_nav_menu_locations();
+	$menu_items = wp_get_nav_menu_items( $locations[ $menu_name ], [
+		'output_key'  => 'menu_order',
+	] );
+	$i=-1;
+	foreach ( $menu_items as $item ):
+		$i++;
+		$menu_oreder = $item->menu_order;
+		$menu_id = $item->object_id;
+		if ( $menu_id == $post->ID ) {
+			$current_key = $i;
+		}
+	endforeach;
+	$next = $menu_items[$current_key+1];
+	$next = get_post_meta( $next->ID, '_menu_item_object_id', true );
+	return $next;
+
+}
+
+/*
+FIND WHAT IS THE PREV MENU ITEM FROM A GIVEN PAGE TEMPLATE
+used in The School pages to present teaser (bottom of the pages)
+
+usage: $prev_post = get_prev_menu_item('menu-id-name');
+*/
+function get_prev_menu_item_id( $menu_name ){
+	global $post;
+	$locations = get_nav_menu_locations();
+	$menu_items = wp_get_nav_menu_items( $locations[ $menu_name ], [
+		'output_key'  => 'menu_order',
+	] );
+	$i=-1;
+	foreach ( $menu_items as $item ):
+		$i++;
+		$menu_oreder = $item->menu_order;
+		$menu_id = $item->object_id;
+		if ( $menu_id == $post->ID ) {
+			$current_id = $i;
+		}
+	endforeach;
+	$prev_id = $current_id <= 0 ? 0 : $current_id-1;
+	$prev = $menu_items[$prev_id];
+	$prev = get_post_meta( $prev->ID, '_menu_item_object_id', true );
+	return $prev;
+
+}
+
+/**
+ * Check page templates
+ * */
+function is_contacts_tmpl() {
+	return is_page_template('page-templates/contacts.php');
+}
+function is_about_tmpl() {
+	return is_page_template('page-templates/about.php');
+}
+
+function is_woo_login_tmpl() {
+	if ( is_account_page() && !is_user_logged_in() )
+		return true;
+}
+
+function get_tmpl_body_class() {
+	$body_class = '';
+	if ( is_front_page() ) {
+		$body_class = 'homepage_tmpl';
+	}
+	elseif ( is_contacts_tmpl() ) {
+		$body_class = 'contacts_tmpl';
+	}
+	elseif ( is_about_tmpl() ) {
+		$body_class = 'about_tmpl';
+	}
+	elseif ( is_account_page() && !is_user_logged_in() ) {
+		$body_class = 'kt_woo_login_tmpl';
+	}
+	elseif ( is_account_page() && is_user_logged_in() ) {
+		$body_class = 'kt_woo_account_tmpl';
+	}
+	else {
+		$body_class = 'default_tmpl';
+	}
+	return $body_class;
+}
+
+
+
 
 
 

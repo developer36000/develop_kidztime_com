@@ -6,7 +6,7 @@ if(1){
 	function add_post_thumbs_in_post_list_table(){
 		// check which records support thumbnails
 		$supports = get_theme_support('post-thumbnails');
-		$ptype_names = array( 'post', 'page' ); // specifies the types for which the
+		$ptype_names = array('post','page'); // specifies the types for which the
 		// column is
 		// needed
 		// separately

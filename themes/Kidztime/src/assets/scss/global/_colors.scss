@@ -1,1 +1,15 @@
-$dark-nav-color: #2C3840;
+$purpl: #58448B;
+$l-purpl: #A5A3B8;
+$d-purpl: #38355B;
+$d1-purpl: #2C2B57;
+$d2-purpl: #171742;
+$d3-purpl: #181743;
+$carrot: #FF7071;
+$orange: #FF643F;
+$help: #E430E8;
+$l-gray: #EBEBF2;
+$sky: #A1EDFF;
+
+$dark-nav-color: $purpl;  // #2C3840
+
+$brn-gradient: linear-gradient(180deg, #FDA894 0%, #FF643F 100%);

@@ -37,7 +37,7 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 	function foundationpress_scripts() {
 
 		// Enqueue the main Stylesheet.
-		wp_enqueue_style( 'main-stylesheet', get_stylesheet_directory_uri() . '/dist/assets/css/' . foundationpress_asset_path( 'app.css' ), array(), '2.10.4', 'all' );
+		wp_enqueue_style( 'main-stylesheet', get_stylesheet_directory_uri() . '/dist/assets/css/' . foundationpress_asset_path( 'app.css' ), array(), '1.0.0', 'all' );
 
 		// Deregister the jquery version bundled with WordPress.
 		wp_deregister_script( 'jquery' );
@@ -55,7 +55,8 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		// wp_enqueue_script( 'jquery-migrate' );
 
 		// Enqueue Foundation scripts
-		wp_enqueue_script( 'foundation', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ), array( 'jquery' ), '2.10.4', true );
+		wp_enqueue_script( 'kidztime-js', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path(
+			'app.js' ), array( 'jquery' ), null, true );
 
 		// Enqueue FontAwesome from CDN. Uncomment the line below if you need FontAwesome.
 		//wp_enqueue_script( 'fontawesome', 'https://use.fontawesome.com/5016a31c8c.js', array(), '4.7.0', true );
@@ -65,7 +66,28 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 			wp_enqueue_script( 'comment-reply' );
 		}
 
+
+		/*		$widget_jp = array(
+			'widget_nonce' => wp_create_nonce( 'widget_nonce' ),
+			'ajaxURL' => admin_url( 'admin-ajax.php' ),
+		);
+		wp_localize_script( 'eventbrite_widget_scripts', 'eventbrite_widget_ajax', $widget_jp );*/
+
 	}
 
 	add_action( 'wp_enqueue_scripts', 'foundationpress_scripts' );
 endif;
+
+// Adding defer attributes to wp scripts
+add_filter( 'script_loader_tag', 'kt_add_defer_attribute', 10, 2 );
+function kt_add_defer_attribute( $tag, $handle ) {
+	$handles = array(
+		'kidztime-js',
+	);
+	foreach( $handles as $defer_script) :
+		if ( $defer_script === $handle ) {
+			return str_replace( ' src', ' defer="defer" src', $tag );
+		}
+	endforeach;
+	return $tag;
+}

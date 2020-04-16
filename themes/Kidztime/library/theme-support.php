@@ -42,6 +42,15 @@ if ( ! function_exists( 'foundationpress_theme_support' ) ) :
 		add_theme_support( 'wc-product-gallery-lightbox' );
 		add_theme_support( 'wc-product-gallery-slider' );
 
+		$defaults = array(
+			'height'      => 59,
+			'width'       => 200,
+			'flex-height' => true,
+			'flex-width'  => true,
+			'header-text' => array( 'site-title', 'site-description' ),
+		);
+		add_theme_support( 'custom-logo', $defaults );
+
 		add_theme_support( 'editor-styles' );
 
 		add_editor_style( get_stylesheet_directory_uri() . '/dist/assets/css/editor.css' );

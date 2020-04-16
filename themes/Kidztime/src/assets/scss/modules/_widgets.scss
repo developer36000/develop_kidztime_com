@@ -1,0 +1,66 @@
+/*
+* KTWidgetSocials
+*/
+.widget_ktwidgetsocials {
+  .kt-social-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    @include breakpoint(small down) {
+      justify-content: space-between !important;
+      max-width: 160px;
+      margin: 0 auto;
+    }
+    a {
+      max-width: 24px;
+      display: block;
+      transition: all .3s;
+      &:not(:last-of-type) {
+        margin-right: 12px;
+      }
+
+      img {
+        filter: brightness(1);
+        transition: all .3s;
+      }
+      &:hover,
+      &:focus {
+        img {
+          filter: brightness(1.5);
+        }
+      }
+    }
+  }
+  .kt-copyright {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    font-family: $affog-font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+    opacity: 0.5;
+    margin: 0;
+    margin-top: 12px;
+    @include breakpoint(small down) {
+      margin-top: 36px;
+      text-align: center;
+      justify-content: center !important;
+    }
+    a {
+      margin-left: 5px;
+    }
+    * {
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      font-weight: inherit;
+      font-style: inherit;
+    }
+  }
+
+}

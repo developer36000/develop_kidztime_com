@@ -2,6 +2,22 @@
   @include xy-grid-container;
 }
 
+body {
+  &.default_tmpl,
+  &.about_tmpl {
+    .main-container {
+      max-width: rem-calc(800);
+      margin-top: rem-calc(72);
+    }
+    .entry-content {
+      margin-bottom: 23.7%;
+      @include breakpoint(medium down) {
+        margin-bottom: 20%;
+      }
+    }
+  }
+}
+
 .main-grid {
   @include xy-grid();
   margin-top: 1rem;
@@ -36,7 +52,7 @@
     }
 
     @include breakpoint(medium) {
-      @include xy-cell(8);
+      @include xy-cell(12);
     }
   }
 
@@ -46,7 +62,7 @@
     }
 
     @include breakpoint(medium) {
-      @include xy-cell(4);
+      @include xy-cell(12);
       margin-top: 1rem;
     }
 

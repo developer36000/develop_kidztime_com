@@ -1,0 +1,31 @@
+body {
+  &.kt_woo_login_tmpl {
+    background: $d3-purpl;
+    #site-footer {
+      display: none;
+    }
+  }
+}
+.main-content {
+   &.body-kt_woo_login_tmpl {
+
+   }
+}
+.has-account {
+  &__message {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: $l-purpl;
+    margin-bottom: 4px;
+  }
+  &__link {
+    display: block;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+}
