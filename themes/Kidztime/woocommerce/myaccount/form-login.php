@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 
-<?php do_action( 'woocommerce_before_customer_login_form' ); ?>
+
 
 <?php if( isset( $_GET['action']) && $_GET['action'] == "register"): ?>
 

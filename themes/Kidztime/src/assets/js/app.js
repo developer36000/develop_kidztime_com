@@ -9,4 +9,5 @@ import Foundation from 'foundation-sites';
 //import './lib/foundation-explicit-pieces';
 $(document).foundation();
 
+import './lib/animations';
 import './lib/custom';

@@ -18,6 +18,9 @@
     z-index: -1;
     height: 137px;
     width: 100%;
+    @include breakpoint(medium down) {
+      height: calc(100% - 21px);
+    }
   }
 }
 
@@ -35,6 +38,10 @@ body {
 
 .footer-container {
   @include xy-grid-container;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  width: 100%;
   max-width: rem-calc(1144);
   background: #2C2B57;
   border-top-left-radius: 10px;
@@ -43,6 +50,7 @@ body {
 
 .footer-grid {
   @include xy-grid;
+  width: 100%;
   padding: rem-calc(45) rem-calc(10);
   @include breakpoint(small down) {
     justify-content: center;

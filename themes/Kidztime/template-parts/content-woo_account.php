@@ -1,20 +1,30 @@
 <?php
 /**
- * The default template for displaying woocommerce page My Account/Login/Register
+ * The default template for displaying woocommerce pages, My Account and Login/Register
  */
 
 ?>
 
+<?php if( is_user_logged_in() ) : ?>
 
-
-<div class="main-container">
-
-	<?php if( is_user_logged_in() ) : ?>
+	<div class="main-container">
 		<?php woocommerce_get_template( 'myaccount/my-account.php' ); ?>
-	<?php else : ?>
-		<?php woocommerce_get_template( 'myaccount/form-login.php' ); ?>
-	<?php endif; ?>
+	</div>
 
-</div>
+<?php else : ?>
+
+	<div class="main-container">
+		<?php the_content(); ?>
+		<?php //woocommerce_get_template( 'myaccount/form-login.php' ); ?>
+	</div>
+
+	<!-- START Animation -->
+	<?php get_template_part( 'template-parts/svg-parts/login-animation' ); ?>
+	<!-- END Animation -->
+
+<?php endif; ?>
+
+
+
 
 

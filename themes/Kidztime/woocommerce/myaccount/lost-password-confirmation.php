@@ -17,11 +17,33 @@
 
 defined( 'ABSPATH' ) || exit;
 
-wc_print_notice( esc_html__( 'Password reset email has been sent.', 'woocommerce' ) );
 ?>
 
-<?php do_action( 'woocommerce_before_lost_password_confirmation_message' ); ?>
 
-<p><?php echo esc_html( apply_filters( 'woocommerce_lost_password_confirmation_message', esc_html__( 'A password reset email has been sent to the email address on file for your account, but may take several minutes to show up in your inbox. Please wait at least 10 minutes before attempting another reset.', 'woocommerce' ) ) ); ?></p>
+<div class="woo-confirmation__container">
 
-<?php do_action( 'woocommerce_after_lost_password_confirmation_message' ); ?>
+	<header>
+		<h1 class="entry-title"><?php _e( 'Password Request', kt_textdomain ); ?></h1>
+	</header>
+
+	<?php do_action( 'woocommerce_before_lost_password_confirmation_message' ); ?>
+
+	<div class="woo-confirmation__message">
+		<p><?php echo esc_html( apply_filters( 'woocommerce_lost_password_confirmation_message', esc_html__( 'An email with password reset instruction has been sent to the email address you provided, it will arrive in less than a few minutes. Please remember to check your junk/spam folders.', kt_textdomain ) ) ); ?> </p>
+	</div>
+
+	<?php
+	//wc_print_notice( esc_html__( 'Password reset email has been sent.', 'woocommerce' ) );
+	do_action( 'woocommerce_after_lost_password_confirmation_message' );
+	?>
+
+	<!-- Confirmation Rocket Animation -->
+	<div class="woo-confirmation-animation">
+		<?php get_template_part( 'template-parts/svg-parts/confirmation-rocket' ); ?>
+	</div>
+	<!-- END Confirmation Rocket Animation -->
+
+</div>
+
+
+

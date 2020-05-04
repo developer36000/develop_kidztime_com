@@ -86,7 +86,7 @@ class KTWidgetSocials extends WP_Widget {
 		<div class="kt-social-links">
 			 <?php if( $facebook_link ) : ?>
 				 <a href="<?php echo $facebook_link; ?>" title="Facebook">
-					 <img src="<?php echo kt_img_base_path.'icons/facebook.svg'; ?>" alt="Facebook" loading="lazy">
+					 <img src="<?php echo kt_img_base_path.'icons/facebook-icon.svg'; ?>" alt="Facebook" loading="lazy">
 				 </a>
 			 <?php endif; ?>
 			<?php if( $instagram_link ) : ?>

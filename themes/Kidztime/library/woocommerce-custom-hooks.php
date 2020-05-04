@@ -10,20 +10,9 @@ function show_currency_symbol() {
 	return get_woocommerce_currency_symbol();
 }
 
-/**
- * Edit my account menu order
- */
-add_filter ( 'woocommerce_account_menu_items', 'kt_account_menu_order' );
-function kt_account_menu_order() {
-	$menuOrder = array(
-		'dashboard'          => __( 'Dashboard', 'woocommerce' ),
-		'orders'             => __( 'Orders', 'woocommerce' ),
-		'downloads'          => __( 'Download', 'woocommerce' ),
-		'edit-address'       => __( 'Addresses', 'woocommerce' ),
-		'edit-account'    	=> __( 'Account Details', 'woocommerce' ),
-		'customer-logout'    => __( 'Logout', 'woocommerce' ),
-	);
-	return $menuOrder;
+function get_currency_name() {
+	global  $woocommerce;
+	return get_woocommerce_currency();
 }
 
 /**
@@ -39,25 +28,6 @@ function kt_shipping_when_free_is_available( $rates ) {
 		}
 	}
 	return ! empty( $free ) ? $free : $rates;
-}
-
-
-/**
- * Create Woocommerce logout link and login link for 'primary-menu'
- * */
-//add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
-function add_loginout_link( $items, $args ) {
-
-	if (is_user_logged_in() && $args->theme_location == 'primary-menu') {
-		$items .= '<li class="menu-item menu-item-myaccount"><a href="'. get_permalink( wc_get_page_id( 'myaccount'
-			) ) .'">'
-		          .__('My Account', kt_textdomain) .'</a></li>';
-	}
-	elseif (!is_user_logged_in() && $args->theme_location == 'primary-menu') {
-		$items .= '<li><a href="' . get_permalink( wc_get_page_id( 'myaccount' ) ) . '">'.__('Login','woocommerce').'</a></li>';
-	}
-	return $items;
-
 }
 
 /*
@@ -142,25 +112,135 @@ function woocommerce_registration_errors_validation($reg_errors, $sanitized_user
 	return $reg_errors;
 }
 
-add_action( 'woocommerce_register_form', 'woocommerce_register_form_password_repeat' );
-function woocommerce_register_form_password_repeat() {
-	?>
-	<p class="form-row form-row-wide">
-		<label for="confirm_password"><?php _e( 'Confirm password', 'woocommerce' ); ?> <span class="required">*</span></label>
-		<input type="password" class="input-text" name="confirm_password" id="confirm_password" value="<?php if ( ! empty(
-			$_POST['confirm_password'] ) ) echo esc_attr( $_POST['confirm_password'] ); ?>" />
-	</p>
-	<?php
+/**
+ * Edit my account menu order
+ */
+add_filter ( 'woocommerce_account_menu_items', 'my_account_menu_order' );
+function my_account_menu_order() {
+	$menuOrder = array(
+		'dashboard'         => __( 'Account Settings', 'woocommerce' ),
+		'orders'            => __( 'Order History', kt_textdomain ),
+		'edit-address'      => __( 'Shipping Address', kt_textdomain ),
+		'payment-methods'   => __( 'Payment Details', kt_textdomain )
+	);
+	return $menuOrder;
 }
 
+/* *
+ * Unset fields in the checkout
+ * */
+add_filter( 'woocommerce_checkout_fields', 'wc_unset_checkout_order_comments_fields', 9998 );
+function wc_unset_checkout_order_comments_fields( $fields ) {
+	unset( $fields['order']['order_comments'] );
+	return $fields;
+}
 
-// Separete Login form and registration form
-//add_action('woocommerce_before_customer_login_form','load_registration_form', 2);
-function load_registration_form(){
-	if(isset($_GET['action'])=='register'){
-		woocommerce_get_template( 'myaccount/form-registration.php' );
+/* *
+ * Unset default address fields
+ * */
+add_filter( 'woocommerce_default_address_fields', 'wc_remove_default_fields' );
+function wc_remove_default_fields( $fields ) {
+
+	unset( $fields[ 'company' ] );
+	unset( $fields[ 'address_1' ] );
+	unset( $fields[ 'state' ] );
+	return $fields;
+
+}
+
+/**
+ * Change input field labels/placeholder and for billing
+ * */
+add_filter( 'woocommerce_billing_fields', 'wc_change_billing_fields', 9999 );
+function wc_change_billing_fields( $fields ) {
+
+	## ---- 1. REORDERING BILLING FIELDS ---- ##
+
+	// Set the order of the fields
+	$billing_order = array(
+		'billing_first_name',
+		'billing_last_name',
+		'billing_email',
+		'billing_phone',
+		'billing_address_2',
+		'billing_city',
+		'billing_country',
+		'billing_postcode',
+	);
+
+	$count = 0;
+	$priority = 10;
+
+	// Updating the 'priority' argument
+	foreach($billing_order as $field_name){
+		$count++;
+		$fields[$field_name]['priority'] = $count * $priority;
 	}
+
+
+	## ---- 2. CHANGING SOME CLASSES FOR BILLING FIELDS ---- ##
+
+	// billing_first_name
+	$fields['billing_first_name']['placeholder'] = 'First Name *';
+	$fields['billing_first_name']['label'] = 'First Name';
+	$fields['billing_first_name']['class'] = array('form-row-first', 'woo-user__first-name');
+
+	// billing_last_name
+	$fields['billing_last_name']['placeholder'] = 'Last Name *';
+	$fields['billing_last_name']['label'] = 'Last Name';
+	$fields['billing_last_name']['class'] = array('form-row-first', 'woo-user__last-name');
+
+	// billing_email
+	$fields['billing_email']['placeholder'] = 'Email address *';
+	$fields['billing_email']['label'] = 'Email address';
+	$fields['billing_email']['class'] = array('form-row-first', 'woo-user__email');
+
+	// billing_phone
+	$fields['billing_phone']['placeholder'] = 'Phone number *';
+	$fields['billing_phone']['label'] = 'Phone number';
+	$fields['billing_phone']['class'] = array('form-row-last', 'woo-user__phone');
+
+	// billing_address_1
+	$fields['billing_address_2']['placeholder'] = 'Address';
+	$fields['billing_address_2']['label'] = 'Address';
+	$fields['billing_address_2']['class'] = array('form-row-wide', 'woo-user__address');
+
+	// billing_city
+	$fields['billing_city']['placeholder'] = 'City';
+	$fields['billing_city']['label'] = 'City';
+	$fields['billing_city']['required'] = true;
+	$fields['billing_city']['class'] = array('form-row-first', 'address-field', 'woo-user__city', 'validate-required');
+
+	// billing_country
+	$fields['billing_country']['placeholder'] = 'Country';
+	$fields['billing_country']['label'] = 'Country';
+	$fields['billing_country']['class'] = array('form-row-wide-2','form-row-wide', 'address-field', 'woo-user__country');
+
+	// billing_postcode
+	$fields['billing_postcode']['placeholder'] = 'Zip Code';
+	$fields['billing_postcode']['label'] = 'Zip Code';
+	$fields['billing_postcode']['class'] = array('form-row-wide-1','form-row-wide', 'address-field', 'woo-user__zipcode');
+
+	return $fields;
+
 }
+
+/**
+ * Woocommerce Account - reorder the columns name
+ * */
+add_filter( 'woocommerce_account_orders_columns', 'wc_custom_account_orders_columns' );
+function wc_custom_account_orders_columns() {
+	$columns = array(
+		'order-number'  => __( '#Order', kt_textdomain ),
+		'order-date'    => __( 'Date Created', 'woocommerce' ),
+		'order-total'   => __( 'Total', 'woocommerce' ),
+		'order-status'  => __( 'Status', 'woocommerce' ),
+		'order-actions' => __( 'Actions', 'woocommerce' ),
+	);
+	return $columns;
+}
+
+
 
 
 

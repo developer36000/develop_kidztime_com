@@ -116,7 +116,7 @@ $breakpoints: (
   xxlarge: 1440px,
 );
 $print-breakpoint: large;
-$breakpoint-classes: (small medium large xlarge);
+$breakpoint-classes: (small medium large xlarge xxlarge);
 
 // 3. The Grid
 // -----------
@@ -836,13 +836,13 @@ $titlebar-icon-spacing: 0.25rem;
 
 $has-tip-cursor: help;
 $has-tip-font-weight: $global-weight-bold;
-$has-tip-border-bottom: dotted 1px $dark-gray;
-$tooltip-background-color: $black;
-$tooltip-color: $white;
-$tooltip-padding: 0.75rem;
-$tooltip-max-width: 10rem;
+$has-tip-border-bottom: none;
+$tooltip-background-color: rgba(88, 68, 139, 0.8);
+$tooltip-color: $l-pink;
+$tooltip-padding: 0.55rem;
+$tooltip-max-width: 17rem;
 $tooltip-font-size: $small-font-size;
-$tooltip-pip-width: 0.75rem;
+$tooltip-pip-width: 0.55rem;
 $tooltip-pip-height: $tooltip-pip-width * 0.866;
 $tooltip-radius: $global-radius;
 

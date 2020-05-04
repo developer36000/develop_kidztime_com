@@ -21,55 +21,180 @@ const get_form_param = ( form ) => {
   return param;
 };
 
+/**
+ * Woo Account Orders Sort function
+ * */
+let sort = (el) => {
+  console.log({el});
+  console.log('sort');
+  let col_sort = el.get(0).innerHTML;
+  let tr = el.get(0).parentNode;
+  let table = tr.parentNode.parentNode;
+  let tbody = table.tBodies[0];
+  let td, arrow, col_sort_num;
+
+  console.log({tr});
+  console.log({table});
+  console.log({tbody});
+  console.log(tbody.rows);
+
+  for (var i=0; (td = tr.getElementsByTagName("td").item(i)); i++) {
+    if (td.innerHTML == col_sort) {
+      col_sort_num = i;
+      if (td.prevsort == "y"){
+        arrow = td.firstChild;
+        el.up = Number(!el.up);
+      }else{
+        td.prevsort = "y";
+        arrow = td.insertBefore(document.createElement("span"),td.firstChild);
+        el.up = 0;
+      }
+      arrow.innerHTML = el.up?"↑ ":"↓ ";
+    }else{
+      if (td.prevsort == "y"){
+        td.prevsort = "n";
+        if (td.firstChild) td.removeChild(td.firstChild);
+      }
+    }
+  }
+
+  let a = [];
+
+  for(let i=1; i < tbody.rows.length; i++) {
+    a[i-1] = [];
+    a[i-1][0]=tbody.rows[i].getElementsByTagName("td").item(col_sort_num).innerHTML;
+    a[i-1][1]=tbody.rows[i];
+  }
+
+  a.sort();
+  if(el.up) a.reverse();
+
+  for(let i=0; i < a.length; i++)
+    tbody.appendChild(a[i][1]);
+
+};
+
+
 $(document).ready(function () {
 
-  // main menu close
-  $(document).on('click', '.mobile-off-canvas-menu-close', function (e) {
-    e.preventDefault();
-    $(document).find('.mobile-off-canvas-menu.off-canvas').removeClass('is-open')
-      .addClass('is-closed');
-    $(document).find('.js-off-canvas-overlay').removeClass('is-visible').removeClass('is-closable');
-    $(document).find('.off-canvas-content').removeClass('is-open-right');
-  });
-
+  /**
+  * Main menu close
+  * */
+    $(document).on('click', '.mobile-off-canvas-menu-close', function (e) {
+      e.preventDefault();
+      $(document).find('.mobile-off-canvas-menu.off-canvas').removeClass('is-open')
+        .addClass('is-closed');
+      $(document).find('.js-off-canvas-overlay').removeClass('is-visible').removeClass('is-closable');
+      $(document).find('.off-canvas-content').removeClass('is-open-right');
+    });
+  // end ->> Main menu close
 
   /**
    *  Custom modals
    * */
-  $(document).find('.btn-cta').click(function (e) {
-    e.preventDefault();
-    let href = $(this).attr('href'),
-      modal = $(document).find(href);
-    modal.addClass('show');
-    modal.parents('.cta-modal-window').find('#cta_overlay').addClass('show');
-  });
+    $(document).find('.btn-cta').click(function (e) {
+      e.preventDefault();
+      let href = $(this).attr('href'),
+        modal = $(document).find(href);
+      modal.addClass('show');
+      modal.parents('.cta-modal-window').find('#cta_overlay').addClass('show');
+    });
+    $(document).find('.cta-mobile-subscribe').on('click',function (e) {
+      e.preventDefault();
+      let modal = $(document).find('#cta_modal');
 
-  $(document).find('.cta-mobile-subscribe').on('click',function (e) {
-    e.preventDefault();
-    let modal = $(document).find('#cta_modal');
+      $(document).find('.mobile-off-canvas-menu.off-canvas').removeClass('is-open')
+        .addClass('is-closed');
+      $(document).find('.js-off-canvas-overlay').removeClass('is-visible').removeClass('is-closable');
+      $(document).find('.off-canvas-content').removeClass('is-open-right');
 
-    $(document).find('.mobile-off-canvas-menu.off-canvas').removeClass('is-open')
-      .addClass('is-closed');
-    $(document).find('.js-off-canvas-overlay').removeClass('is-visible').removeClass('is-closable');
-    $(document).find('.off-canvas-content').removeClass('is-open-right');
-
-    modal.addClass('show');
-    modal.parents('.cta-modal-window').find('#cta_overlay').addClass('show');
-  });
-  // close modals
-  $(document).find('.cta-close, #cta_overlay').click(function (e) {
-    e.preventDefault();
-    $(document).find('.cta_modal, #cta_overlay').removeClass('show');
-  });
+      modal.addClass('show');
+      modal.parents('.cta-modal-window').find('#cta_overlay').addClass('show');
+    });
+    // close all modals
+    $(document).find('.cta-close, #cta_overlay').click(function (e) {
+      e.preventDefault();
+      $(document).find('.cta_modal, #cta_overlay').removeClass('show');
+    });
   // end ->> Custom modals
 
-  /* CF7 Successfully Modal after form sent */
-  document.addEventListener( 'wpcf7mailsent', function( event ) {
+  /**
+  * CF7 Successfully Modal after form sent
+  * */
+    document.addEventListener( 'wpcf7mailsent', function( event ) {
     if( $(document).find('#cta_modal_successfully').length > 0 ) {
       let modal = $(document).find('#cta_modal_successfully');
       modal.parents('.cta-modal-window').find('#cta_overlay').addClass('show');
       modal.addClass('show');
     }
   }, false );
+  // end ->> CF7 Successfully Modal
+
+  /*
+  * Render html for login with social use YITH WOOCOMMERCE SOCIAL LOGIN PREMIUM
+  * */
+    if ( $(document).find('.wc-social-login').length > 0 ) {
+      const socials_wrapper = $(document).find('.wc-social-login'),
+            socials_label = socials_wrapper.find('.ywsl-label').text();
+      socials_wrapper.find('.ywsl-social').map((index, elem) => {
+        const elem_label = $(elem).attr('data-social');
+        $(elem).append('<span class="social-label">'+socials_label+' <span class="social-name">'+elem_label+'</span></span>');
+      });
+    }
+  // end ->> Render
+
+  /**
+  * Woo Account Navigation
+  * */
+    if ($('.woo-account__navigation').length > 0) {
+      $('.woo-account__navigation li').map((index, element) => {
+        if ( $(element).hasClass('is-active') ) {
+          $(element).prev().addClass('is-active-prev');
+          $(element).next().addClass('is-active-next');
+        }
+      });
+    }
+  // end ->> Woo Account Navigation
+
+  /**
+   * Woo Account Orders
+   * */
+    if ( $(document).find('.woocommerce-orders-table__header').length > 0 ) {
+
+      $(document).find('table.woocommerce-orders-table')
+          .on('click', '.woocommerce-orders-table__header.sortable', function () {
+            var index = $(this).index(),
+              rows = [],
+              thClass = $(this).hasClass('asc') ? 'desc' : 'asc';
+
+            $('table.woocommerce-orders-table th.sortable').removeClass('asc desc');
+            $(this).addClass(thClass);
+
+            $('table.woocommerce-orders-table tbody tr').each(function (index, row) {
+              rows.push($(row).detach());
+            });
+
+            rows.sort(function (a, b) {
+              var aValue = $(a).find('td').eq(index).text(),
+                bValue = $(b).find('td').eq(index).text();
+
+              return aValue > bValue
+                ? 1
+                : aValue < bValue
+                  ? -1
+                  : 0;
+            });
+
+            if ($(this).hasClass('desc')) {
+              rows.reverse();
+            }
+
+            $.each(rows, function (index, row) {
+              $('table.woocommerce-orders-table tbody').append(row);
+            });
+          });
+
+    }
+  // end ->> Woo Account Orders
 
 });

@@ -16,21 +16,29 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+?>
+<div class="woo-account__container">
 
-/**
- * My Account navigation.
- *
- * @since 2.6.0
- */
-do_action( 'woocommerce_account_navigation' ); ?>
+	<header>
+		<h1 class="entry-title"><?php _e( 'My Account', 'woocommerce' ); ?></h1>
+	</header>
 
-<div class="woocommerce-MyAccount-content">
 	<?php
-		/**
-		 * My Account content.
-		 *
-		 * @since 2.6.0
-		 */
-		do_action( 'woocommerce_account_content' );
-	?>
+	/**
+	 * My Account navigation.
+	 *
+	 * @since 2.6.0
+	 */
+	do_action( 'woocommerce_account_navigation' ); ?>
+
+	<div class="woocommerce-MyAccount-content woo-account__wrapper">
+		<?php
+			/**
+			 * My Account content.
+			 *
+			 * @since 2.6.0
+			 */
+			do_action( 'woocommerce_account_content' ); ?>
+	</div>
+
 </div>

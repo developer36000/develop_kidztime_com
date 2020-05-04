@@ -1,0 +1,493 @@
+2020-04-27T07:17:41+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Keys are not set correctly.
+====End Log====
+
+
+2020-04-27T09:49:47+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Error: Unable to verify domain - missing secret key.
+====End Log====
+
+
+2020-04-27T10:01:25+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Error: Unable to verify domain - missing secret key.
+====End Log====
+
+
+2020-04-27T10:15:57+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D/sources request: Array
+(
+    [limit] => 100
+)
+
+====End Log====
+
+
+2020-04-27T10:15:59+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D/sources request: Array
+(
+    [limit] => 100
+)
+
+====End Log====
+
+
+2020-04-27T10:16:40+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+sources/src_1GcU0xF94RBmEuwRy2cTXtqe
+====End Log====
+
+
+2020-04-27T10:16:41+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D/sources request: Array
+(
+    [source] => src_1GcU0xF94RBmEuwRy2cTXtqe
+)
+
+====End Log====
+
+
+2020-04-27T10:16:42+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D request: Array
+(
+    [email] => developer36000@gmail.com
+    [description] => Name: dev dev, Username: dev
+    [metadata] => Array
+        (
+        )
+
+)
+
+====End Log====
+
+
+2020-04-27T10:16:42+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Info: Begin processing payment for order 106 for the amount of 0.50
+====End Log====
+
+
+2020-04-27T10:16:42+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+payment_intents request: Array
+(
+    [source] => src_1GcU0xF94RBmEuwRy2cTXtqe
+    [amount] => 50
+    [currency] => sgd
+    [description] => KidztimeLab - Order 106
+    [metadata] => Array
+        (
+            [customer_name] => dev dev
+            [customer_email] => developer36000@gmail.com
+            [order_id] => 106
+        )
+
+    [capture_method] => automatic
+    [payment_method_types] => Array
+        (
+            [0] => card
+        )
+
+    [customer] => cus_HApb7toKv7bG4D
+)
+
+====End Log====
+
+
+2020-04-27T10:16:44+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+sources/src_1GcU0xF94RBmEuwRy2cTXtqe
+====End Log====
+
+
+2020-04-27T10:16:45+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D/sources request: Array
+(
+    [source] => src_1GcU0xF94RBmEuwRy2cTXtqe
+)
+
+====End Log====
+
+
+2020-04-27T10:16:45+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Error: stdClass Object
+(
+    [error] => stdClass Object
+        (
+            [message] => The source you provided has already been attached to a customer.
+            [param] => source
+            [type] => invalid_request_error
+        )
+
+)
+
+====End Log====
+
+
+2020-04-27T10:20:04+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D/sources request: Array
+(
+    [limit] => 100
+)
+
+====End Log====
+
+
+2020-04-27T10:20:06+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D/sources request: Array
+(
+    [limit] => 100
+)
+
+====End Log====
+
+
+2020-04-27T10:23:44+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D/sources request: Array
+(
+    [limit] => 100
+)
+
+====End Log====
+
+
+2020-04-27T10:23:53+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D request: Array
+(
+    [email] => developer36000@gmail.com
+    [description] => Name: dev dev, Username: dev
+    [metadata] => Array
+        (
+        )
+
+)
+
+====End Log====
+
+
+2020-04-27T10:23:53+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+sources/src_1GcTwiF94RBmEuwR7gTupGBa
+====End Log====
+
+
+2020-04-27T10:23:54+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Info: Begin processing payment for order 106 for the amount of 0.50
+====End Log====
+
+
+2020-04-27T10:23:54+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+payment_intents request: Array
+(
+    [source] => src_1GcTwiF94RBmEuwR7gTupGBa
+    [amount] => 50
+    [currency] => sgd
+    [description] => KidztimeLab - Order 106
+    [metadata] => Array
+        (
+            [customer_name] => dev dev
+            [customer_email] => developer36000@gmail.com
+            [order_id] => 106
+        )
+
+    [capture_method] => automatic
+    [payment_method_types] => Array
+        (
+            [0] => card
+        )
+
+    [customer] => cus_HApb7toKv7bG4D
+)
+
+====End Log====
+
+
+2020-04-27T10:23:55+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D request: Array
+(
+    [email] => developer36000@gmail.com
+    [description] => Name: dev dev, Username: dev
+    [metadata] => Array
+        (
+        )
+
+)
+
+====End Log====
+
+
+2020-04-27T10:23:56+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+sources/src_1GcTwiF94RBmEuwR7gTupGBa
+====End Log====
+
+
+2020-04-27T10:23:56+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Info: Begin processing payment for order 106 for the amount of 0.50
+====End Log====
+
+
+2020-04-27T10:23:56+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+payment_intents request: Array
+(
+    [source] => src_1GcTwiF94RBmEuwR7gTupGBa
+    [amount] => 50
+    [currency] => sgd
+    [description] => KidztimeLab - Order 106
+    [metadata] => Array
+        (
+            [customer_name] => dev dev
+            [customer_email] => developer36000@gmail.com
+            [order_id] => 106
+        )
+
+    [capture_method] => automatic
+    [payment_method_types] => Array
+        (
+            [0] => card
+        )
+
+    [customer] => cus_HApb7toKv7bG4D
+)
+
+====End Log====
+
+
+2020-04-27T10:23:59+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+sources/src_1GcTwiF94RBmEuwR7gTupGBa
+====End Log====
+
+
+2020-04-27T10:23:59+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Info: Begin processing payment for order 106 for the amount of 0.50
+====End Log====
+
+
+2020-04-27T10:23:59+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+payment_intents request: Array
+(
+    [source] => src_1GcTwiF94RBmEuwR7gTupGBa
+    [amount] => 50
+    [currency] => sgd
+    [description] => KidztimeLab - Order 106
+    [metadata] => Array
+        (
+            [customer_name] => dev dev
+            [customer_email] => developer36000@gmail.com
+            [order_id] => 106
+        )
+
+    [capture_method] => automatic
+    [payment_method_types] => Array
+        (
+            [0] => card
+        )
+
+    [customer] => cus_HApb7toKv7bG4D
+)
+
+====End Log====
+
+
+2020-04-27T10:24:03+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+sources/src_1GcTwiF94RBmEuwR7gTupGBa
+====End Log====
+
+
+2020-04-27T10:24:03+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Info: Begin processing payment for order 106 for the amount of 0.50
+====End Log====
+
+
+2020-04-27T10:24:03+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+payment_intents request: Array
+(
+    [source] => src_1GcTwiF94RBmEuwR7gTupGBa
+    [amount] => 50
+    [currency] => sgd
+    [description] => KidztimeLab - Order 106
+    [metadata] => Array
+        (
+            [customer_name] => dev dev
+            [customer_email] => developer36000@gmail.com
+            [order_id] => 106
+        )
+
+    [capture_method] => automatic
+    [payment_method_types] => Array
+        (
+            [0] => card
+        )
+
+    [customer] => cus_HApb7toKv7bG4D
+)
+
+====End Log====
+
+
+2020-04-27T10:24:07+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+sources/src_1GcTwiF94RBmEuwR7gTupGBa
+====End Log====
+
+
+2020-04-27T10:24:08+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Info: Begin processing payment for order 106 for the amount of 0.50
+====End Log====
+
+
+2020-04-27T10:24:08+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+payment_intents request: Array
+(
+    [source] => src_1GcTwiF94RBmEuwR7gTupGBa
+    [amount] => 50
+    [currency] => sgd
+    [description] => KidztimeLab - Order 106
+    [metadata] => Array
+        (
+            [customer_name] => dev dev
+            [customer_email] => developer36000@gmail.com
+            [order_id] => 106
+        )
+
+    [capture_method] => automatic
+    [payment_method_types] => Array
+        (
+            [0] => card
+        )
+
+    [customer] => cus_HApb7toKv7bG4D
+)
+
+====End Log====
+
+
+2020-04-27T10:24:08+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+sources/src_1GcTwiF94RBmEuwR7gTupGBa
+====End Log====
+
+
+2020-04-27T10:24:09+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Info: Begin processing payment for order 106 for the amount of 0.50
+====End Log====
+
+
+2020-04-27T10:24:09+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+payment_intents request: Array
+(
+    [source] => src_1GcTwiF94RBmEuwR7gTupGBa
+    [amount] => 50
+    [currency] => sgd
+    [description] => KidztimeLab - Order 106
+    [metadata] => Array
+        (
+            [customer_name] => dev dev
+            [customer_email] => developer36000@gmail.com
+            [order_id] => 106
+        )
+
+    [capture_method] => automatic
+    [payment_method_types] => Array
+        (
+            [0] => card
+        )
+
+    [customer] => cus_HApb7toKv7bG4D
+)
+
+====End Log====
+
+
+2020-04-27T10:24:09+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+Error: stdClass Object
+(
+    [error] => stdClass Object
+        (
+            [code] => amount_too_small
+            [doc_url] => https://stripe.com/docs/error-codes/amount-too-small
+            [message] => Amount must convert to at least 50 cents. $0.50 SGD converts to approximately $0.35 USD.
+            [type] => invalid_request_error
+        )
+
+)
+
+====End Log====
+
+
+2020-04-27T10:24:09+00:00 DEBUG 
+====Stripe Version: 4.3.3====
+====Start Log====
+customers/cus_HApb7toKv7bG4D/sources request: Array
+(
+    [limit] => 100
+)
+
+====End Log====
+
+

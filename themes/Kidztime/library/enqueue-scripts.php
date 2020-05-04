@@ -35,9 +35,16 @@ endif;
 
 if ( ! function_exists( 'foundationpress_scripts' ) ) :
 	function foundationpress_scripts() {
+		$is_woocomerce_class_arr = is_woocommerce() ? array( 'woocommerce-general-css' ) : array();
 
 		// Enqueue the main Stylesheet.
-		wp_enqueue_style( 'main-stylesheet', get_stylesheet_directory_uri() . '/dist/assets/css/' . foundationpress_asset_path( 'app.css' ), array(), '1.0.0', 'all' );
+		wp_enqueue_style(
+			'main-stylesheet',
+			get_stylesheet_directory_uri() . '/dist/assets/css/' . foundationpress_asset_path( 'app.css' ),
+			$is_woocomerce_class_arr,
+			'1.0.0',
+			'all'
+		);
 
 		// Deregister the jquery version bundled with WordPress.
 		wp_deregister_script( 'jquery' );
@@ -55,8 +62,12 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		// wp_enqueue_script( 'jquery-migrate' );
 
 		// Enqueue Foundation scripts
-		wp_enqueue_script( 'kidztime-js', get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path(
-			'app.js' ), array( 'jquery' ), null, true );
+		wp_enqueue_script(
+			'kidztime-js',
+			get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ),
+			array( 'jquery' ),
+			null,
+			true );
 
 		// Enqueue FontAwesome from CDN. Uncomment the line below if you need FontAwesome.
 		//wp_enqueue_script( 'fontawesome', 'https://use.fontawesome.com/5016a31c8c.js', array(), '4.7.0', true );

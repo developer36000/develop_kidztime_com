@@ -23,16 +23,26 @@
   @include breakpoint(medium down) {
     padding-right: rem-calc(16);
     padding-left: rem-calc(20);
+    min-height: 52px;
+  }
+  @include breakpoint(small down) {
+    min-height: 52px;
   }
   .site-navigation {
     padding: 0;
     @include breakpoint(medium) {
-      min-height: 107px;
+      min-height: rem-calc(107);
     }
   }
   .top-bar,
   .top-bar ul {
     background: transparent;
+  }
+  .site-desktop-title {
+    a {
+      display: block;
+      max-width: rem-calc(202);
+    }
   }
   .top-bar-left {}
   .top-bar-center {
@@ -64,9 +74,12 @@
     padding: 5px 0;
     min-height: 42px;
     .title-bar-title {
-      max-width: 202px;
+      max-width: rem-calc(202);
+      a {
+        display: block;
+      }
       @include breakpoint(small down) {
-        max-width: 143px;
+        max-width: rem-calc(143);
         margin-left: 24px;
       }
     }
@@ -82,6 +95,9 @@
 }
 
 // off-canvas mobile
+.off-canvas-content {
+  min-height: inherit;
+}
 .mobile-off-canvas-menu-close {
   width: 30px;
   height: 30px;
@@ -172,7 +188,9 @@
 
 body {
   &.default_tmpl,
-  &.contacts_tmpl {
+  &.contacts_tmpl,
+  &.about_tmpl,
+  &.kt_woo_account_tmpl {
     #site-header {
       .top-bar-left {}
       .top-bar-center {}
@@ -182,12 +200,50 @@ body {
   &.homepage_tmpl,
   &.kt_woo_login_tmpl {
     #site-header {
+      position: relative;
+      z-index: 15;
       .top-bar-left {}
       .top-bar-center {
         flex: 1 1 auto;
+        ul.menu {
+          li {
+            a {
+              color: $white;
+            }
+          }
+        }
       }
-      .top-bar-right {}
-    }
+      .top-bar-right {
+        .header-loginout-icons {
+          .loginout-item {
+            a {
+              color: $white;
+              svg {
+                color: $white;
+                fill: $white;
+              }
+            }
+          }
+        }
+      }
+      .menu-icon {
+        &:after {
+          background: $white;
+          box-shadow: 0 7px 0 $white, 0 14px 0 $white;
+        }
+      }
+      .site-desktop-title,
+      .title-bar-title {
+        a {
+          background: url("../images/icons/logo-horizontal-white.svg") no-repeat 50% 50%;
+          background-size: contain;
+          img {
+            opacity: 0;
+          }
+        }
+      }
+
+    } // #site-header
   }
 }
 

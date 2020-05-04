@@ -39,17 +39,25 @@ if ( $show_downloads ) {
 	);
 }
 ?>
-<section class="woocommerce-order-details">
+<!-- VIEW ORDER DETAILS BLOCK -->
+<section class="woocommerce-order-details woo-account__order-details">
 	<?php do_action( 'woocommerce_order_details_before_order_table', $order ); ?>
 
-	<h2 class="woocommerce-order-details__title"><?php esc_html_e( 'Order details', 'woocommerce' ); ?></h2>
-
-	<table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
+	<table class="woocommerce-table woocommerce-table--order-details shop_table order_details shop_table_responsive">
 
 		<thead>
 			<tr>
-				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
+				<th class="woocommerce-table__product-name product-name">
+					<?php esc_html_e( 'Product', 'woocommerce' ); ?>
+				</th>
+				<th class="woocommerce-table__product-table product-quantity">
+					<?php esc_html_e( 'Qty', kt_textdomain ); ?></th>
+				<th class="woocommerce-table__product-table product-price">
+					<?php echo _e( 'Price', kt_textdomain ).', ' .get_currency_name(); ?>
+				</th>
+				<th class="woocommerce-table__product-table product-total">
+					<?php esc_html_e( 'Subtotal', 'woocommerce' ); ?>
+				</th>
 			</tr>
 		</thead>
 
@@ -57,7 +65,7 @@ if ( $show_downloads ) {
 			<?php
 			do_action( 'woocommerce_order_details_before_order_table_items', $order );
 
-			foreach ( $order_items as $item_id => $item ) {
+			foreach ( $order_items as $item_id => $item ) :
 				$product = $item->get_product();
 
 				wc_get_template(
@@ -71,35 +79,30 @@ if ( $show_downloads ) {
 						'product'            => $product,
 					)
 				);
-			}
+			endforeach;
 
 			do_action( 'woocommerce_order_details_after_order_table_items', $order );
 			?>
 		</tbody>
-
-		<tfoot>
-			<?php
-			foreach ( $order->get_order_item_totals() as $key => $total ) {
-				?>
-					<tr>
-						<th scope="row"><?php echo esc_html( $total['label'] ); ?></th>
-						<td><?php echo ( 'payment_method' === $key ) ? esc_html( $total['value'] ) : wp_kses_post( $total['value'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
-					</tr>
-					<?php
-			}
-			?>
-			<?php if ( $order->get_customer_note() ) : ?>
-				<tr>
-					<th><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
-					<td><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
-				</tr>
-			<?php endif; ?>
-		</tfoot>
 	</table>
+
+	<div class="woocommerce-table--order-details__sub-table">
+		<?php foreach ( $order->get_order_item_totals() as $key => $total ) :
+			?>
+		<?php if( $key !== 'cart_subtotal' ) : ?>
+			<div class="details-row">
+				<div class="details-label"><?php echo esc_html( $total['label'] ); ?></div>
+				<div class="details-value"><?php echo ( 'payment_method' === $key ) ? esc_html( $total['value'] ) : wp_kses_post( $total['value'] );  ?></div>
+			</div>
+
+		<?php endif; ?>
+
+		<?php endforeach; ?>
+	</div>
 
 	<?php do_action( 'woocommerce_order_details_after_order_table', $order ); ?>
 </section>
-
+<!-- END VIEW ORDER DETAILS BLOCK -->
 <?php
 if ( $show_customer_details ) {
 	wc_get_template( 'order/order-details-customer.php', array( 'order' => $order ) );
