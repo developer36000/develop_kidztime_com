@@ -84,4 +84,4 @@ include_once 'library/custom-hooks.php';
 /*
  * Woocommerce Custom Hooks
  * */
-include_once 'library/woocommerce-custom-hooks.php';
+include_once 'library/woo-custom-hooks.php';

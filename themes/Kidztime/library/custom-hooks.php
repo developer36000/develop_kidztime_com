@@ -255,6 +255,9 @@ function get_tmpl_body_class() {
 	elseif ( is_order_received_page() ) {
 		$body_class = 'kt_woo_invoice_tmpl';
 	}
+	elseif ( is_checkout() && !is_wc_endpoint_url() ) {
+		$body_class = 'kt_woo_checkout_tmpl';
+	}
 	else {
 		$body_class = 'default_tmpl';
 	}

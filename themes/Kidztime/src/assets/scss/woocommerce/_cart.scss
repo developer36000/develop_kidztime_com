@@ -53,6 +53,15 @@ body {
         min-height: initial;
         margin-bottom: 72px;
       }
+      .woocommerce-notices-wrapper {
+        margin-bottom: 0;
+      }
+      .woocommerce-info {
+        margin-bottom: 24px;
+        &.cart-empty {
+          margin-bottom: 12px;
+        }
+      }
       .woocommerce-message {
         margin-top: 32px;
         .restore-item {
@@ -73,6 +82,7 @@ body {
       }
       &__image {
         margin: 0 auto;
+        margin-bottom: 40px;
         max-width: 134px;
         width: 100%;
         display: block;
@@ -387,7 +397,7 @@ body {
           background: transparent;
           font-size: 0;
           svg {
-            fill: $purpl;
+            fill: #ee406f;
           }
         }
       }

@@ -4,6 +4,9 @@
  *
  * This template can be overridden by copying it to yourtheme/woocommerce/myaccount/form-edit-account.php.
  *
+ * @author  WooThemes
+ * @package WooCommerce/Templates
+ * @version 4.1.0
  */
 
 defined( 'ABSPATH' ) || exit;

@@ -39,22 +39,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
 			<div class="col2-set" id="customer_details">
-				<div class="col-1">
+				<div class="col-1 woo-checkout__column">
 
 					<h2 class="checkout-title"><?php esc_html_e('Checkout', 'woocommerce'); ?></h2>
 
-					<!-- CHECKOUT ADDRESSES -->
-					<?php do_action( 'woocommerce_checkout_billing' ); ?>
-					<?php // do_action( 'woocommerce_checkout_shipping' ); ?>
-					<!-- END CHECKOUT ADDRESSES -->
+					<!-- Custom Checkout Tabs -->
+					<?php do_action( 'wc_checkout_billing_tabs' ); ?>
+					<!-- END Custom Checkout Tabs -->
+					<div data-id="digital"  class="tab-content digital is_active">
+						<!-- CHECKOUT BILLING ADDRESSES -->
+						<?php do_action( 'woocommerce_checkout_billing' ); ?>
+						<!-- END CHECKOUT BILLING ADDRESSES -->
 
-					<!-- CUSTOM CHECKOUT PAYMENT BLOCK -->
-					<?php wc_get_template( 'checkout/parts/part-checkout_payment.php' ); ?>
-					<!-- END CUSTOM CHECKOUT PAYMENT BLOCK -->
+						<!-- CUSTOM CHECKOUT PAYMENT BLOCK -->
+						<?php wc_get_template( 'checkout/parts/part-checkout_payment.php' ); ?>
+						<!-- END CUSTOM CHECKOUT PAYMENT BLOCK -->
+					</div>
+					<div data-id="live"  class="tab-content live">
+						<!-- CHECKOUT BILLING ADDRESSES -->
+						<?php do_action( 'woocommerce_checkout_billing' ); ?>
+						<!-- END CHECKOUT BILLING ADDRESSES -->
+					</div>
+
+					<div class="woo-checkout__container--submit digital">
+						<?php
+						$order_button_text = 'Confirm Order';
+						$order_button_text =  apply_filters( 'woocommerce_order_button_text', $order_button_text );
+						echo apply_filters( 'woocommerce_order_button_html', '<button type="submit" class="button alt" name="woocommerce_checkout_place_order" id="place_order" value="' . esc_attr( $order_button_text ) . '" data-value="' . esc_attr( $order_button_text ) . '">' . esc_html( $order_button_text ) . '</button>' ); ?>
+						<?php do_action( 'woocommerce_review_order_after_submit' ); ?>
+						<?php wp_nonce_field( 'woocommerce-process_checkout', 'woocommerce-process-checkout-nonce' ); ?>
+					</div>
+					<?php do_action( 'woocommerce_review_order_before_submit' ); ?>
 
 				</div>
 
-				<div class="col-2">
+				<div class="col-2 woo-checkout__column">
 
 					<!-- ORDER SUMMARY BLOCK -->
 					<?php wc_get_template( 'checkout/parts/part-order_summary.php' ); ?>

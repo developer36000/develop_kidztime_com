@@ -183,7 +183,8 @@ mark {
 
 // woocommerce notice
 .woocommerce-notices-wrapper,
-.woocommerce-form-login-toggle {
+.woocommerce-form-login-toggle,
+.woocommerce-NoticeGroup {
   max-width: rem-calc(391);
   margin: 0 auto;
   margin-bottom: 32px;

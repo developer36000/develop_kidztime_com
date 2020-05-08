@@ -29,9 +29,81 @@ body {
             margin-bottom: 18px;
           }
         }
-        &--payment {
-
+        &--billing {
+          margin-bottom: 40px;
+          .woocommerce-billing-fields {
+            .form-row {
+              &.form-row-wide.woo-user__email {
+                width: 100% !important;
+              }
+            }
+          }
         }
+        &--shipping {
+          margin-bottom: 40px;
+          .shipping_address {
+            .form-row {
+              &.form-row-wide.woo-user__email {
+                width: 100% !important;
+              }
+            }
+          }
+        }
+        &--payment {
+          margin-bottom: 40px;
+        }
+        &--submit {
+          [type="submit"] {
+            position: relative;
+            font-family: $affog-font;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 21px;
+            text-align: center;
+            color: $white;
+            background: $brn-gradient;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.25);
+            border-radius: 100px;
+            border: 1px solid $d-orange;
+            outline: none;
+            min-height: 47px;
+            width: 100%;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-shadow: 0 4px 4px rgba(255, 255, 255, 0.15);
+            max-width: 100%;
+            &:before {
+              content: '';
+              position: absolute;
+              top: -3px;
+              bottom: -3px;
+              left: -3px;
+              right: -3px;
+              z-index: -1;
+              min-height: 100%;
+              min-width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              border-radius: 100px;
+              border: 2px solid #fff;
+              background: #fff;
+              box-shadow: 0 4px 12px rgba(88, 68, 139, 0.5) !important;
+              cursor: pointer;
+            }
+            &:hover,
+            &:focus {
+              cursor: pointer;
+              color: $white;
+              background: $brn-gradient;
+            }
+          } // [type="submit"]
+        }
+
         // Address form
         // forms
         form.woo-kt_form {
@@ -164,8 +236,7 @@ body {
                 border-radius: 100px;
                 border: 2px solid #fff;
                 background: #fff;
-                //box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25);
-                box-shadow: 0 4px 12px rgba(88, 68, 139, 0.25);
+                box-shadow: 0 4px 12px rgba(88, 68, 139, 0.5);
                 cursor: pointer;
               }
               &:hover,
@@ -325,6 +396,122 @@ body {
 
 
       } // &__container
+
+      &__column {
+        .tab-content {
+          display: none;
+          &.is_active {
+            display: block;
+          }
+        }
+      } // &__column
+
+      &__tabs {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 752px;
+        list-style: none;
+        position: relative;
+        margin-bottom: 74px;
+        @include breakpoint(small down) {
+          flex-wrap: wrap;
+        }
+        &:before {
+          content: '';
+          background: #EBEBF2;
+          height: 44px;
+          border-radius: 100px;
+          position: absolute;
+          left: 0;
+          right: 0;
+          @include breakpoint(small down) {
+            display: none;
+          }
+        }
+        &--item {
+          list-style: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex: 1;
+          position: relative;
+          @include breakpoint(small down) {
+            flex: 1 0 auto;
+            margin-bottom: 8px;
+            width: calc( 50% - 4px );
+            &:nth-child(1),
+            &:nth-child(3) {
+              padding-right: 8px;
+            }
+          }
+          .item-name {
+            min-height: 44px;
+            background: transparent;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
+            color: $l-purpl;
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 500;
+            border-radius: 100px;
+            width: 100%;
+            position: relative;
+            transition: all .3s;
+            input {
+              opacity: 0;
+              position: absolute;
+              left: 0;
+            }
+            label {
+              width: 100%;
+              display: block;
+              margin: 0;
+              max-width: 100%;
+              height: 100%;
+              color: inherit;
+              font-weight: inherit;
+              font-size: inherit;
+              transition: font-weight .3s;
+              &:hover,
+              &:focus {
+                cursor: pointer;
+              }
+            }
+            @include breakpoint(small down) {
+              background: #EBEBF2;
+              min-height: 40px;
+              padding: 10px 16px;
+            }
+          }
+          &.is_active {
+            .item-name {
+              background: $orange;
+              color: $white;
+              font-size: 16px;
+              font-weight: bold;
+              min-height: 48px;
+              @include breakpoint(small down) {
+                min-height: 40px;
+              }
+            }
+          }
+          &:hover,
+          &:focus {
+            outline: none;
+            cursor: pointer;
+            .item-name {
+              font-weight: bold;
+            }
+          }
+        }
+      } // &__tabs
+
     } // .woo-checkout
 
   } // &.woocommerce-checkout

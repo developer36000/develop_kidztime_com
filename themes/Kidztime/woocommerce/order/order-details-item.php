@@ -38,6 +38,8 @@ $product_sku = $product->get_sku();
 $product_id = $product->get_id();
 $product_cat_name = wc_product_category_name( $product_id );
 
+
+
 ?>
 <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
 

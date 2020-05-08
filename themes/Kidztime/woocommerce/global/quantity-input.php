@@ -10,7 +10,9 @@ function ktq_replace_template($template_path) {
 $template_path = get_stylesheet_directory() . '/custom templates/quantity-input.php';
 return $template_path;
 }
-
+ * author  WooThemes
+ * @package WooCommerce/Templates
+ * @version 4.1.0
  */
 
 defined( 'ABSPATH' ) || exit;

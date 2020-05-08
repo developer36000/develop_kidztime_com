@@ -3,6 +3,10 @@
  * Orders
  *
  * Shows orders on the account page.
+ *
+ *  * @author  WooThemes
+ * @package WooCommerce/Templates
+ * @version 4.1.0
  */
 
 defined( 'ABSPATH' ) || exit;

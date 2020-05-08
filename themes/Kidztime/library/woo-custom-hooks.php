@@ -76,7 +76,7 @@ function kt_add_loginout_icons() {
 /**
  * Remove product data tabs
  */
-add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
+//add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
 function woo_remove_product_tabs( $tabs ) {
 	unset( $tabs['description'] );      	// Remove the description tab
 	unset( $tabs['reviews'] ); 			// Remove the reviews tab
@@ -110,6 +110,18 @@ function woocommerce_registration_errors_validation($reg_errors, $sanitized_user
 		return new WP_Error( 'registration-error', __( 'Passwords do not match.', 'woocommerce' ) );
 	}
 	return $reg_errors;
+}
+
+/**
+ * rRemove WooCommerce default payment gateways from everywhere: BACS, Check Payments, Cash on Delivery and PayPal
+ * */
+add_filter( 'woocommerce_payment_gateways', 'wc_remove_default_gateway', 10, 1 );
+function wc_remove_default_gateway( $load_gateways ){
+	unset( $load_gateways[0] ); // WC_Gateway_BACS
+	//unset( $load_gateways[1] ); // WC_Gateway_Cheque
+	//unset( $load_gateways[2] ); // WC_Gateway_COD (Cash on Delivery)
+	//unset( $load_gateways[3] ); // WC_Gateway_Paypal
+	return $load_gateways;
 }
 
 /**
@@ -177,49 +189,115 @@ function wc_change_billing_fields( $fields ) {
 		$fields[$field_name]['priority'] = $count * $priority;
 	}
 
-
 	## ---- 2. CHANGING SOME CLASSES FOR BILLING FIELDS ---- ##
 
 	// billing_first_name
 	$fields['billing_first_name']['placeholder'] = 'First Name *';
 	$fields['billing_first_name']['label'] = 'First Name';
+	$fields['billing_first_name']['required'] = true;
 	$fields['billing_first_name']['class'] = array('form-row-first', 'woo-user__first-name');
 
 	// billing_last_name
 	$fields['billing_last_name']['placeholder'] = 'Last Name *';
 	$fields['billing_last_name']['label'] = 'Last Name';
+	$fields['billing_last_name']['required'] = true;
 	$fields['billing_last_name']['class'] = array('form-row-first', 'woo-user__last-name');
 
 	// billing_email
 	$fields['billing_email']['placeholder'] = 'Email address *';
 	$fields['billing_email']['label'] = 'Email address';
+	$fields['billing_email']['required'] = true;
 	$fields['billing_email']['class'] = array('form-row-first', 'woo-user__email');
 
 	// billing_phone
-	$fields['billing_phone']['placeholder'] = 'Phone number *';
+	$fields['billing_phone']['placeholder'] = 'Phone number';
 	$fields['billing_phone']['label'] = 'Phone number';
+	$fields['billing_phone']['required'] = false;
 	$fields['billing_phone']['class'] = array('form-row-last', 'woo-user__phone');
 
 	// billing_address_1
 	$fields['billing_address_2']['placeholder'] = 'Address';
 	$fields['billing_address_2']['label'] = 'Address';
+	$fields['billing_address_2']['required'] = false;
 	$fields['billing_address_2']['class'] = array('form-row-wide', 'woo-user__address');
 
 	// billing_city
 	$fields['billing_city']['placeholder'] = 'City';
 	$fields['billing_city']['label'] = 'City';
-	$fields['billing_city']['required'] = true;
+	$fields['billing_city']['required'] = false;
 	$fields['billing_city']['class'] = array('form-row-first', 'address-field', 'woo-user__city', 'validate-required');
 
 	// billing_country
 	$fields['billing_country']['placeholder'] = 'Country';
 	$fields['billing_country']['label'] = 'Country';
+	$fields['billing_country']['required'] = false;
 	$fields['billing_country']['class'] = array('form-row-wide-2','form-row-wide', 'address-field', 'woo-user__country');
 
 	// billing_postcode
 	$fields['billing_postcode']['placeholder'] = 'Zip Code';
 	$fields['billing_postcode']['label'] = 'Zip Code';
+	$fields['billing_postcode']['required'] = false;
 	$fields['billing_postcode']['class'] = array('form-row-wide-1','form-row-wide', 'address-field', 'woo-user__zipcode');
+
+	return $fields;
+
+}
+
+/**
+ * Change input field labels/placeholder and for shipping
+ * */
+add_filter( 'woocommerce_shipping_fields', 'wc_change_shipping_fields', 9999 );
+function wc_change_shipping_fields( $fields ) {
+
+	## ---- 1. REORDERING BILLING FIELDS ---- ##
+
+	// Set the order of the fields
+	$shipping_order = array(
+		'shipping_first_name',
+		'shipping_last_name',
+		'shipping_email',
+		'shipping_phone',
+		'shipping_address_2',
+		'shipping_city',
+		'shipping_country',
+		'shipping_postcode',
+	);
+
+	$count = 0;
+	$priority = 10;
+
+	// Updating the 'priority' argument
+	foreach($shipping_order as $field_name){
+		$count++;
+		$fields[$field_name]['priority'] = $count * $priority;
+	}
+
+
+	## ---- 2. CHANGING SOME CLASSES FOR BILLING FIELDS ---- ##
+
+	// shipping_first_name
+	$fields['shipping_first_name']['placeholder'] = 'First Name';
+	$fields['shipping_first_name']['label'] = 'First Name';
+	$fields['shipping_first_name']['class'] = array('form-row-first', 'woo-user__first-name');
+
+	// shipping_last_name
+	$fields['shipping_last_name']['placeholder'] = 'Last Name';
+	$fields['shipping_last_name']['label'] = 'Last Name';
+	$fields['shipping_last_name']['class'] = array('form-row-first', 'woo-user__last-name');
+
+	// shipping_email
+	$fields['shipping_email']['placeholder'] = 'Email address';
+	$fields['shipping_email']['required'] = true;
+	$fields['shipping_email']['class'] = array('form-row-wide', 'woo-user__email');
+
+	unset( $fields[ 'shipping_company' ] );
+	unset( $fields[ 'shipping_address_1' ] );
+	unset( $fields[ 'shipping_address_2' ] );
+	unset( $fields[ 'shipping_phone' ] );
+	unset( $fields[ 'shipping_state' ] );
+	unset( $fields[ 'shipping_city' ] );
+	unset( $fields[ 'shipping_country' ] );
+	unset( $fields[ 'shipping_postcode' ] );
 
 	return $fields;
 
@@ -240,7 +318,6 @@ function wc_custom_account_orders_columns() {
 	return $columns;
 }
 
-
 /**
  * Remove Product Tags
  * */
@@ -249,20 +326,17 @@ add_action( 'admin_menu', 'wc_hide_product_tags_admin_menu', 9999 );
 function wc_hide_product_tags_admin_menu() {
 	remove_submenu_page( 'edit.php?post_type=product', 'edit-tags.php?taxonomy=product_tag&amp;post_type=product' );
 }
-
 // Remove Product tags Metabox
 add_action( 'admin_menu', 'wc_hide_product_tags_metabox' );
 function wc_hide_product_tags_metabox() {
 	remove_meta_box( 'tagsdiv-product_tag', 'product', 'side' );
 }
-
 // Remove Tags Column from All Products page
 add_filter('manage_product_posts_columns', 'wc_hide_product_tags_column', 999 );
 function wc_hide_product_tags_column( $product_columns ) {
 	unset( $product_columns['product_tag'] );
 	return $product_columns;
 }
-
 // Remove Product Tags Textarea from Quick Edit and Bulk Edit
 add_filter( 'quick_edit_show_taxonomy', 'wc_hide_product_tags_quick_edit', 10, 2 );
 function wc_hide_product_tags_quick_edit( $show, $taxonomy_name ) {
@@ -271,7 +345,6 @@ function wc_hide_product_tags_quick_edit( $show, $taxonomy_name ) {
 	return $show;
 
 }
-
 // Remove Product Tag Cloud Widget
 add_action( 'widgets_init', 'wc_remove_product_tag_cloud_widget' );
 function wc_remove_product_tag_cloud_widget(){
@@ -402,9 +475,139 @@ function wc_get_account_mail_phone( $name ) {
 	return $args;
 }
 
+/**
+ * Rendering Custom Checkout Tabs
+ * */
+add_action('wc_checkout_billing_tabs', 'wc_checkout_billing_tabs_callback');
+function wc_checkout_billing_tabs_callback() {
+	if ( function_exists( 'WC' )) {
+		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
+		if ( $available_gateways ) : ?>
+		<ul class="woo-checkout__tabs">
+			<li class="woo-checkout__tabs--item wc_payment_method payment_method_digital is_active" data-link="digital">
+				<span class="item-name">
+					 <?php esc_html_e('Digital Checkout', kt_textdomain); ?>
+				</span>
+			</li>
+			<?php foreach ( $available_gateways as $gateway ) :
+				if ( $gateway->id == 'cod' ) :
+					wc_get_template( 'checkout/parts/part-payment_invoice.php', array( 'gateway' => $gateway ) );
+				endif;
+			endforeach; ?>
+		</ul>
+		<?php endif;
+	}
+}
+
+function wc_update_meta_address( $id, $meta_array ) {
+	update_post_meta( $id, '_billing_first_name', $meta_array['billing_first_name'][0] );
+	update_post_meta( $id, '_billing_last_name', $meta_array['billing_last_name'][0] );
+	update_post_meta( $id, '_billing_company', $meta_array['billing_company'][0] );
+	update_post_meta( $id, '_billing_address_1', $meta_array['billing_address_1'][0] );
+	update_post_meta( $id, '_billing_address_2', $meta_array['billing_address_2'][0] );
+	update_post_meta( $id, '_billing_city', $meta_array['billing_city'][0] );
+	update_post_meta( $id, '_billing_state', $meta_array['billing_state'][0] );
+	update_post_meta( $id, '_billing_postcode', $meta_array['billing_postcode'][0] );
+	update_post_meta( $id, '_billing_country', $meta_array['billing_country'][0] );
+	update_post_meta( $id, '_billing_email', $meta_array['billing_email'][0] );
+	update_post_meta( $id, '_billing_phone', $meta_array['billing_phone'][0] );
+	// shipping
+	update_post_meta( $id, '_shipping_first_name', $meta_array['billing_first_name'][0] );
+	update_post_meta( $id, '_shipping_last_name', $meta_array['billing_last_name'][0] );
+	update_post_meta( $id, '_shipping_company', $meta_array['billing_company'][0] );
+	update_post_meta( $id, '_shipping_address_1', $meta_array['billing_address_1'][0] );
+	update_post_meta( $id, '_shipping_address_2', $meta_array['billing_address_2'][0] );
+	update_post_meta( $id, '_shipping_city', $meta_array['billing_city'][0] );
+	update_post_meta( $id, '_shipping_state', $meta_array['billing_state'][0] );
+	update_post_meta( $id, '_shipping_postcode', $meta_array['billing_postcode'][0] );
+	update_post_meta( $id, '_shipping_country', $meta_array['billing_country'][0] );
+	update_post_meta( $id, '_shipping_email', $meta_array['billing_email'][0] );
+	update_post_meta( $id, '_shipping_phone', $meta_array['billing_phone'][0] );
+}
+
+/**
+ * Update WooCommerce Order Address Dynamically When Customer Updates Their Address
+ * */
+add_action( 'woocommerce_customer_save_address', 'wc_update_address_for_orders', 10, 2 );
+function wc_update_address_for_orders( $user_id ) {
+
+	$customer_meta = get_user_meta( $user_id );
+	$customer_orders = get_posts( array(
+		'numberposts' => -1,
+		'meta_key'    => '_customer_user',
+		'meta_value'  => $user_id,
+		'post_type'   => wc_get_order_types(),
+		'post_status' => array_keys( wc_get_order_statuses() )
+	) );
+
+	foreach( $customer_orders as $order ) {
+		wc_update_meta_address( $order->ID, $customer_meta );
+	}
+
+};
+
+/**
+ * Checkbox to copy billing to shipping address
+ * */
+add_action( 'woocommerce_checkout_update_customer', 'wc_override_checkout_update_fields', 10, 2 );
+function wc_override_checkout_update_fields( $customer, $data ) {
+	if ( ! is_user_logged_in() || ! is_admin() ) return;
+	$customer_id = $customer->get_id();
+	$user_id = $customer_id;
+	$customer_meta = get_user_meta( $user_id );
+	wc_update_meta_address( $customer_id, $customer_meta );
+}
+// save order billing address fields to order shipping address fields
+add_action( 'woocommerce_thankyou', 'wc_checkout_save_user_meta');
+function wc_checkout_save_user_meta( $order_id ) {
+	$order = wc_get_order( $order_id );
+	$billing_address = $order->data['billing'];
+	$shipping_address = $billing_address;
+	$order->set_address( $billing_address, 'billing' );
+	$order->set_address( $shipping_address, 'shipping' );
+	if ( is_user_logged_in() || is_admin() ) {
+		$customer_id = $order->data['customer_id'];
+		$customer_meta = get_user_meta( $customer_id );
+		wc_update_meta_address( $customer_id, $customer_meta );
+	}
+}
 
 
+/**
+ * Change "Place order" button text on WooCommerce Checkout page
+ */
+add_filter( 'woocommerce_order_button_text', 'wc_custom_button_text_for_product' );
+function wc_custom_button_text_for_product( $button_text ) {
+	$button_text = 'Confirm Order';
+	if( WC()->cart->find_product_in_cart( WC()->cart->generate_cart_id( $product_id ) ) ) {
+		$button_text = 'Submit';
+	} else {
+		$button_text = 'Confirm Order';
+	}
 
+	return $button_text;
+
+
+}
+
+
+/**
+ * Update the order meta with field value
+ */
+add_action( 'woocommerce_checkout_update_order_meta', 'wc_checkout_field_update_order_meta' );
+function wc_checkout_field_update_order_meta( $order_id ) {
+	if ( ! empty( $_POST['cod_live_checkout'] ) ) {
+		update_post_meta( $order_id, 'COD Live Checkout', sanitize_text_field( $_POST['cod_live_checkout'] ) );
+	}
+}
+
+/**
+ * Display field value on the order edit page
+ */
+add_action( 'woocommerce_admin_order_data_after_billing_address', 'wc_checkout_field_display_admin_order_meta', 10, 1 );
+function wc_checkout_field_display_admin_order_meta($order){
+	echo '<p><strong>'.__('COD Live Checkout').':</strong> ' . get_post_meta( $order->id, 'COD Live Checkout', true ) . '</p>';
+}
 
 
 // test
@@ -433,6 +636,7 @@ function woocommerce_product_category( $args = array() ) {
 		echo '</ul>';
 	}
 }
+
 
 
 

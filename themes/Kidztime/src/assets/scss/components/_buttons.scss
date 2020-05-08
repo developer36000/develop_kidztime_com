@@ -22,6 +22,7 @@
     border-radius: 100px;
   }
   &--customize,
+  &--default,
   &--add,
   &.wc-forward {
     position: relative;
@@ -75,6 +76,13 @@
   }
   &--add {
     max-width: 100%;
+  }
+  &--default {
+    max-width: max-content;
+    padding: 8px 23px;
+    &:before {
+      box-shadow: 0 4px 12px rgba(88, 68, 139, 0.5);
+    }
   }
 }
 
