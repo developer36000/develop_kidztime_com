@@ -47,11 +47,16 @@ $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
 		<nav class="site-navigation top-bar" role="navigation" id="<?php foundationpress_mobile_menu_id(); ?>">
 			<div class="top-bar-left">
 				<div class="site-desktop-title top-bar-title">
-					<?php if ( has_custom_logo() && ( !is_front_page() || !is_home() ) ) { ?>
+					<?php if ( has_custom_logo() && ( !is_front_page() || !is_home() ) ) : ?>
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-							<img src="<?php echo esc_url( $logo[0] ); ?>" alt="<?php bloginfo( 'name' ); ?>" title="<?php bloginfo( 'name' ); ?>">
+							<img src="<?php echo esc_url( $logo[0] ); ?>" alt="<?php bloginfo( 'name' ); ?>" title="<?php bloginfo( 'name' ); ?>" />
 						</a>
-					<?php } ?>
+					<?php endif; ?>
+					<?php if ( is_order_received_page() ) : ?>
+						<img class="print-logo-image" src="<?php echo esc_url( $logo[0] ); ?>" alt="<?php bloginfo( 'name' ); ?>"
+						     title="<?php bloginfo( 'name' ); ?>" />
+
+					<?php endif; ?>
 				</div>
 			</div>
 			<div class="top-bar-center">

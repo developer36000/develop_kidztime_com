@@ -241,6 +241,201 @@ function wc_custom_account_orders_columns() {
 }
 
 
+/**
+ * Remove Product Tags
+ * */
+// Hide “All Products > Tags” Link from Admin Menu
+add_action( 'admin_menu', 'wc_hide_product_tags_admin_menu', 9999 );
+function wc_hide_product_tags_admin_menu() {
+	remove_submenu_page( 'edit.php?post_type=product', 'edit-tags.php?taxonomy=product_tag&amp;post_type=product' );
+}
+
+// Remove Product tags Metabox
+add_action( 'admin_menu', 'wc_hide_product_tags_metabox' );
+function wc_hide_product_tags_metabox() {
+	remove_meta_box( 'tagsdiv-product_tag', 'product', 'side' );
+}
+
+// Remove Tags Column from All Products page
+add_filter('manage_product_posts_columns', 'wc_hide_product_tags_column', 999 );
+function wc_hide_product_tags_column( $product_columns ) {
+	unset( $product_columns['product_tag'] );
+	return $product_columns;
+}
+
+// Remove Product Tags Textarea from Quick Edit and Bulk Edit
+add_filter( 'quick_edit_show_taxonomy', 'wc_hide_product_tags_quick_edit', 10, 2 );
+function wc_hide_product_tags_quick_edit( $show, $taxonomy_name ) {
+	if ( 'product_tag' == $taxonomy_name )
+		$show = false;
+	return $show;
+
+}
+
+// Remove Product Tag Cloud Widget
+add_action( 'widgets_init', 'wc_remove_product_tag_cloud_widget' );
+function wc_remove_product_tag_cloud_widget(){
+	unregister_widget('WC_Widget_Product_Tag_Cloud');
+}
+
+/**
+ * Disable reviews for All Products
+ */
+add_action( 'init', 'wc_disable_reviews' );
+function wc_disable_reviews() {
+	remove_post_type_support( 'product', 'comments' );
+}
+
+/**
+ * Get Product First Category
+ * */
+function wc_product_category_name( $product_id = 0 ) {
+	global $post;
+	$post_id = $product_id ?: $post->ID;
+	$terms = get_the_terms( $post_id, 'product_cat' );
+	$product_cat_id = '';
+	foreach ($terms as $key => $term) {
+		if ( $key==0 ) {
+			$product_cat_id = $term->term_id;
+			break;
+		}
+
+	}
+	$product_term = get_term( $product_cat_id, 'product_cat' );
+
+	return $product_term->name;
+}
+
+/**
+ * Custom Woocommerce quantity input
+ *
+ * Enqueue js script inline using wc_enqueue_js to make the buttons actually work.
+ * */
+add_action( 'template_redirect', 'wc_quantity_enqueue_script' );
+function wc_quantity_enqueue_script() {
+
+	$event_listeners = '
+		// Make the code work after page load.
+		$(document).ready(function(){
+			QtyChng();
+		});
+
+		// Make the code work after executing AJAX.
+		$(document).ajaxComplete(function () {
+			QtyChng();
+		});
+		';
+
+	$event_listeners = apply_filters( 'ktq_change_event_listeners', $event_listeners);
+
+	$quantity_change = '
+		// Find quantity input field corresponding to increment button clicked.
+		var qty = $( this ).siblings( ".quantity" ).find( ".qty" );
+		// Read value and attributes min, max, step.
+		var val = parseFloat(qty.val());
+		var max = parseFloat(qty.attr( "max" ));
+		var min = parseFloat(qty.attr( "min" ));
+		var step = parseFloat(qty.attr( "step" ));
+
+		// Change input field value if result is in min and max range.
+		// If the result is above max then change to max and alert user about exceeding max stock.
+		// If the field is empty, fill with min for "-" (0 possible) and step for "+".
+		if ( $( this ).is( ".plus" ) ) {
+			if ( val === max ) return false;
+			if( isNaN(val) ) {
+				qty.val( step );
+				return false;
+			}
+			if ( val + step > max ) {
+			  qty.val( max );
+			} else {
+			  qty.val( val + step );
+			}
+		} else {
+			if ( val === min ) return false;
+			if( isNaN(val) ) {
+				qty.val( min );
+				return false;
+			}
+			if ( val - step < min ) {
+			  qty.val( min );
+			} else {
+			  qty.val( val - step );
+			}
+		}
+
+		qty.trigger("change");
+		$( "body" ).removeClass( "sf-input-focused" );
+		';
+
+	$quantity_change = apply_filters( 'ktq_change_quantity_change', $quantity_change);
+
+	wc_enqueue_js( $event_listeners . '
+			function QtyChng() {
+				$(document).off("click", ".ktq-button").on( "click", ".ktq-button", function() {'
+	               . $quantity_change .
+	               '});
+			}
+			'
+	);
+
+}
+
+/**
+ * Remove the payment options form from default location
+ * */
+remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
+
+/**
+ * Add the checkout payment options to the new action
+ * */
+add_action( 'woocommerce_checkout_kt_payment', 'woocommerce_checkout_payment', 20 );
+
+/**
+ * Get account address (billing or shipping) phone and email
+ * */
+function wc_get_account_mail_phone( $name ) {
+	$customer_id = get_current_user_id();
+	$args = array();
+	$args['phone'] = get_user_meta( $customer_id, $name . '_phone', true );
+	$args['email'] = get_user_meta( $customer_id, $name . '_email', true );
+	return $args;
+}
+
+
+
+
+
+
+// test
+add_action( 'woocommerce_before_shop_loop', 'woocommerce_product_category', 100 );
+function woocommerce_product_category( $args = array() ) {
+	$woocommerce_category_id = get_queried_object_id();
+	$args = array(
+		'parent' => $woocommerce_category_id
+	);
+	$terms = get_terms( 'product_cat', $args );
+	if ( $terms ) {
+		echo '<ul class="woocommerce-categories">';
+		foreach ( $terms as $term ) {
+			echo '<li class="woocommerce-product-category-page">';
+			woocommerce_subcategory_thumbnail( $term );
+			echo '<h2>';
+			echo '<a href="' .  esc_url( get_term_link( $term ) ) . '" class="' . $term->slug . '">';
+			echo $term->name;
+			echo '<span class="woocommerce-get-product-category">';
+			echo $term->description;
+			echo '</span>';
+			echo '</a>';
+			echo '</h2>';
+			echo '</li>';
+		}
+		echo '</ul>';
+	}
+}
+
+
+
 
 
 

@@ -34,24 +34,40 @@ if ( $refunded_qty ) {
 } else {
 	$qty_display = esc_html( $qty );
 }
-
+$product_sku = $product->get_sku();
+$product_id = $product->get_id();
+$product_cat_name = wc_product_category_name( $product_id );
 
 ?>
 <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
 
 	<td class="woocommerce-table__product-name product-name"
 	    data-title="<?php esc_html_e( 'Product', 'woocommerce' ); ?>">
-		<?php
+		<div class="product-information">
+			<?php if( !is_order_received_page() ) : ?>
+				<?php
 
-		echo apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item->get_name() ) : $item->get_name(), $item, $is_visible );
+				echo apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a class="product-name" href="%s">%s</a>',
+					$product_permalink, $item->get_name() ) : $item->get_name(), $item, $is_visible ); ?>
+			<?php else: ?>
+				<span class="product-name">
+			 <?php echo $item->get_name(); ?>
+		</span>
+			<?php endif; ?>
 
-		do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
 
-		wc_display_item_meta( $item );
+			<?php echo $product_cat_name ? '<span class="product-category">'.$product_cat_name.'</span>' : ''; ?>
+			<?php echo $product_sku ? '<span class="product-sku">SKU: #'.$product_sku.'</span>' : ''; ?>
 
-		do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
+			<?php do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
 
-		?>
+			wc_display_item_meta( $item );
+
+			do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
+
+			?>
+		</div>
+
 	</td>
 
 	<td class="woocommerce-table__product-total product-quantity"

@@ -6,8 +6,8 @@
  * @since FoundationPress 1.0.0
  */
 
-if ( ! function_exists( 'foundationpress_theme_support' ) ) :
-	function foundationpress_theme_support() {
+if ( ! function_exists( 'kt_theme_support' ) ) :
+	function kt_theme_support() {
 		// Add language support
 		load_theme_textdomain( 'foundationpress', get_template_directory() . '/languages' );
 
@@ -59,7 +59,7 @@ if ( ! function_exists( 'foundationpress_theme_support' ) ) :
 		// add_editor_style( 'dist/assets/css/' . foundationpress_asset_path( 'editor.css' ) );
 	}
 
-	add_action( 'after_setup_theme', 'foundationpress_theme_support' );
+	add_action( 'after_setup_theme', 'kt_theme_support' );
 
 endif;
 if ( ! function_exists( 'kt_add_woocommerce_support' ) ) :
@@ -78,5 +78,5 @@ if ( ! function_exists( 'kt_add_woocommerce_support' ) ) :
 			),
 		) );
 	}
-	add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
+	add_action( 'after_setup_theme', 'kt_add_woocommerce_support' );
 endif;

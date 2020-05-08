@@ -28,6 +28,7 @@
   @include breakpoint(small down) {
     min-height: 52px;
   }
+
   .site-navigation {
     padding: 0;
     @include breakpoint(medium) {
@@ -42,10 +43,17 @@
     a {
       display: block;
       max-width: rem-calc(202);
+      width: 100%;
+      img {
+        width: 100%;
+      }
     }
   }
-  .top-bar-left {}
+  .top-bar-left {
+
+  }
   .top-bar-center {
+
     ul.menu {
       li {
         a {
@@ -67,7 +75,9 @@
       }
     }
   }
-  .top-bar-right {}
+  .top-bar-right {
+
+  }
   // mobile
   .site-title-bar {
     background: transparent;
@@ -81,6 +91,12 @@
       @include breakpoint(small down) {
         max-width: rem-calc(143);
         margin-left: 24px;
+      }
+      @media screen and (max-width: 346px) {
+        margin-left: 16px;
+      }
+      @media screen and (max-width: 319px) {
+        max-width: rem-calc(120);
       }
     }
   }
@@ -197,6 +213,55 @@ body {
       .top-bar-right {}
     }
   }
+  &.kt_woo_invoice_tmpl {
+    @media print {
+      * {
+        color: $purpl !important;
+      }
+    }
+    #site-header {
+      .top-bar-center,
+      .top-bar-right {
+        opacity: 0;
+        @include breakpoint(medium down) {
+          opacity: 1;
+        }
+      }
+      .site-desktop-title {
+        margin-top: 44px;
+        display: block;
+        @include breakpoint(medium down) {
+          margin: 0.5rem 1rem 0.5rem 0;
+        }
+        .print-logo-image {
+          max-width: 100%;
+          width: 100%;
+          min-height: 98px;
+          height: auto;
+          display: none;
+          min-width: 336px;
+          margin-left: 20px;
+          @media print {
+            display: block !important;
+          }
+        }
+        a {
+          max-width: rem-calc(336);
+          width: 100%;
+          display: block;
+          margin-left: 20px;
+          @media print {
+            display: none;
+          }
+          @include breakpoint(medium down) {
+            margin-left: 0;
+            max-width: rem-calc(202);
+          }
+        }
+      }
+    }
+
+  }
   &.homepage_tmpl,
   &.kt_woo_login_tmpl {
     #site-header {
@@ -257,6 +322,9 @@ body {
   margin-left: 56px;
   @include breakpoint(medium down) {
     margin-left: 36px;
+  }
+  @media screen and (max-width: 346px) {
+    margin-left: 16px;
   }
   .loginout-item {
     list-style: none;

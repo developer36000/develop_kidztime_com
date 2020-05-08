@@ -44,8 +44,13 @@ $col    = 1;
 <!-- EDIT SHIPPING BLOCK -->
 <div class="woo-account__edit-address">
 
-	<?php foreach ( $get_addresses as $name => $address_title ) :
+	<?php
+
+	foreach ( $get_addresses as $name => $address_title ) :
 		$address = wc_get_account_formatted_address( $name );
+	  $phone_email = wc_get_account_mail_phone( $name );
+		$phone = $phone_email['phone'];
+	  $email = $phone_email['email'];
 		?>
 
 		<div class="woocommerce-Address woo-account__address">
@@ -55,6 +60,17 @@ $col    = 1;
 				<address class="top" data-tooltip data-click-open="false" tabindex="1"
 				         title="<?php echo apply_filters( 'woocommerce_my_account_my_address_description', esc_html__( 'The following addresses will be used on the checkout page by default.', 'woocommerce' ) );  ?>">
 					<?php echo wp_kses_post( $address ); ?>
+
+					<?php if ( $phone ) : ?>
+						<p class="woo-account__address--phone">
+							<?php echo $phone; ?></p>
+					<?php endif; ?>
+
+					<?php if ( $email ) : ?>
+						<p class="woo-account__address--email">
+							<?php echo $email; ?></p>
+					<?php endif; ?>
+
 				</address>
 			<?php else : ?>
 				<img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/icons/no-orders.svg'; ?>"
@@ -64,7 +80,7 @@ $col    = 1;
 
 
 			<a href="<?php echo esc_url( wc_get_endpoint_url( 'edit-address', $name ) ); ?>"
-			   class="edit woo-btn woo-btn__<?php echo $address?'edit':'add'; ?>">
+			   class="edit woo-btn woo-btn__<?php echo $address?'address-edit':'add'; ?>">
 				<?php echo $address ? esc_html__( 'Edit Address', 'woocommerce' ) : esc_html__( 'Add Address', 'woocommerce' )
 				; ?>
 			</a>

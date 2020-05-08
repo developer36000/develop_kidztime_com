@@ -1,6 +1,9 @@
 #site-footer {
   margin-top: 7%;
   position: relative;
+  @media print {
+    opacity: 0;
+  }
   @include breakpoint(medium) {
     padding: 0 24px;
   }

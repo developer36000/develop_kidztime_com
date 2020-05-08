@@ -1,0 +1,51 @@
+body {
+  &.woocommerce-order-received {
+    .main-container {
+      max-width: rem-calc(1192);
+      margin-top: 0;
+      header {
+        display: none;
+      }
+    }
+    .woo-order__order-details {
+      .woocommerce-table--order-details {
+        tbody {
+          td {
+            width: 10%;
+            @include breakpoint(medium down) {
+              width: 16%;
+            }
+            @include breakpoint(small down) {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.kt_woo_invoice_tmpl {
+
+  }
+}
+
+.woo-invoice {
+  &__container {
+    .invoice-title {
+      font-weight: bold;
+      font-size: 28px;
+      line-height: 130%;
+      text-align: left;
+      margin-bottom: 32px;
+      &--sub {
+        @extend .checkout-title;
+        font-size: 20px;
+      }
+      &--small {
+        @extend .checkout-title;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 18px;
+      }
+    }
+  }
+}

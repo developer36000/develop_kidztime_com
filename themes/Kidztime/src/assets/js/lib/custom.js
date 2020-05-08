@@ -197,4 +197,36 @@ $(document).ready(function () {
     }
   // end ->> Woo Account Orders
 
+  /**
+  * Custom Woocommerce quantity input
+  * */
+    $(document).on( "click", ".quantity input", function() {
+      return false;
+    });
+    $(document).on( "change input", ".quantity .qty", function() {
+      var add_to_cart_button = $( this ).closest( ".product" ).find( ".add_to_cart_button" );
+      // For AJAX add-to-cart actions
+      add_to_cart_button.attr( "data-quantity", $( this ).val() );
+      // For non-AJAX add-to-cart actions
+      add_to_cart_button.attr( "href", "?add-to-cart=" + add_to_cart_button.attr("data-product_id") + "&quantity=" + $(this).val() );
+    });
+  // end ->> Custom Woocommerce quantity input
+
+  /**
+  * History back button
+  * */
+    $(document).find('.woo-btn__cart-back').on('click', function (e) {
+      e.preventDefault();
+      window.history.back();
+    });
+  // end ->> History back button
+  /**
+  * Print button
+  * */
+    $(document).find('.woo-btn__print').on('click', function (e) {
+      e.preventDefault();
+      window.print();
+    });
+  // end ->> Print button
+
 });

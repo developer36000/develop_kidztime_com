@@ -22,7 +22,8 @@
     border-radius: 100px;
   }
   &--customize,
-  &--add {
+  &--add,
+  &.wc-forward {
     position: relative;
     font-family: $affog-font;
     font-style: normal;
@@ -62,7 +63,6 @@
       border-radius: 100px;
       border: 2px solid #fff;
       background: #fff;
-      //box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25);
       box-shadow: 0 4px 12px rgba(88, 68, 139, 0.25);
       cursor: pointer;
     }
@@ -111,7 +111,9 @@
       color: $purpl;
     }
   }
-  &__logout {
+  &__logout,
+  &__cart-back,
+  &__print {
     border: 3px solid $l-gray;
     font-size: 20px;
     padding: 5px 10px;
@@ -125,10 +127,13 @@
     }
   }
   &__delete,
+  &__edit,
+  &__address-edit,
   &__default,
   &__cancel,
   &__pay,
-  &__view {
+  &__view,
+  &__update {
     display: inline-flex;
     border: 2px solid $l-gray;
     background: transparent;
@@ -145,8 +150,17 @@
     }
     &:hover,
     &:focus {
+      cursor: pointer;
       background: $l-gray;
       color: $purpl;
+      &:disabled {
+        cursor: not-allowed;
+        opacity: .5;
+      }
+    }
+    &:disabled {
+      cursor: not-allowed;
+      opacity: .5;
     }
   }
   &__delete {
@@ -173,7 +187,42 @@
       color: #29B2BB;
     }
   }
-  &__edit,
+  &__cart-back {
+    margin: 0;
+    @include breakpoint(small down) {
+      max-width: 100%;
+      margin-bottom: 24px;
+    }
+  }
+  &__print {
+    margin: 0;
+    margin-top: 52px;
+    margin-left: auto;
+    min-width: rem-calc(264);
+    @include breakpoint(medium down) {
+      max-width: rem-calc(656);
+      margin-right: auto;
+      margin-top: 15%;
+    }
+    @media print {
+     opacity: 0;
+    }
+    .icon-print {
+      width: 15px;
+      height: 15px;
+      margin-right: 8px;
+      display: inline-block;
+      svg {
+        width: 100%;
+        fill: $purpl;
+      }
+    }
+    @include breakpoint(small down) {
+      max-width: 100%;
+      margin-bottom: 24px;
+      min-width: initial;
+    }
+  }
   &__order-again {
     border: 2px solid $l-gray;
     background: transparent;
@@ -222,6 +271,22 @@
       &:after {
         transform: rotate(-180deg);
       }
+    }
+  }
+  &__address-edit {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  &__edit {
+    min-height: 32px;
+    max-height: 32px;
+    padding: 4px 24px;
+    .edit-icon {
+      margin-right: 8px;
+      display: inline-flex;
+      align-items: center;
+      svg {}
     }
   }
 }

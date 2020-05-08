@@ -24,6 +24,22 @@ body {
       }
     }
   }
+  &:not(.woocommerce-page) {
+    .entry-content,
+    .simple-text {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 157%;
+      * {
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-weight: inherit;
+        font-style: inherit;
+      }
+    }
+  }
 }
 .simple-title {
   font-style: normal;
@@ -54,20 +70,6 @@ body {
   line-height: 130%;
   margin-bottom: rem-calc(64);
   text-align: center;
-}
-.entry-content,
-.simple-text {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 157%;
-  * {
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    font-weight: inherit;
-    font-style: inherit;
-  }
 }
 
 // ACF Goal Section

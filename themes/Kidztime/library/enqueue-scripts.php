@@ -41,7 +41,7 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		wp_enqueue_style(
 			'main-stylesheet',
 			get_stylesheet_directory_uri() . '/dist/assets/css/' . foundationpress_asset_path( 'app.css' ),
-			$is_woocomerce_class_arr,
+			null,
 			'1.0.0',
 			'all'
 		);

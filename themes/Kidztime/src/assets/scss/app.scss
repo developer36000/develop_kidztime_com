@@ -89,5 +89,10 @@
 @import "templates/page";
 
 // Woocommerce
+@import "woocommerce/quantity-input";
 @import "woocommerce/login";
 @import "woocommerce/account";
+@import "woocommerce/order";
+@import "woocommerce/cart";
+@import "woocommerce/checkout";
+@import "woocommerce/invoice";

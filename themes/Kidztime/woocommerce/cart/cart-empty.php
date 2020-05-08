@@ -16,16 +16,26 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+?>
 
-/*
- * @hooked wc_empty_cart_message - 10
- */
-do_action( 'woocommerce_cart_is_empty' );
+<div class="woo-cart__container">
+	<?php if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
+		<div class="return-to-shop">
+			<img src="<?php echo get_stylesheet_directory_uri() . '/dist/assets/images/icons/empty-cart.svg'; ?>"
+			     class="return-to-shop__image" loading="lazy" alt="Empty Cart">
 
-if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
-	<p class="return-to-shop">
-		<a class="button wc-backward" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-			<?php esc_html_e( 'Return to shop', 'woocommerce' ); ?>
-		</a>
-	</p>
-<?php endif; ?>
+			<?php
+			// @hooked wc_empty_cart_message - 10
+			do_action( 'woocommerce_cart_is_empty' ); ?>
+
+			<p class="return-to-shop__msg">
+				<?php echo __('Start customise product to view items', kt_textdomain); ?>
+			</p>
+			<a class="wc-backward kt-btn kt-btn--customize "
+			   href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect',
+				wc_get_page_permalink( 'shop' ) ) ); ?>">
+				<?php esc_html_e( 'Start Now', kt_textdomain ); ?>
+			</a>
+		</div>
+	<?php endif; ?>
+</div>

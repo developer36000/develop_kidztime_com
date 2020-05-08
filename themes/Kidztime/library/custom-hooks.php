@@ -252,6 +252,9 @@ function get_tmpl_body_class() {
 	elseif ( is_account_page() && is_user_logged_in() ) {
 		$body_class = 'kt_woo_account_tmpl';
 	}
+	elseif ( is_order_received_page() ) {
+		$body_class = 'kt_woo_invoice_tmpl';
+	}
 	else {
 		$body_class = 'default_tmpl';
 	}
