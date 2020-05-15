@@ -169,8 +169,11 @@ body .woocommerce {
         &::placeholder{
           color: $l-purpl;
         }
+        &:hover {
+          border: 3px solid #DCDCE8;
+        }
         &:focus {
-          border: 2px solid #DCDCE8;
+          border: 3px solid #58448B;
         }
         &:-webkit-autofill {
           background: transparent;
@@ -299,7 +302,7 @@ body .woocommerce {
           border: none;
           outline: none;
           color: $l-pink;
-          font-weight: bold;
+          font-weight: 500;
           font-size: 12px;
           line-height: 14px;
           text-align: center;
@@ -346,7 +349,8 @@ body .woocommerce {
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      text-shadow: 0 4px 4px rgba(255, 255, 255, 0.15);
+      transition: all .3s;
+      //text-shadow: 0 4px 4px rgba(255, 255, 255, 0.15);
       &:before {
         content: '';
         position: absolute;
@@ -371,6 +375,12 @@ body .woocommerce {
         cursor: pointer;
         color: $white;
         background: $brn-gradient;
+      }
+      &:hover {
+        background: $brn-gradient-hover;
+      }
+      &:focus {
+        background: $brn-gradient-focus;
       }
     } // [type="submit"]
 
@@ -414,7 +424,7 @@ body .woocommerce {
         }
         * {
           color: $l-pink;
-          font-weight: bold;
+          font-weight: 500;
           font-size: 12px;
           line-height: 14px;
           text-align: center;

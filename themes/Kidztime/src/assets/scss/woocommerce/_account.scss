@@ -122,8 +122,7 @@ body {
             &:hover,
             &:focus {
               a {
-                font-weight: bold;
-                font-size: 16px;
+                color: $purpl;
               }
             }
           }
@@ -208,8 +207,11 @@ body {
               &::placeholder{
                 color: $l-purpl;
               }
+              &:hover {
+                border: 3px solid #DCDCE8;
+              }
               &:focus {
-                border: 3px solid $l-purpl;
+                border: 3px solid #58448B;
               }
               &:-webkit-autofill {
                 background: transparent;
@@ -248,7 +250,8 @@ body {
               align-items: center;
               justify-content: center;
               cursor: pointer;
-              text-shadow: 0 4px 4px rgba(255, 255, 255, 0.15);
+              transition: all .3s;
+             // text-shadow: 0 4px 4px rgba(255, 255, 255, 0.15);
               &:before {
                 content: '';
                 position: absolute;
@@ -265,8 +268,7 @@ body {
                 border-radius: 100px;
                 border: 2px solid #fff;
                 background: #fff;
-                //box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25);
-                box-shadow: 0 4px 12px rgba(88, 68, 139, 0.25);
+                box-shadow: 0 4px 12px rgba(88, 68, 139, 0.5);
                 cursor: pointer;
               }
               &:hover,
@@ -274,6 +276,12 @@ body {
                 cursor: pointer;
                 color: $white;
                 background: $brn-gradient;
+              }
+              &:hover {
+                background: $brn-gradient-hover;
+              }
+              &:focus {
+                background: $brn-gradient-focus;
               }
             } // [type="submit"]
             &__checkbox {
@@ -436,11 +444,26 @@ body {
                     background: url("../images/icons/sort.svg") no-repeat 50% 50%;
                     background-size: contain;
                     transform: rotate(0deg);
-                    transition: transform .3s;
+                    transition: all .3s;
+                    filter: brightness(.5);
                   }
                 }
                 &.asc:after {
                   transform: rotate(-180deg);
+                }
+                &.sortable {
+                  transition: color .3s;
+                  &:after {
+                    filter: brightness(1);
+                  }
+                  &:hover,
+                  &:focus {
+                    cursor: pointer;
+                    color: #A5A3B8;
+                    &:after {
+                      filter: brightness(1);
+                    }
+                  }
                 }
               }
             }

@@ -108,6 +108,7 @@ body {
           margin-bottom: 13px;
           flex: 1 0 50%;
           text-align: left;
+          transition: color .3s;
           @include breakpoint(small down) {
             flex: 1 0 100%;
             text-align: center;
@@ -134,12 +135,17 @@ body {
             font-style: inherit;
             text-align: inherit;
             padding: 0;
+            transition: color .3s;
           }
           &.current_page_item {
             background: transparent;
             a {
               background: inherit;
             }
+          }
+          &:hover,
+          &:focus {
+            color: #9B9AAD;
           }
         }
       }

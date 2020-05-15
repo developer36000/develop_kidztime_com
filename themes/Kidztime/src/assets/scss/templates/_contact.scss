@@ -208,10 +208,13 @@ body.contacts_tmpl {
           color: $l-purpl;
         }
         &.wpcf7-not-valid {
-          border: 3px solid rgba(255, 130, 130, 0.69);
+          border: 3px solid #FF7071;
+        }
+        &:hover {
+          border: 3px solid #DCDCE8;
         }
         &:focus {
-          border: 3px solid #DCDCE8;
+          border: 3px solid #58448B;
         }
       }
       textarea {
