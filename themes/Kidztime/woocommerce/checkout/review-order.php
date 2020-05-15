@@ -30,14 +30,39 @@ defined( 'ABSPATH' ) || exit;
 
 		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 			$_product = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+			$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
+			$product_sku = $_product->get_sku();
+			$product_cat_name = wc_product_category_name( $product_id );
 
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 				?>
 				<tr class="<?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
 					<td class="product-name">
-						<?php echo apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<div class="product-row">
+							<div class="product-thumbnail">
+								<?php
+								$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
+								echo $thumbnail;
+								?>
+							</div>
+							<div class="product-information">
+								<?php echo apply_filters( 'woocommerce_cart_item_name', sprintf( '<span
+							class="product-name">%s</span>', $_product->get_name()), $cart_item, $cart_item_key ); ?>
+
+								<?php echo $product_cat_name ? '<span class="product-category">'.$product_cat_name.'</span>' : ''; ?>
+								<?php echo $product_sku ? '<span class="product-sku">SKU: #'.$product_sku.'</span>' : ''; ?>
+								<?php echo wc_get_formatted_cart_item_data( $cart_item );  ?>
+							</div>
+
+							<div class="product-quantity">
+								<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <span class="product-quantity">' . sprintf( '&times;&nbsp;%s', $cart_item['quantity'] ) . '</span>', $cart_item, $cart_item_key
+								); ?>
+
+							</div>
+						</div>
+
+
+
 					</td>
 					<td class="product-total">
 						<?php echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -100,7 +125,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 		<tr class="order-total">
-			<th><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
+			<th><?php esc_html_e( 'Total', 'woocommerce' ); ?>:</th>
 			<td><?php wc_cart_totals_order_total_html(); ?></td>
 		</tr>
 

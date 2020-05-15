@@ -18,26 +18,26 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 ?>
 <?php if ( $gateway->id != 'cod' ) : ?>
-	<li class="wc_payment_method payment_method_<?php echo esc_attr( $gateway->id ); ?>">
-		<input id="payment_method_<?php echo esc_attr( $gateway->id ); ?>" type="radio" class="input-radio"
-		       name="payment_method" value="<?php echo esc_attr( $gateway->id ); ?>"
-			<?php checked( $gateway->chosen, true ); ?>
-		       data-order_button_text="<?php echo esc_attr( $gateway->order_button_text ); ?>" />
+	<li class="wc_payment_method payment_methods--item payment_method_<?php echo esc_attr( $gateway->id ); ?>"
+	data-method_id="<?php echo esc_attr( $gateway->id ); ?>">
 
-		<label for="payment_method_<?php echo esc_attr( $gateway->id ); ?>">
-			<?php echo $gateway->get_title(); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?> <?php echo $gateway->get_icon(); /* phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped */ ?>
-		</label>
-		<?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
-			<div class="payment_box payment_method_<?php echo esc_attr( $gateway->id ); ?>" <?php if ( ! $gateway->chosen )
-				: ?>style="display:none;"<?php endif; ?>>
-				<?php $gateway->payment_fields(); ?>
-			</div>
-		<?php endif; ?>
-
-
+		<span class="payment_methods_description">
+			  <input id="payment_method_<?php echo esc_attr( $gateway->id ); ?>" type="radio" class="input-radio"
+			         name="payment_method" value="<?php echo esc_attr( $gateway->id ); ?>"
+								<?php checked( $gateway->chosen, true ); ?>
+		            data-order_button_text="<?php echo esc_attr( $gateway->order_button_text ); ?>" />
+		    <label for="payment_method_<?php echo esc_attr( $gateway->id ); ?>">
+				<span class="payment_methods_description--label"><?php echo wp_kses_post( $gateway->get_title() ); ?></span>
+				<!--	<span class="payment_methods_description--icons">
+					<?php /*echo wp_kses_post( $gateway->get_icon() ); */?>
+				</span>-->
+			</label>
+		</span>
 
 	</li>
+
 <?php endif; ?>
 

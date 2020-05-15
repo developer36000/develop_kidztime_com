@@ -6,7 +6,7 @@
 
 <?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 
-	<div id="order_review" class="woocommerce-checkout-review-order">
+	<div id="order_review" class="woocommerce-checkout-review-order woo-checkout__order-review">
 		<?php do_action( 'woocommerce_checkout_order_review' ); ?>
 	</div>
 

@@ -257,8 +257,8 @@ $(document).ready(function () {
   * Conditional Show hide checkout fields based on chosen payment methods
   * */
   if ( $(document.body).hasClass('kt_woo_checkout_tmpl') ) {
-    $(document).find('.woo-checkout__tabs .woo-checkout__tabs--item').on('click', function (e) {
-      e.preventDefault();
+    $(document).find('#payment input[name="payment_method"]').first().prop('checked', true);
+    $(document).on( 'click', '.woo-checkout__tabs .woo-checkout__tabs--item', function (e) {
       let link = $(this).attr('data-link'),
         parent = $(this).parents('.woo-checkout__column');
         const _billing_fields = ['billing_address_2', 'billing_country', 'billing_postcode', 'billing_city', 'billing_phone'];
@@ -294,6 +294,8 @@ $(document).ready(function () {
       });
 
     });
+
+    console.log($(document).find('#payment input[name="payment_method"]').prop('checked'));
   }
   // end ->> Checkout tabs navigation && Conditional Show hide checkout fields based on chosen payment methods
 
