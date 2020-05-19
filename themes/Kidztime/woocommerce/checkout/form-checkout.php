@@ -31,35 +31,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	?>
 
-	<form name="checkout" method="post" class="checkout woocommerce-checkout woo-kt_form "
+	<form name="checkout" method="post" class="checkout woocommerce-checkout woo-kt_form woo-kt_form-checkout "
 	      action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 
 		<?php if ( $checkout->get_checkout_fields() ) : ?>
 
 			<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
-			<div class="col2-set" id="customer_details">
-				<div class="col-1 woo-checkout__column">
+			<div class="col2-set woo-checkout__customer_details" id="customer_details">
 
-					<h2 class="checkout-title"><?php esc_html_e('Checkout', 'woocommerce'); ?></h2>
+				<h2 class="checkout-title"><?php esc_html_e('Checkout', 'woocommerce'); ?></h2>
+
+				<div class="col-1 woo-checkout__column">
 
 					<!-- Custom Checkout Tabs -->
 					<?php do_action( 'wc_checkout_billing_tabs' ); ?>
 					<!-- END Custom Checkout Tabs -->
-					<div data-id="digital"  class="tab-content digital is_active">
-						<!-- CHECKOUT BILLING ADDRESSES -->
-						<?php do_action( 'woocommerce_checkout_billing' ); ?>
-						<!-- END CHECKOUT BILLING ADDRESSES -->
 
+					<!-- CHECKOUT BILLING ADDRESSES -->
+					<?php do_action( 'woocommerce_checkout_billing' ); ?>
+					<!-- END CHECKOUT BILLING ADDRESSES -->
+
+					<div data-id="digital"  class="tab-content digital is_active">
 						<!-- CUSTOM CHECKOUT PAYMENT BLOCK -->
 						<?php wc_get_template( 'checkout/parts/part-checkout_payment.php' ); ?>
 						<!-- END CUSTOM CHECKOUT PAYMENT BLOCK -->
 					</div>
-					<div data-id="live"  class="tab-content live">
-						<!-- CHECKOUT BILLING ADDRESSES -->
-						<?php do_action( 'woocommerce_checkout_billing' ); ?>
-						<!-- END CHECKOUT BILLING ADDRESSES -->
-					</div>
+					<div data-id="live"  class="tab-content live"></div>
 
 					<div class="woo-checkout__container--submit digital">
 						<?php

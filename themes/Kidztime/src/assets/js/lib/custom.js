@@ -257,14 +257,45 @@ $(document).ready(function () {
   * Conditional Show hide checkout fields based on chosen payment methods
   * */
   if ( $(document.body).hasClass('kt_woo_checkout_tmpl') ) {
-    $(document).find('#payment input[name="payment_method"]').first().prop('checked', true);
+    let payment_method_input = '#payment input[name="payment_method"]',
+      live_input = '[name="cod_live_checkout"]';
+    $(document).find(payment_method_input).first().prop('checked', true);
+    $(document).find(live_input).val('Digital Checkout');
+
+    $(document).find('.mobile-order-summary').on('click', function () {
+      $(this).toggleClass('is_active');
+      $(this).parents('.woo-checkout__column').find('.woo-checkout__order-review').toggleClass('is_active');
+    });
+
+    $(document).ajaxComplete(function () {
+      $(document).find(payment_method_input).first().prop('checked', true);
+      $(document).find(payment_method_input).parents('li').removeClass('is_active');
+      $(document).find(payment_method_input+':checked').parents('li').addClass('is_active');
+
+      $(document).on( 'change', '#payment input[name="payment_method"]', function () {
+        console.log( $(this) );
+        $(document).find(payment_method_input).parents('li').removeClass('is_active');
+        if ( $(this).prop('checked') ) {
+          $(this).parents('li.payment_methods--item').addClass('is_active');
+          console.log($(this).parents('li.payment_methods--item'));
+        }
+
+      });
+
+    });
+
     $(document).on( 'click', '.woo-checkout__tabs .woo-checkout__tabs--item', function (e) {
       let link = $(this).attr('data-link'),
-        parent = $(this).parents('.woo-checkout__column');
-        const _billing_fields = ['billing_address_2', 'billing_country', 'billing_postcode', 'billing_city', 'billing_phone'];
+        parent = $(this).parents('.woo-checkout__column'),
+        _billing_fields = ['billing_address_2', 'billing_country', 'billing_postcode', 'billing_city', 'billing_phone'];
+
       $(document).find('.woo-checkout__tabs .woo-checkout__tabs--item').removeClass('is_active');
       $(this).addClass('is_active');
+
       if ( link === 'live' ) {
+
+        $(document).find(payment_method_input).parents('li').removeClass('is_active');
+
         $(this).find('input#payment_method_cod').prop('checked', true);
         parent.find('p#billing_email_field').each(function() {
           $(this).removeClass('form-row-first').addClass('form-row-wide');
@@ -273,15 +304,28 @@ $(document).ready(function () {
           show_hide_checkout_fields( element, 'hide' );
         });
 
+        $(document).find(live_input).val('Live Checkout');
+
       } else {
+
+        $(document).find(payment_method_input).parents('li').removeClass('is_active');
         parent.find('input#payment_method_cod').prop('checked', false);
-        parent.find('#payment input[name="payment_method"]').first().prop('checked', true);
+
+        parent.find(payment_method_input).first()
+          .parents('li.payment_methods--item').addClass('is_active');
+        parent.find(payment_method_input).first().prop('checked', true);
+
         _billing_fields.map((element) => {
           show_hide_checkout_fields( element, 'show' );
         });
         parent.find('p#billing_email_field').each(function() {
           $(this).addClass('form-row-first').removeClass('form-row-wide');
         });
+        $(document).find('[name="woocommerce_checkout_place_order"]')
+          .text('Confirm Order').val('Confirm Order').attr('data-value', 'Confirm Order');
+
+        $(document).find(live_input).val('Digital Checkout');
+
       }
 
       parent.find('.tab-content').each(function () {
@@ -295,7 +339,10 @@ $(document).ready(function () {
 
     });
 
-    console.log($(document).find('#payment input[name="payment_method"]').prop('checked'));
+
+
+
+
   }
   // end ->> Checkout tabs navigation && Conditional Show hide checkout fields based on chosen payment methods
 

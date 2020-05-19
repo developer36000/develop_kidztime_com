@@ -38,6 +38,9 @@
           }
           tr {
             border: none !important;
+            &:nth-child(even) {
+              background: transparent !important;
+            }
             @include breakpoint(medium down) {
               display: table-row;
             }
@@ -72,6 +75,9 @@
           }
           tr {
             border: none;
+            &:nth-child(even) {
+              background: transparent !important;
+            }
             @include breakpoint(medium down) {
               display: table-row;
             }

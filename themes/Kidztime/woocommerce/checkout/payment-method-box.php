@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
+<?php if ( ( $gateway->has_fields() || $gateway->get_description() ) && $gateway->id != 'cod' ) : ?>
 	<div class="payment_box payment_box--item payment_method_<?php echo esc_attr( $gateway->id ); ?>" <?php if ( !
 	$gateway->chosen )
 	: ?>style="display:none;"<?php endif; ?>

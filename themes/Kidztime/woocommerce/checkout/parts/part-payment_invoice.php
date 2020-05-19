@@ -6,6 +6,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 ?>
 <li class="woo-checkout__tabs--item wc_payment_method payment_method_<?php echo esc_attr( $gateway->id ); ?> top"
     data-tooltip data-click-open="false" tabindex="1" data-link="live"
@@ -15,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			         name="payment_method" value="<?php echo esc_attr( $gateway->id ); ?>"
 			         data-order_button_text="<?php echo esc_attr($gateway->order_button_text ); ?>"
 		<?php checked( $gateway->chosen ); ?> />
-		<input type="hidden" name='cod_live_checkout'>
+		<input type="hidden" name="cod_live_checkout" value="">
 		<label for="payment_method_<?php echo esc_attr( $gateway->id ); ?>">
 			<?php esc_html_e('Live Checkout'); ?>
 		</label>

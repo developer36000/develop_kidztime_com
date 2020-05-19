@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( $order->get_payment_method() == 'cheque' )  {
+if ( $order->get_payment_method() == 'cheque' || $order->get_payment_method() == 'cod' )  {
 	wc_get_template( 'checkout/thankyou-invoice.php', array( 'order' => $order ) );
 } else {
 	wc_get_template( 'checkout/thankyou-other.php', array( 'order' => $order ) );

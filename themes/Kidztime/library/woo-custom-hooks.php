@@ -498,6 +498,22 @@ function wc_checkout_billing_tabs_callback() {
 		<?php endif;
 	}
 }
+/**
+ * Change "Place order" button text on WooCommerce Checkout page for a specific payment method
+ */
+add_filter( 'woocommerce_available_payment_gateways', 'woocommerce_available_payment_gateways' );
+function woocommerce_available_payment_gateways( $available_gateways ) {
+	if (! is_checkout() ) return $available_gateways;  // stop doing anything if we're not on checkout page.
+
+	foreach ( $available_gateways as $gateway ) :
+		if ( $gateway->id == 'cod' ) :
+			$gateway->order_button_text = __( 'Generate receipt', kt_textdomain );
+		else :
+			$gateway->order_button_text = __( 'Confirm Order', kt_textdomain );
+		endif;
+	endforeach;
+	return $available_gateways;
+}
 
 function wc_update_meta_address( $id, $meta_array ) {
 	update_post_meta( $id, '_billing_first_name', $meta_array['billing_first_name'][0] );
@@ -579,16 +595,10 @@ function wc_checkout_save_user_meta( $order_id ) {
 add_filter( 'woocommerce_order_button_text', 'wc_custom_button_text_for_product' );
 function wc_custom_button_text_for_product( $button_text ) {
 	$button_text = 'Confirm Order';
-	if( WC()->cart->find_product_in_cart( WC()->cart->generate_cart_id( $product_id ) ) ) {
-		$button_text = 'Submit';
-	} else {
-		$button_text = 'Confirm Order';
-	}
-
 	return $button_text;
-
-
 }
+
+
 
 
 /**

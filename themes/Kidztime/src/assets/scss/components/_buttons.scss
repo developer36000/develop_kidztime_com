@@ -315,7 +315,9 @@
     border: none;
     background: transparent;
     position: relative;
-    padding-left: 40px;
+    padding: 10px 16px;
+    padding-left: 56px;
+    border-radius: 10px;
     &:before,
     &:after {
       content: '';
@@ -324,7 +326,7 @@
       height: 2px;
       background: $purpl;
       position: absolute;
-      left: 0;
+      left: 16px;
       transition: all .3s;
     }
     &:after {
@@ -341,6 +343,12 @@
       &:after {
         transform: rotate(-180deg);
       }
+    }
+    &:hover {
+      background: $l-gray;
+    }
+    &:focus {
+      background: #DCDCE8;
     }
   }
   &__address-edit {
