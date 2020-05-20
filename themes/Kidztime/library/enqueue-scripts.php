@@ -84,6 +84,8 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		);
 		wp_localize_script( 'eventbrite_widget_scripts', 'eventbrite_widget_ajax', $widget_jp );*/
 
+
+
 	}
 
 	add_action( 'wp_enqueue_scripts', 'foundationpress_scripts' );
@@ -102,3 +104,5 @@ function kt_add_defer_attribute( $tag, $handle ) {
 	endforeach;
 	return $tag;
 }
+
+

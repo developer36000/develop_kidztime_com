@@ -23,9 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 
-
-
-
 <?php if( isset( $_GET['action']) && $_GET['action'] == "register"): ?>
 
 	<!--REGISTRATION BLOCK -->
@@ -44,5 +41,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <!-- HAS ACCOUNT BLOCK -->
 <?php get_template_part( 'woocommerce/myaccount/parts/part', 'has_account' ); ?>
 <!-- HAS ACCOUNT BLOCK END-->
+
 
 <?php do_action( 'woocommerce_after_customer_login_form' ); ?>

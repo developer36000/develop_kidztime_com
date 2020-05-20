@@ -3,31 +3,57 @@
  * News post_type --> post
  * */
 
-// create a new column
-add_filter('manage_post_posts_columns', 'posts_column', 4);
-function posts_column( $columns ){
-	unset($columns['author']); // delete the column Author
-	$num = 2; // after which column under the account to insert new
-	$new_columns = array(
-		'likes_counted' => __('Count of Likes')
-	);
-	return array_slice( $columns, 0, $num ) + $new_columns + array_slice( $columns, $num );
+
+/**
+ * Add a column with WooCommerce Billing Details to Users Admin Page
+ * */
+add_filter( 'manage_users_columns', 'ktwc_billing_address_column', 20 );
+function ktwc_billing_address_column( $user_columns ) {
+	return array_slice( $user_columns, 0, 3, true ) // 4 columns before
+	       + array( 'billing_address' => 'Billing Address' ) // our column is 5th
+	       + array_slice( $user_columns, 3, NULL, true );
 
 }
-// adjust the width of the column via css
-add_action('admin_head', 'post_column_css');
-function post_column_css(){
-	if( get_current_screen()->base == 'edit')
-		echo '<style type="text/css">.column-likes_counted{width:7%;}</style>';
-}
-// fill the column with data
-add_filter('manage_post_posts_custom_column', 'fill_posts_column', 5, 2);
-// wp-admin/includes/class-wp-posts-list-table.php
-function fill_posts_column( $colname, $post_id ){
-	global $post;
-	$total_liked = get_total_liked( $post->ID );
-	if( $colname === 'likes_counted' ){
-		echo $total_liked ? $total_liked : 0;
+
+add_filter( 'manage_users_custom_column', 'ktwc_populate_with_billing_address', 10, 3 );
+function ktwc_populate_with_billing_address( $row_output, $user_column_name, $user_id ) {
+
+	if( $user_column_name == 'billing_address' ) {
+		$address = array();
+		if( $billing_address_1 = get_user_meta( $user_id, 'billing_address_1', true ) )
+			$address[] = $billing_address_1;
+
+		if( $billing_address_2 = get_user_meta( $user_id, 'billing_address_2', true ) )
+			$address[] = $billing_address_2;
+
+		if( $billing_city = get_user_meta( $user_id, 'billing_city', true ) )
+			$address[] = $billing_city;
+
+		if( $billing_postcode = get_user_meta( $user_id, 'billing_postcode', true ) )
+			$address[] = $billing_postcode;
+
+		if( $billing_country = get_user_meta( $user_id, 'billing_country', true ) )
+			$address[] = $billing_country;
+		return join(', ', $address ); // here we replace and return our custom $row_output
 	}
-
+ return $row_output;
 }
+
+/**
+ * Change style for user social login column
+ * */
+add_action('admin_head', 'ktwc_user_social_login_column_css');
+function ktwc_user_social_login_column_css() {
+	echo '<style type="text/css">
+		.column-connections .user_table_social {
+			display: flex;
+	    width: 26px;
+	    height: 26px;
+	    background: #58448B;
+	    border-radius: 50%;
+	    align-items: center;
+	    justify-content: center;
+    }
+	</style>';
+}
+

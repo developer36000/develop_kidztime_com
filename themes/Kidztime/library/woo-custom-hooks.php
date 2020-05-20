@@ -99,6 +99,20 @@ function iconic_cart_count_fragments( $fragments ) {
 }
 
 /**
+ * Remove the short description field
+ * */
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+add_action('add_meta_boxes', 'ktwc_remove_short_description', 999);
+function ktwc_remove_short_description() {
+	remove_meta_box( 'postexcerpt', 'product', 'normal');
+}
+
+/**
+ * Remove related products output
+ */
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+/**
  * Add the code below to your theme's functions.php file
  * to add a confirm password field on the register form under My Accounts.
  */
@@ -498,6 +512,7 @@ function wc_checkout_billing_tabs_callback() {
 		<?php endif;
 	}
 }
+
 /**
  * Change "Place order" button text on WooCommerce Checkout page for a specific payment method
  */
@@ -589,6 +604,7 @@ function wc_checkout_save_user_meta( $order_id ) {
 }
 
 
+
 /**
  * Change "Place order" button text on WooCommerce Checkout page
  */
@@ -597,9 +613,6 @@ function wc_custom_button_text_for_product( $button_text ) {
 	$button_text = 'Confirm Order';
 	return $button_text;
 }
-
-
-
 
 /**
  * Update the order meta with field value
@@ -646,6 +659,43 @@ function woocommerce_product_category( $args = array() ) {
 		echo '</ul>';
 	}
 }
+
+/**
+ * Remove Downloadable Checkboxes from the Product Data Metabox
+ * */
+add_filter( 'product_type_options', 'ktwc_product_type_options' );
+function ktwc_product_type_options( $options ) {
+	// remove "Downloadable" checkbox
+	if( isset( $options[ 'downloadable' ] ) ) {
+		unset( $options[ 'downloadable' ] );
+	}
+	return $options;
+}
+
+/**
+ * Remove Downloadable Dropdown Options from Product Type Filter
+ * */
+add_filter( 'woocommerce_products_admin_list_table_filters', 'ktwc_products_admin_list_table_filters');
+function ktwc_products_admin_list_table_filters( $filters ) {
+	if( isset( $filters[ 'product_type' ] ) ) {
+		$filters[ 'product_type' ] = 'ktwc_product_type_callback';
+	}
+	return $filters;
+}
+function ktwc_product_type_callback(){
+	$current_product_type = isset( $_REQUEST['product_type'] ) ? wc_clean( wp_unslash( $_REQUEST['product_type'] ) ) : false;
+	$output               = '<select name="product_type" id="dropdown_product_type"><option value="">Filter by product type</option>';
+
+	foreach ( wc_get_product_types() as $value => $label ) {
+		$output .= '<option value="' . esc_attr( $value ) . '" ';
+		$output .= selected( $value, $current_product_type, false );
+		$output .= '>' . esc_html( $label ) . '</option>';
+	}
+
+	$output .= '</select>';
+	echo $output;
+}
+
 
 
 
