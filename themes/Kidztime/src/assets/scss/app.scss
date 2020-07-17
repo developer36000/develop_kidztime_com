@@ -82,6 +82,8 @@
 @import "components/dividers";
 @import "components/links";
 @import "components/modals";
+@import "components/slick";
+@import "components/slick-theme";
 
 // Templates
 @import "templates/front";
@@ -96,3 +98,6 @@
 @import "woocommerce/cart";
 @import "woocommerce/checkout";
 @import "woocommerce/invoice";
+@import "woocommerce/shop";
+@import "woocommerce/single-product";
+@import "woocommerce/customizer";

@@ -55,6 +55,7 @@
   }
   &--customize,
   &--default,
+  &--next,
   &--add,
   &.wc-forward {
     position: relative;
@@ -70,7 +71,7 @@
     border-radius: 100px;
     border: 1px solid $d-orange;
     outline: none;
-    min-height: 47px;
+    min-height: 43px;
     width: 100%;
     padding: 8px 16px;
     display: flex;
@@ -116,11 +117,21 @@
   &--add {
     max-width: 100%;
   }
-  &--default {
+  &--default,
+  &--next {
     max-width: max-content;
     padding: 8px 23px;
     &:before {
       box-shadow: 0 4px 12px rgba(88, 68, 139, 0.5);
+    }
+  }
+  &--next {
+    max-width: 204px;
+    width: 100%;
+    &.no-active {
+      pointer-events: none;
+      background: #C8C8C8;
+      border: 1px solid #9B9B9B;
     }
   }
 }
@@ -160,7 +171,12 @@
   }
   &__logout,
   &__cart-back,
-  &__print {
+  &__print,
+  &__edit-product,
+  &__cancel-action,
+  &__skip-action,
+  &__go-back-action,
+  &--back {
     border: 3px solid $l-gray;
     font-size: 20px;
     padding: 5px 10px;
@@ -367,4 +383,42 @@
       svg {}
     }
   }
+  &__edit-product {
+    padding: 4px 24px;
+    max-width: 216px;
+    margin: 0;
+    .edit-icon {
+      width: 22px;
+      height: 22px;
+      fill: $purpl;
+      margin-right: 9px;
+    }
+  }
+  &__cancel-action,
+  &__skip-action,
+  &__go-back-action,
+  &--back {
+    color: $purpl;
+  }
+  &__go-back-action {
+    .load-icon {
+      position: relative;
+      margin-left: 8px;
+      .app-loading {
+        background: transparent;
+        padding: 0;
+        .spinner {
+          height: 24px;
+          width: 24px;
+        }
+      }
+    }
+    &.load-page {
+      pointer-events: none;
+      .load-icon {
+        //display: block;
+      }
+    }
+  }
 }
+

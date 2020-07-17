@@ -2,7 +2,7 @@
 
 import plugins       from 'gulp-load-plugins';
 import yargs         from 'yargs';
-import browser       from 'browser-sync';
+//import browser       from 'browser-sync';
 import gulp          from 'gulp';
 import rimraf        from 'rimraf';
 import yaml          from 'js-yaml';
@@ -24,7 +24,7 @@ const PRODUCTION = !!(yargs.argv.production);
 const DEV = !!(yargs.argv.dev);
 
 // Load settings from settings.yml
-const { BROWSERSYNC, COMPATIBILITY, REVISIONING, PATHS } = loadConfig();
+const { COMPATIBILITY, REVISIONING, PATHS } = loadConfig();
 
 // Check if file exists synchronously
 function checkFileExists(filepath) {
@@ -92,8 +92,8 @@ function sass() {
     .pipe($.if(REVISIONING && PRODUCTION || REVISIONING && DEV, $.rev()))
     .pipe(gulp.dest(PATHS.dist + '/assets/css'))
     .pipe($.if(REVISIONING && PRODUCTION || REVISIONING && DEV, $.rev.manifest()))
-    .pipe(gulp.dest(PATHS.dist + '/assets/css'))
-    .pipe(browser.reload({ stream: true }));
+    .pipe(gulp.dest(PATHS.dist + '/assets/css'));
+    //.pipe(browser.reload({ stream: true }));
 }
 
 // Combine JavaScript into one file
@@ -119,7 +119,7 @@ const webpack = {
       colors: true,
     }));
 
-    browser.reload();
+   // browser.reload();
   },
 
   build() {
@@ -168,16 +168,16 @@ function images() {
       $.imagemin.optipng({
         optimizationLevel: 5,
       }),
-			$.imagemin.gifsicle({
+      $.imagemin.gifsicle({
         interlaced: true,
       }),
-			$.imagemin.svgo({
+      $.imagemin.svgo({
         plugins: [
           {cleanupAttrs: true},
           {removeComments: true},
         ]
       })
-		])))
+    ])))
     .pipe(gulp.dest(PATHS.dist + '/assets/images'));
 }
 
@@ -206,33 +206,15 @@ gulp.task('phpcs', function() {
 // PHP Code Beautifier task
 gulp.task('phpcbf', function () {
   return gulp.src(PATHS.phpcs)
-  .pipe($.phpcbf({
-    bin: 'wpcs/vendor/bin/phpcbf',
-    standard: './codesniffer.ruleset.xml',
-    warningSeverity: 0
-  }))
-  .on('error', log)
-  .pipe(gulp.dest('.'));
+    .pipe($.phpcbf({
+      bin: 'wpcs/vendor/bin/phpcbf',
+      standard: './codesniffer.ruleset.xml',
+      warningSeverity: 0
+    }))
+    .on('error', log)
+    .pipe(gulp.dest('.'));
 });
 
-// Start BrowserSync to preview the site in
-function server(done) {
-  browser.init({
-    proxy: BROWSERSYNC.url,
-
-    ui: {
-      port: 8080
-    },
-
-  });
-  done();
-}
-
-// Reload the browser with BrowserSync
-function reload(done) {
-  browser.reload();
-  done();
-}
 
 // Watch for changes to static assets, pages, Sass, and JavaScript
 function watch() {
@@ -240,10 +222,10 @@ function watch() {
   gulp.watch('src/assets/scss/**/*.scss', sass)
     .on('change', path => log('File ' + colors.bold(colors.magenta(path)) + ' changed.'))
     .on('unlink', path => log('File ' + colors.bold(colors.magenta(path)) + ' was removed.'));
-  gulp.watch('**/*.php', reload)
+  gulp.watch('**/*.php')
     .on('change', path => log('File ' + colors.bold(colors.magenta(path)) + ' changed.'))
     .on('unlink', path => log('File ' + colors.bold(colors.magenta(path)) + ' was removed.'));
-  gulp.watch('src/assets/images/**/*', gulp.series(images, reload));
+  gulp.watch('src/assets/images/**/*', gulp.series(images));
 }
 
 // Build the "dist" folder by running all of the below tasks
@@ -252,7 +234,7 @@ gulp.task('build',
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
-  gulp.series('build', server, gulp.parallel('webpack:watch', watch)));
+  gulp.series('build', gulp.parallel('webpack:watch', watch)));
 
 // Package task
 gulp.task('package',

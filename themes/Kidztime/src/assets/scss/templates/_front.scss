@@ -1,0 +1,1159 @@
+body {
+  &.homepage_tmpl {
+    background-color: $d3-purpl;
+    background-image: url("../images/icons/woo-header-bg.svg");
+    background-repeat: no-repeat;
+    background-position: 100% 0;
+    background-size: rem-calc(537) auto;
+    @include breakpoint(medium down) {
+      background-position: 116% 0;
+      background-size: rem-calc(535) rem-calc(171);
+    }
+    // header top clouds on left and right sides
+    .off-canvas-content {
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: initial;
+        background-repeat: no-repeat;
+        background-size: auto;
+        display: block;
+      }
+      &:before {
+        left: 0;
+        right: initial;
+        min-width: rem-calc(222);
+        min-height: rem-calc(261);
+        background-image: url("../images/icons/Sky_night_1.svg");
+        pointer-events: none;
+      }
+      &:after {
+        right: 0;
+        left: initial;
+        min-width: rem-calc(139);
+        min-height: rem-calc(207);
+        background-image: url("../images/icons/Sky_night_2.svg");
+        pointer-events: none;
+      }
+    }
+    .main-front-content {
+      overflow-x: hidden;
+    }
+  }
+}
+
+.kt-section {
+  position: relative;
+  .main-container {
+    position: relative;
+    z-index: 5;
+  }
+  &__sup-title {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 0.2px;
+    color: $white;
+    margin-bottom: 6px;
+  }
+  &__title {
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 130%;
+    text-align: center;
+    color: $sky;
+    margin-bottom: 24px;
+    @include breakpoint(medium down) {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    @include breakpoint(small down) {
+      margin-bottom: 22px;
+    }
+  }
+  &__sub-title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    color: $white;
+    @include breakpoint(medium down) {
+      font-size: 16px;
+    }
+  }
+  &__custom-title {
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 130%;
+    text-align: center;
+    color: $orange;
+    background: url("../images/front/sky.svg") no-repeat 50% 50%;
+    background-size: contain;
+    max-width: max-content;
+    min-width: rem-calc(328);
+    min-height: rem-calc(207);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 78px;
+    @include breakpoint(medium down) {
+      min-width: rem-calc(222);
+      min-height: rem-calc(142);
+      font-size: 40px;
+      margin-bottom: 32px;
+    }
+    @include breakpoint(small down) {
+      background-position: 0 0;
+      min-width: rem-calc(197);
+      min-height: rem-calc(114);
+      font-size: 36px;
+      margin-bottom: 22px;
+    }
+  }
+  &__first {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    min-height: calc( 100vh - 107px );
+    //min-height: 113vh;
+    padding-top: 42px;
+    @include breakpoint(medium down) {
+      padding-top: 55px;
+    }
+    @include breakpoint(small down) {
+      min-height: calc( 100vh - 52px );
+    }
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -10%;
+      bottom: 0;
+      background: url("../images/icons/woo-body-bg.svg") no-repeat 50% 54%;
+      background-size: contain;
+      animation: 20s infinite alternate swell;
+      max-height: 100vh;
+      pointer-events: none;
+      @include breakpoint(medium down) {
+        background-position: 55% 37%;
+        background-size: 180%;
+      }
+    }
+    .main-container {
+      text-align: center;
+    }
+    .slogan-image {
+      max-width: rem-calc(468);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: rem-calc(40);
+      @include breakpoint(medium down) {
+        max-width: rem-calc(388);
+        margin-bottom: 50px;
+      }
+      @include breakpoint(small down) {
+        max-width: rem-calc(258);
+        margin-bottom: 53px;
+      }
+    }
+    .main-slogan {
+      font-weight: 900;
+      font-size: rem-calc(68);
+      line-height: 130%;
+      color: $sky;
+      margin-bottom: rem-calc(16);
+      @include breakpoint(medium down) {
+        font-size: 44px;
+      }
+      @include breakpoint(small down) {
+        line-height: 110%;
+      }
+    }
+    .main-slogan-desc {
+      font-weight: bold;
+      font-size: rem-calc(18);
+      line-height: rem-calc(28);
+      color: #fff;
+      margin-bottom: 8%;
+      @include breakpoint(small down) {
+        font-size: 16px;
+        line-height: 150%;
+      }
+    }
+  }
+  // How it works
+  &__how-works {
+    min-height: rem-calc(840);
+    background: url("../images/front/how-works-bg-full.svg") no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    z-index: 2;
+    margin-top: -12%;
+    padding-top: 12%;
+    padding-bottom: 8.3%;
+    @include breakpoint(medium down) {
+      padding-top: 20%;
+      min-height: initial;
+    }
+    @include breakpoint(small down) {
+      margin-top: -175px;
+      background: url("../images/front/how-works-bg-full-mobile.svg") no-repeat;
+      background-size: cover;
+    }
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 14%;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("../images/front/how-works-stars-bg.svg") no-repeat;
+      background-position: 50% 0;
+      background-size: cover;
+      mix-blend-mode: overlay;
+      min-height: 171%;
+      z-index: 2;
+      pointer-events: none;
+      @include breakpoint(small down) {
+        top: 2.5%;
+        bottom: initial;
+        background: url("../images/front/stars_bg_how_it-mobile.svg") no-repeat;
+        background-size: cover;
+        min-height: rem-calc(356);
+      }
+    }
+    .kt-section__title {
+      @include breakpoint(small down) {
+        margin-bottom: 44px;
+      }
+    }
+    // Items
+    .how-works-items {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 4%;
+      @include breakpoint(medium down) {
+       justify-content: center;
+      }
+      @include breakpoint(small down) {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .how-works-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+
+        &__image {
+          display: block;
+          max-width: 272px;
+          width: auto;
+          height: auto;
+          margin: 0 auto;
+          margin-bottom: 16px;
+          transform: rotate(0deg) translate(0, 0);
+          animation: 3s ease-in-out 0s infinite alternate front-planet-move;
+          @include breakpoint(medium down) {
+            max-width: 150px;
+          }
+          @include breakpoint(small down) {
+            margin-bottom: 20px;
+          }
+        }
+        &__description {
+          font-weight: 900;
+          font-size: 24px;
+          line-height: 130%;
+          text-align: center;
+          color: $sky;
+          @include breakpoint(medium down) {
+            font-size: 20px;
+          }
+        }
+        &--01 {
+          @include breakpoint(medium down) {
+            margin-right: 9%;
+          }
+          @include breakpoint(small down) {
+            margin-right: 0;
+            margin-bottom: 13%;
+          }
+          > img {
+            animation-delay: 0s;
+          }
+          &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            z-index: -1;
+            top: 40%;
+            right: rem-calc(-196);
+            width: rem-calc(196);
+            height: rem-calc(70);
+            background: url("../images/front/how-works-line-1.svg") no-repeat;
+            background-size: contain;
+            animation: 8s ease-in-out 1s infinite alternate swell-path;
+            @include breakpoint(medium down) {
+              top: 40%;
+              right: rem-calc(-90);
+              width: rem-calc(90);
+              height: rem-calc(41);
+              animation: none;
+            }
+            @include breakpoint(small down) {
+              right: initial;
+              top: 55%;
+              left: -37%;
+              width: rem-calc(98);
+              height: rem-calc(315);
+              background: url("../images/front/hiw1-after-mobile.svg") no-repeat;
+              background-size: contain;
+            }
+          }
+        }
+        &--02 {
+          @include breakpoint(medium down) {
+            margin-right: 9%;
+          }
+          @include breakpoint(small down) {
+            margin-right: 0;
+            margin-bottom: 13%;
+          }
+          > img {
+            animation: 3s ease-in-out 1s infinite alternate front-planet-move-back;
+          }
+          &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            z-index: -1;
+            top: 20%;
+            right: rem-calc(-238);
+            width: rem-calc(241);
+            height: rem-calc(88);
+            background: url("../images/front/how-works-line-2.svg") no-repeat;
+            background-size: contain;
+            animation: 8s ease-in-out 1s infinite alternate swell-path;
+            @include breakpoint(medium down) {
+              top: 15%;
+              right: rem-calc(-105);
+              width: rem-calc(130);
+              height: rem-calc(58);
+              animation: none;
+            }
+            @include breakpoint(small down) {
+              top: 58%;
+              right: -38%;
+              width: rem-calc(105);
+              height: rem-calc(274);
+              background: url("../images/front/hiw2-after-mobile.svg") no-repeat;
+              background-size: contain;
+            }
+          }
+        }
+        &--03 {
+          > img {
+            animation-delay: 2s;
+          }
+        }
+      }
+    }
+  }
+  // Choose a product type
+  &__choose-product {
+    background: #282756;
+    min-height: rem-calc(548);
+    @include breakpoint(medium down) {
+      padding-top: 5%;
+    }
+    @include breakpoint(small down) {
+      padding-top: 12%;
+    }
+    &:before {
+      z-index: 2;
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 0;
+      right: 0;
+      bottom: 18%;
+      display: block;
+      background: linear-gradient(360deg, #FF7207 2.43%, #FF643F 29.71%, rgba(255, 100, 63, 0) 86%);
+      min-height: inherit;
+      pointer-events: none;
+      @include breakpoint(small down) {
+        top: -20%;
+      }
+    }
+    .titles-wrapper {
+      max-width: rem-calc(691);
+      margin: 0 auto;
+      display: block;
+      position: relative;
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: -1;
+        width: rem-calc(61);
+        height: rem-calc(59);
+        background: url('../images/front/aster_2.svg') no-repeat 50% 50%;
+        background-size: contain;
+        animation: 36s linear 1.5s infinite alternate aster-rotate;
+        pointer-events: none;
+      }
+      &:before {
+        right: -16%;
+        bottom: 0;
+        @include breakpoint(small down) {
+          width: rem-calc(43);
+          height: rem-calc(43);
+          right: -9%;
+          bottom: 38%;
+        }
+      }
+      &:after {
+        width: rem-calc(52);
+        height: rem-calc(52);
+        right: initial;
+        left: -30%;
+        bottom: -22%;
+        @include breakpoint(small down) {
+          width: rem-calc(32);
+          height: rem-calc(32);
+          left: -4%;
+          bottom: -9%;
+        }
+      }
+    }
+    .kt-section__title {
+      @include breakpoint(small down) {
+        max-width: 300px;
+        margin: 0 auto;
+        margin-bottom: 22px;
+      }
+    }
+    .kt-btn {
+      max-width: rem-calc(200);
+    }
+    .main-container {
+      max-width: 100%;
+    }
+    // Front Categories Gallery
+    .kt-front-cat-gallery {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      margin: 0 -24px;
+      margin-top: 20px;
+      .cat-gallery-wrapper {
+        position: relative;
+        right: 0;
+        flex: 1 0 100%;
+        width: 100%;
+        max-width: calc( 100% - 160px );
+       // margin-left: -160px;
+        margin-right: 44px;
+        @include breakpoint(medium down) {
+          margin-right: 41px;
+          max-width: calc( 100% - 125px );
+        }
+        @include breakpoint(small down) {
+          margin-right: 24px;
+          max-width: calc( 100% - 74px );
+        }
+        .slick-slider {
+          .slick-list {
+            direction: rtl;
+            padding-right: 28px;
+            @include breakpoint(medium down) {
+              padding-right: 15px;
+            }
+            @include breakpoint(small down) {
+              padding-right: 8px;
+            }
+            .slick-track {
+              direction: ltr;
+            }
+          }
+        }
+      }
+      .gallery-item {
+        list-style: none;
+        min-width: 333px;
+        max-width: 333px;
+        width: 100%;
+        min-height: 404px;
+        max-height: 404px;
+        position: relative;
+        overflow: hidden;
+        border: none;
+        padding: 0;
+        margin: 28px 0;
+        margin-left: 28px;
+        box-sizing: border-box;
+        border-radius: 8px;
+        box-shadow: 12px 12px 12px rgba(88, 68, 139, 0.25);
+        transform: scale(1);
+        transition: all .3s;
+        @include breakpoint(medium down) {
+          min-width: 204px;
+          max-width: 204px;
+          min-height: 252px;
+          max-height: 252px;
+          margin-left: 16px;
+        }
+        @include breakpoint(small down) {
+          min-width: 165px;
+          max-width: 165px;
+          min-height: 200px;
+          max-height: 200px;
+          margin-left: 12px;
+        }
+        &.slick-current {
+          transform: scale(1.05);
+          transition: all .3s;
+          @include breakpoint(medium down) {
+            transform: scale(1.1);
+            margin-left: 27px;
+          }
+          @include breakpoint(small down) {
+            margin-left: 20px;
+          }
+        }
+        &:focus {
+          outline: none;
+        }
+        img {
+          object-fit: cover;
+          min-height: inherit;
+          display: block;
+          border: 4px solid #FFFFFF;
+          border-radius: 8px;
+        }
+      }
+      .cat-gallery-controls {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .controls-item:not(.current-slides-number) {
+          max-height: 40px;
+          a {
+            display: block;
+            max-height: inherit;
+          }
+        }
+        .current-slides-number {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          font-size: 20px;
+          line-height: 28px;
+          text-align: center;
+          letter-spacing: 0.2px;
+          color: $white;
+          margin: 20px auto;
+          * {
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 28px;
+            text-align: center;
+            letter-spacing: 0.2px;
+            color: $white;
+          }
+          .current {}
+          .total {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:before {
+              content: '/';
+              display: block;
+            }
+          }
+        }
+        .slick-prev,
+        .slick-next {
+          position: relative;
+          left: 0;
+          right: 0;
+          width: auto;
+          height: auto;
+          transform: none;
+          &:before {
+            color: $white;
+            font-size: 40px;
+            display: none;
+          }
+        }
+        .slick-next {
+          transform: rotate(180deg);
+        }
+        .controls-item {
+          svg {
+            overflow: visible;
+            .arrow {
+              fill: $white;
+              fill-opacity: 1;
+              stroke-opacity: 1;
+              stroke-width: 0;
+              transition: all .3s;
+            }
+            .round {
+              fill: #FF653D;
+              transition: all .3s;
+            }
+          }
+          &.slick-disabled {
+            svg {
+              .arrow {
+                fill: $white;
+                fill-opacity: .32;
+                stroke-opacity: .73;
+                stroke-width: 2;
+                transition: all .3s;
+              }
+              .round {
+                fill: $white;
+                transition: all .3s;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Customize button
+    .kt-product-to-customize {
+      position: relative;
+      min-height: 48px;
+      text-transform: uppercase;
+      @include breakpoint(small down) {
+        min-height: 52px;
+      }
+      &:after {
+        content: '';
+        width: rem-calc(289);
+        height: rem-calc(180);
+        position: absolute;
+        z-index: -1;
+        top: 20%;
+        left: -90%;
+        background: url('../images/front/category-cloud.svg') no-repeat 50% 50%;
+        background-size: contain;
+        transform-origin: 50% 50%;
+        animation: 16s linear 1s infinite alternate orange-planet-orbit-pulsar;
+        pointer-events: none;
+        @include breakpoint(medium down) {
+          width: rem-calc(208);
+          height: rem-calc(152);
+          left: -40%;
+          top: -20%;
+        }
+        @include breakpoint(small down) {
+          width: rem-calc(193);
+          height: rem-calc(114);
+          left: -10%;
+          top: 15%;
+        }
+      }
+      .load-icon {
+        position: relative;
+        margin-left: 8px;
+        .app-loading {
+          background: transparent;
+          padding: 0;
+          .spinner {
+            height: 24px;
+            width: 24px;
+          }
+        }
+      }
+      &.load-page {
+        pointer-events: none;
+        .load-icon {
+          //display: block;
+        }
+      }
+    }
+    // Front Categories List
+    .kt-front-cat-list {
+      background: $d1-purpl;
+      border-radius: 12px;
+      max-width: rem-calc(695);
+      //min-height: rem-calc(131);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      margin: 48px auto;
+      padding: 8px;
+      position: relative;
+      @include breakpoint(medium down) {
+        max-width: rem-calc(559);
+      }
+      @include breakpoint(small down) {
+        padding: 4px 8px;
+        justify-content: space-around;
+        margin-top: 32px;
+        margin-bottom: 44px;
+      }
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        transform-origin: 50% 50%;
+        pointer-events: none;
+        display: block;
+      }
+      &:before {
+        width: rem-calc(275);
+        height: rem-calc(123);
+        background: url('../images/front/category-rocket.svg') no-repeat 50% 50%;
+        background-size: contain;
+        left: -12%;
+        top: 62%;
+        animation: 5s linear 0s infinite alternate orange-planet-orbit-pulsar;
+        @include breakpoint(medium down) {
+          animation: none;
+          width: rem-calc(290);
+          height: rem-calc(140);
+          left: -16%;
+        }
+        @include breakpoint(small down) {
+          left: -25%;
+          top: 80%;
+        }
+      }
+      &:after {
+        width: rem-calc(105);
+        height: rem-calc(101);
+        bottom: rem-calc(-50);
+        right: rem-calc(-50);
+        background: url('../images/front/aster_2.svg') no-repeat 50% 50%;
+        background-size: contain;
+        animation: 36s linear 1.5s infinite alternate aster-rotate;
+        @include breakpoint(medium down) {
+          animation: none;
+        }
+        @include breakpoint(small down) {
+          width: rem-calc(61);
+          height: rem-calc(63);
+          bottom: -23%;
+          right: -9%;
+        }
+      }
+      .list-item {
+        list-style: none;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: $white;
+        margin: 4px 6px;
+        min-height: 39px;
+        padding: 8px 16px;
+        background: transparent;
+        border-radius: 100px;
+        transition: all .3s;
+        @include breakpoint(medium down) {
+          margin: 4px 0;
+          padding: 4px 10px;
+          min-height: 32px;
+        }
+        &:hover,
+        &:focus {
+          cursor: pointer;
+          font-weight: 500;
+          font-size: 18px;
+        }
+        &.is_active {
+          cursor: pointer;
+          background: $orange;
+          font-weight: 500;
+          font-size: 18px;
+        }
+      }
+    }
+
+  }
+
+  // Custom Content
+  @include breakpoint(xxlarge down) {
+    $bg_bottom_size: rem-calc(637);
+  }
+  $bg_bottom_size: rem-calc(737);
+
+
+
+  &__custom-content {
+    background: $white;
+    min-height: rem-calc(852);
+    padding-top: 9%;
+    @include breakpoint(medium down) {
+      padding-top: 18%;
+    }
+    @include breakpoint(small down) {
+      padding-top: 42%;
+    }
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: $bg_bottom_size;
+      z-index: 3;
+      pointer-events: none;
+      @include breakpoint(medium down) {
+        bottom: rem-calc(420);
+      }
+      @include breakpoint(small down) {
+        bottom: rem-calc(211);
+      }
+    }
+    &:before {
+      position: absolute;
+      top: -10%;
+      min-height: inherit;
+      background: linear-gradient(180deg, #FF7207 0.71%, #4BDAE3 28.96%, #56E1E8 61.46%, #97EDF5 72.04%, #C4F5F9 79.96%, #E4FAFC 87%, #F8FEFE 92.88%, #FFFFFF 96.87%);
+      @include breakpoint(medium down) {
+        background: linear-gradient(180deg, #FF7207 0.71%, #4BDAE3 26.96%, #56E1E8 47.46%, #97EDF5 52.04%, #C4F5F9 58.96%, #E4FAFC 72%, #F8FEFE 92.88%, #FFFFFF 100%);
+      }
+      @include breakpoint(small down) {
+        background: linear-gradient(180deg, #FF7207 0.71%, #4BDAE3 23.96%, #56E1E8 32.46%, #97EDF5 38.04%, #C4F5F9 47.96%, #E4FAFC 54%, #F8FEFE 92.88%, #FFFFFF 100%);
+      }
+
+    }
+    &:after {
+      background: #00B4AF url('../images/front/bottom-cloud-custom.svg') no-repeat;
+      background-position: 0 100%;
+      background-size: cover;
+      min-height: $bg_bottom_size;
+      bottom: 0;
+      top: 0;
+      position: relative;
+      z-index: 2;
+      animation: 3s ease-in-out 0s infinite alternate bottom-cloud-animation;
+      @include breakpoint(medium down) {
+        background-position: 7% 100%;
+        min-height: rem-calc(420);
+      }
+      @include breakpoint(small down) {
+        background-position: 0 100%;
+        animation: none;
+        min-height: rem-calc(211);
+      }
+    }
+    .kt-section {
+      &__sup-title,
+      &__sub-title {
+        color: $d1-purpl;
+        @include breakpoint(medium down) {
+          margin-bottom: 2px;
+        }
+      }
+      &__title {
+        color: $orange;
+      }
+    }
+    .custom-content {
+      color: $d1-purpl;
+      font-size: 16px;
+      line-height: 150%;
+      font-weight: 500;
+      max-width: rem-calc(824);
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: 40px;
+      @include breakpoint(medium down) {
+        max-width: rem-calc(571);
+      }
+      p, b, strong, em, i, li, span, a {
+        color: inherit;
+        font-weight: inherit;
+        font-size: inherit;
+        line-height: inherit;
+      }
+      b, strong {
+        font-weight: 900;
+      }
+    }
+    .main-container {
+      margin-bottom: 3%;
+      @include breakpoint(medium down) {
+        margin-bottom: 24px;
+      }
+      @include breakpoint(small down) {
+        margin-bottom: 44px;
+      }
+    }
+    // custom images section
+    .custom-images {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: url("../images/front/cloud-1.svg") no-repeat;
+      background-size: auto;
+      background-position: 86% 0;
+      padding-top: 5%;
+      margin-top: -5%;
+      margin-bottom: 50px;
+      @include breakpoint(medium down) {
+        margin-bottom: 64px;
+      }
+      @include breakpoint(small down) {
+        background-position: 100% 0;
+        background-size: 135px 67px;
+        padding-top: 5%;
+        margin-top: -5%;
+      }
+      .column {
+        max-width: rem-calc(332);
+        min-height: rem-calc(418);
+        max-height: rem-calc(422);
+        background: #FFFFFF;
+        border: 4px solid #EEF6FF;
+        box-sizing: border-box;
+        border-radius: 8px;
+        box-shadow: 12px 12px 12px rgba(88, 68, 139, 0.1);
+        padding: 24px;
+        @include breakpoint(medium down) {
+          max-width: rem-calc(210);
+          min-height: rem-calc(260);
+          max-height: rem-calc(260);
+        }
+        @include breakpoint(small down) {
+          max-width: rem-calc(160);
+          min-height: rem-calc(201);
+          max-height: rem-calc(201);
+        }
+        @media screen and (max-width: 365px) {
+          max-width: 45%;
+        }
+        img {
+          width: 100%;
+          max-height: inherit;
+          object-fit: cover;
+          display: block;
+        }
+        &--1 {
+          @include breakpoint(medium down) {
+            position: relative;
+           &:after {
+             content: '';
+             display: block;
+             width: rem-calc(148);
+             height: rem-calc(81);
+             background: url("../images/front/cloud-1.svg") no-repeat;
+             background-size: contain;
+             right: -60%;
+             position: absolute;
+             bottom: -6%;
+             @include breakpoint(small down) {
+               width: rem-calc(121);
+               height: rem-calc(62);
+               right: -55%;
+               position: absolute;
+               bottom: -21%;
+             }
+           }
+          }
+
+        }
+        &--2 {
+          margin-left: 38px;
+          margin-top: 30px;
+          min-height: rem-calc(422);
+          @include breakpoint(medium down) {
+            min-height: rem-calc(260);
+          }
+          @include breakpoint(small down) {
+            min-height: rem-calc(201);
+            margin-left: 16px;
+          }
+        }
+      }
+    }
+
+    .kt-btn {
+      max-width: rem-calc(204);
+      min-height: 52px;
+    }
+
+  }
+
+  // About Us
+  &__about-us {
+    min-height: rem-calc(852);
+    background: $d-sky;
+    margin-top: -18%;
+    overflow: hidden;
+    @include breakpoint(small down) {
+      margin-top: -9%;
+    }
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: initial;
+      width: 100%;
+      pointer-events: none;
+    }
+    &:before {
+      min-height: rem-calc(430);
+      background: url("../images/front/town.svg") no-repeat;
+      background-size: cover;
+      mix-blend-mode: multiply;
+      bottom: 8%;
+      @include breakpoint( xxlarge up ) {
+        min-height: rem-calc(468);
+        bottom: 3%;
+      }
+      @include breakpoint(medium down) {
+        min-height: rem-calc(264);
+      }
+      @include breakpoint(small down) {
+        min-height: rem-calc(131);
+      }
+    }
+    &:after {
+      min-height: rem-calc(648);
+      background: url("../images/front/rocket-gas.svg") no-repeat;
+      background-size: cover;
+      background-position: 50% 0;
+      z-index: 3;
+      margin-bottom: -16px;
+      animation: 3s ease-in-out .5s infinite alternate bottom-cloud-animation;
+      @include breakpoint( xxlarge up ) {
+        min-height: rem-calc(748);
+      }
+      @include breakpoint(medium down) {
+        min-height: rem-calc(417);
+        background-position: left bottom;
+      }
+      @include breakpoint(small down) {
+        min-height: rem-calc(207);
+        margin-bottom: 25px;
+        animation: none;
+      }
+    }
+    .about-container {
+      max-width: rem-calc(810);
+      @include breakpoint(medium down) {
+        max-width: rem-calc(624);
+        margin: 0 auto;
+      }
+    }
+    .about-titles {
+      max-width: max-content;
+      margin: 0 auto;
+      position: relative;
+      @include breakpoint(medium down) {
+        max-width: 50%;
+        width: 100%;
+        margin-left: 0;
+      }
+      @include breakpoint(small down) {
+        margin-left: 9%;
+        margin-bottom: 9px;
+      }
+      .titles {
+        width: 100%;
+        display: block;
+        @include breakpoint(medium down) {
+          max-width: max-content;
+          margin: 0 auto;
+        }
+      }
+      &:after {
+        content: '';
+        display: block;
+        width: rem-calc(100);
+        height: rem-calc(69);
+        background: url("../images/front/small-cloud.svg") no-repeat;
+        background-size: contain;
+        position: absolute;
+        right: -116px;
+        left: initial;
+        top: 55%;
+        pointer-events: none;
+        animation: 4.5s ease-in-out 1.3s infinite alternate title-cloud-animation;
+        @include breakpoint(medium down) {
+          top: 34%;
+        }
+        @include breakpoint(small down) {
+          top: 26%;
+          width: rem-calc(82);
+          height: rem-calc(44);
+        }
+      }
+    }
+    .about-content {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      color: $white;
+      @include breakpoint(small down) {
+        margin-bottom: 28%;
+      }
+      .column {
+        flex: 1;
+        @include breakpoint(small down) {
+          flex: 1 0 100%;
+        }
+        &--2 {
+          margin-left: 20%;
+          margin-top: 5%;
+          @include breakpoint(medium down) {
+            margin-left: 38px;
+            margin-top: 6%;
+          }
+          @include breakpoint(small down) {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+    .kt-section {
+      &__sup-title,
+      &__sub-title {
+        text-align: left;
+        margin-bottom: 4px;
+      }
+      &__title {
+        text-align: center;
+        margin-bottom: 16px;
+      }
+    }
+  }
+}

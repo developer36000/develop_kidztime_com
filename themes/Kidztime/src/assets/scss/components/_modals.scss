@@ -104,6 +104,14 @@
     max-width: rem-calc(380);
     margin-bottom: 12px;
     display: block;
+    color: $purpl;
+  }
+  .modal_description {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 140%;
+    text-align: center;
+    color: $white;
   }
   .modal_notification {
     font-weight: 500;
@@ -161,4 +169,393 @@
     }
   }
 
+}
+
+.ktwoo_modal {
+  min-height: 294px;
+  .modal_title {
+    margin-bottom: 32px;
+  }
+  .modal-entry {
+    width: 100%;
+  }
+  .form-button {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+    button,
+    .btn {
+      max-width: 194px;
+      @include breakpoint( medium down ) {
+        margin: 0;
+      }
+      @include breakpoint( small down ) {
+        max-width: 145px;
+      }
+      @media screen and (max-width: 340px) {
+        max-width: max-content;
+      }
+      &.woo-btn__cancel-action {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 28px;
+        color: $purpl;
+      }
+      &.woo-btn__link-action {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 28px;
+        color: $purpl;
+        &:hover,
+        &:focus {
+          color: $white;
+        }
+      }
+      &.kt-btn--default {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 28px;
+        color: $white;
+        .load-icon {
+          position: relative;
+          margin-left: 8px;
+          .app-loading {
+            background: transparent;
+            padding: 0;
+            .spinner {
+              height: 24px;
+              width: 24px;
+            }
+          }
+        }
+        &.load-page {
+          pointer-events: none;
+          .load-icon {
+            //display: block;
+          }
+        }
+      }
+    }
+  }
+  &--edit {}
+  &--added {
+    .modal-entry {
+      @include breakpoint( medium down ) {
+        max-width: 354px;
+      }
+      .form-button {
+        button,
+        .btn {
+          @include breakpoint( medium down ) {
+            max-width: 165px;
+            margin: 0;
+          }
+          @include breakpoint( small down ) {
+            max-width: 145px;
+          }
+          @media screen and (max-width: 340px) {
+            max-width: max-content;
+          }
+        }
+      }
+    }
+    .create-new {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      min-height: 150px;
+      max-width: 412px;
+      width: 100%;
+      background: url("../images/create-bg.png") no-repeat 50% 50%;
+      background-size: contain;
+
+      .create-new-label {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: $purpl;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 40px;
+        pointer-events: none;
+        &:before,
+        &:after {
+          content: '';
+          display: block;
+          width: 24px;
+          height: 2px;
+          background: $purpl;
+          position: absolute;
+          left: 50%;
+          top: 12px;
+          transition: all .3s;
+        }
+        &:after {
+          transform: rotate(-90deg);
+        }
+      }
+      &:hover,
+      &:focus {
+        .create-new-label {
+          &:before {
+            transform: rotate(-90deg);
+          }
+          &:after {
+            transform: rotate(-180deg);
+          }
+        }
+      }
+    }
+  }
+  &--small,
+  &--big {
+    background-image: url("../images/form-small-bg.png");
+    background-color: $white;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+  &--small {
+    @include breakpoint( medium down ) {
+      background-image: url("../images/form-small-bg-mob.png");
+      max-width: 500px;
+    }
+    @include breakpoint( small down ) {
+      padding: 32px 11px;
+      padding-top: 3.75rem;
+    }
+  }
+  &--big {
+    min-height: 419px;
+    background-image: url("../images/form-big-bg.png");
+    @include breakpoint( medium down ) {
+      background-image: url("../images/form-big-bg-moob.png");
+      max-width: 500px;
+    }
+    @include breakpoint( small down ) {
+      background-position: 5% 50%;
+      padding: 32px 11px;
+      padding-top: 3.75rem;
+    }
+  }
+  &--create {
+    background-image: none;
+    max-width: rem-calc(556);
+    min-height: rem-calc(418);
+    justify-content: flex-start;
+    .cta-close {
+      background: rgba(255, 255, 255, 0.2);
+      &:before {
+        filter: brightness(1.5);
+      }
+    }
+    .modal_header {
+    //  position: relative;
+      width: 100%;
+      min-height: rem-calc(164);
+
+      .modal_title {
+        color: $white;
+        margin: 12px auto;
+      }
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: rem-calc(-30);
+        right: rem-calc(-30);
+        z-index: -1;
+        background-size: cover;
+        display: block;
+      }
+      &:before {
+        min-height: rem-calc(180);
+        background: url("../images/front/modal-header-top.svg") no-repeat 50% 50%;
+      }
+      &:after {
+        z-index: -2;
+        min-height: rem-calc(223);
+        background: url("../images/front/modal-header-bg.svg") no-repeat 50% 50%;
+      }
+    }
+    .modal-entry {
+      max-width: rem-calc(412);
+      @include breakpoint( medium down ) {
+        max-width: rem-calc(354);
+      }
+      .form-row {
+        label {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 130%;
+          color: $purpl;
+          margin-bottom: 16px;
+          text-align: center;
+        }
+        input {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 18px;
+          letter-spacing: -0.084px;
+        }
+        .error-label {
+          opacity: 0;
+          transition: all .3s;
+          color: $carrot;
+          font-size: 12px;
+          line-height: 14px;
+          font-weight: 500;
+          margin-top: 2px;
+          text-align: center;
+          display: block;
+          &.show {
+            opacity: 1;
+          }
+        }
+      }
+      .form-button {
+        button,
+        .btn {
+          @include breakpoint( medium down ) {
+            max-width: 165px;
+          }
+          @include breakpoint( small down ) {
+            max-width: 145px;
+          }
+          @media screen and (max-width: 340px) {
+            max-width: max-content;
+          }
+          &:first-child {
+            margin: 0;
+          }
+          &:nth-child(2) {
+            margin-left: 24px;
+            @include breakpoint( medium down ) {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  &--go_back {
+    min-height: rem-calc(255);
+    max-width: rem-calc(556);
+    background-image: url("../images/front/modal-go_back-bg.svg");
+    .modal_title {
+      margin-bottom: 12px;
+    }
+    .notification {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 150%;
+      color: $carrot;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      svg {
+        margin-right: 4px;
+      }
+    }
+    .form-button {
+      button,
+      .btn {
+        @include breakpoint( medium down ) {
+          max-width: 165px;
+        }
+        @include breakpoint( small down ) {
+          max-width: 145px;
+        }
+        @media screen and (max-width: 340px) {
+          max-width: max-content;
+        }
+        &:first-child {
+          margin: 0;
+        }
+        &:nth-child(2) {
+          margin-left: 24px;
+          @include breakpoint( medium down ) {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+.ktwoo_single_form {
+  width: 100%;
+  max-width: 412px;
+  margin: 16px auto;
+  margin-top: 0;
+  @include breakpoint( medium down ) {
+   max-width: 100%;
+  }
+  input {
+    min-height: 23px;
+    height: auto;
+    display: block;
+    width: 100%;
+    border: 3px solid $l-gray;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px 16px;
+    box-shadow: none;
+    outline: none;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: $d-purpl;
+    margin-bottom: 0;
+    &::placeholder{
+      color: $l-purpl;
+    }
+    &:hover {
+      border: 3px solid #DCDCE8;
+    }
+    &:focus {
+      border: 3px solid #58448B;
+    }
+    &:-webkit-autofill {
+      background: transparent;
+      -webkit-text-fill-color: $d-purpl;
+      color: $d-purpl;
+      transition: background-color 5000s ease-in-out 0s;
+      background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(0,174,255,0.04) 50%,rgba(255,255,255,0) 51%,rgba(0,174,255,0.03) 100%);
+      &:hover,
+      &:focus {
+        background: transparent;
+        -webkit-text-fill-color: $d-purpl;
+        color: $d-purpl;
+        transition: background-color 5000s ease-in-out 0s;
+        background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(0,174,255,0.04) 50%,rgba(255,255,255,0) 51%,rgba(0,174,255,0.03) 100%);
+      }
+    }
+  }
+  .form-button {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+    button {
+      max-width: 194px;
+      @include breakpoint( small down ) {
+        margin: 0;
+        max-width: 145px;
+      }
+      @media screen and (max-width: 340px) {
+        max-width: max-content;
+      }
+    }
+  }
 }

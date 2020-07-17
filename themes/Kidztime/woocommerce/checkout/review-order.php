@@ -41,7 +41,8 @@ defined( 'ABSPATH' ) || exit;
 						<div class="product-row">
 							<div class="product-thumbnail">
 								<?php
-								$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
+								$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image('full'), $cart_item,
+									$cart_item_key );
 								echo $thumbnail;
 								?>
 							</div>

@@ -1,5 +1,8 @@
 import $ from 'jquery';
 import whatInput from 'what-input';
+import fabric from 'fabric';
+import 'fabric-history';
+
 
 window.$ = $;
 
@@ -9,5 +12,8 @@ import Foundation from 'foundation-sites';
 //import './lib/foundation-explicit-pieces';
 $(document).foundation();
 
-import './lib/animations';
+import './lib/slick.min';
+import './lib/woo-scripts';
+import './lib/choose-product';
 import './lib/custom';
+import './lib/customization';

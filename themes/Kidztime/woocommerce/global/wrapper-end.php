@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $template = wc_get_theme_slug_for_templates();
-
+/*
 switch ( $template ) {
 	case 'twentyten':
 		echo '</div></div>';
@@ -49,4 +49,4 @@ switch ( $template ) {
 	default:
 		echo '</main></div>';
 		break;
-}
+}*/

@@ -8,14 +8,14 @@
 <?php if( is_user_logged_in() ) : ?>
 
 	<div class="main-container">
-		<?php woocommerce_get_template( 'myaccount/my-account.php' ); ?>
+		<?php wc_get_template( 'myaccount/my-account.php' ); ?>
 	</div>
 
 <?php else : ?>
 
 	<div class="main-container">
 		<?php the_content(); ?>
-		<?php //woocommerce_get_template( 'myaccount/form-login.php' ); ?>
+		<?php //wc_get_template( 'myaccount/form-login.php' ); ?>
 	</div>
 
 	<!-- START Animation -->

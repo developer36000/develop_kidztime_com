@@ -43,6 +43,10 @@ do_action( 'woocommerce_before_cart' ); ?>
 					$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 					$product_sku = $_product->get_sku();
 					$product_cat_name = wc_product_category_name( $product_id );
+					$arr_params = array(
+						'edit_product' => true
+					);
+					$edit_product_link = add_query_arg( $arr_params, get_permalink( $product_id ) );
 					if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 						$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
 						?>
@@ -50,7 +54,8 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 							<td class="product-thumbnail">
 							<?php
-							$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
+							$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image('full'), $cart_item,
+								$cart_item_key );
 
 							if ( ! $product_permalink ) {
 								echo $thumbnail; // PHPCS: XSS ok.
@@ -109,7 +114,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 									?>
 										</span>
 									<!-- Edit button -->
-									<a class="woo-btn woo-btn__edit product-edit" href="<?php esc_url( $product_permalink ); ?>">
+									<a class="woo-btn woo-btn__edit product-edit" href="<?php echo $edit_product_link; ?>">
 										<span class="edit-icon">
 											<svg width="16" height="16" viewBox="0 0 16 16" fill="#58448B" xmlns="http://www.w3.org/2000/svg">
 												<path fill-rule="evenodd" clip-rule="evenodd" d="M7.33784 2.0042C8.21968 1.12236 9.4157 0.626953 10.6628 0.626953C11.9099 0.626953 13.1059 1.12236 13.9878 2.0042C14.8696 2.88604 15.365 4.08207 15.365 5.32918C15.365 6.57616 14.8697 7.77208 13.988 8.6539L12.2211 10.4261C12.1845 10.4736 12.142 10.5162 12.0946 10.5529L9.49519 13.1601C9.36385 13.2918 9.18549 13.3658 8.99948 13.3658H3.62306L1.82779 15.1611C1.55442 15.4345 1.1112 15.4345 0.837838 15.1611C0.564471 14.8878 0.564471 14.4445 0.837838 14.1712L2.63281 12.3762V6.99918C2.63281 6.81353 2.70656 6.63548 2.83784 6.5042L7.33784 2.0042ZM11.3676 9.29932L12.9978 7.6642C13.6171 7.04492 13.965 6.20498 13.965 5.32918C13.965 4.45337 13.6171 3.61344 12.9978 2.99415C12.3786 2.37487 11.5386 2.02695 10.6628 2.02695C9.78701 2.02695 8.94707 2.37487 8.32779 2.99415L4.03281 7.28913V10.9762L5.49714 9.51187C5.50205 9.50681 5.50703 9.50183 5.51208 9.49692L10.1712 4.83784C10.4445 4.56447 10.8878 4.56447 11.1611 4.83784C11.4345 5.1112 11.4345 5.55442 11.1611 5.82779L7.68959 9.29932H11.3676ZM6.28959 10.6993H9.9717L8.70892 11.9658H5.02306L6.28959 10.6993Z" fill="inherit"/>

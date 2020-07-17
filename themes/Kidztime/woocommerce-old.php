@@ -11,11 +11,12 @@
 get_header(); ?>
 
 <div class="main-container">
-	<div class="main-grid">
-		<main class="main-content">
-			<?php woocommerce_content(); ?>
-		</main>
-	<?php get_sidebar(); ?>
-	</div>
+	<header>
+		<h1 class="entry-title"><?php echo $kt_page_title ? $kt_page_title : get_the_title(); ?></h1>
+	</header>
+
+	<?php woocommerce_content(); ?>
+
 </div>
+
 <?php get_footer();

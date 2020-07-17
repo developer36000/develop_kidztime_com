@@ -178,8 +178,11 @@ body {
               a {
                 display: block;
                 img {
-                  width: 100%;
+                  width: auto;
                   max-width: 100px;
+                  margin: 0 auto;
+                  display: block;
+                  max-height: 100px;
                 }
               }
             }

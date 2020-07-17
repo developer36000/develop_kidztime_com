@@ -28,6 +28,10 @@ body {
             font-weight: bold;
             font-size: 16px;
             margin-bottom: 18px;
+            &:before {
+              content: '';
+              display: block;
+            }
           }
         }
         &--billing {
@@ -842,9 +846,17 @@ body {
       }
 
       &__column {
+        @include breakpoint(medium down) {
+          width: 100% !important;
+          float: none !important;
+        }
         &.col-2 {
-          border-bottom: 1px solid $l-purpl;
+          margin-top: -63px;
           margin-bottom: 24px;
+          @include breakpoint(medium down) {
+            margin-top: 0;
+            border-bottom: 1px solid $l-purpl;
+          }
         }
         .tab-content {
           display: none;
@@ -1026,8 +1038,11 @@ body {
                       min-width: 32px;
                     }
                     img {
-                      width: 100%;
+                      width: auto;
                       max-width: 56px;
+                      margin: 0 auto;
+                      display: block;
+                      max-height: 56px;
                     }
                   }
                   .product-information {

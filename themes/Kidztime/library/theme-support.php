@@ -54,6 +54,8 @@ if ( ! function_exists( 'kt_theme_support' ) ) :
 		add_theme_support( 'editor-styles' );
 
 		add_editor_style( get_stylesheet_directory_uri() . '/dist/assets/css/editor.css' );
+	 // Remove zoom effect on WooCommerce product image
+		remove_theme_support( 'wc-product-gallery-zoom' );
 
 		// Add foundation.css as editor style https://codex.wordpress.org/Editor_Style
 		// add_editor_style( 'dist/assets/css/' . foundationpress_asset_path( 'editor.css' ) );

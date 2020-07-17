@@ -9,6 +9,7 @@
 
 get_header();
 $body_class = get_tmpl_body_class();
+
 ?>
 
 <main class="main-content <?php echo 'body-'.$body_class; ?>">
@@ -16,6 +17,8 @@ $body_class = get_tmpl_body_class();
 
 	 <?php if( is_account_page() ) : ?>
 			<?php get_template_part( 'template-parts/content', 'woo_account' ); ?>
+	 	<?php elseif ( is_shop() ) : ?>
+			<?php get_template_part( 'woocommerce/archive-product.php' ); ?>
 	 	<?php else : ?>
 			<?php get_template_part( 'template-parts/content', 'page' ); ?>
 	 <?php endif; ?>

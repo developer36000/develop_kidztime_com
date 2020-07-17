@@ -34,7 +34,8 @@ body {
   }
   &.homepage_tmpl {
     #site-footer {
-      margin-top: 0;
+      margin-top: -51px;
+      z-index: 4;
     }
   }
 }

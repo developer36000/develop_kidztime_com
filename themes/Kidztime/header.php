@@ -7,12 +7,12 @@
  * @package FoundationPress
  * @since FoundationPress 1.0.0
  */
-global $post;
-$post_id = $post->ID;
-$page_template_slug = get_page_template_slug( $post_id );
+
+$page_template_slug = get_page_template_slug( );
 $body_class = get_tmpl_body_class();
 $custom_logo_id = get_theme_mod( 'custom_logo' );
 $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+
 ?>
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?> >
@@ -20,6 +20,7 @@ $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<?php wp_head(); ?>
+
 	</head>
 	<body <?php body_class( $body_class ); ?>>
 

@@ -23,7 +23,8 @@ if( is_admin() && ! class_exists('Term_Meta_Image') ){
 	class Term_Meta_Image {
 
 		// для каких таксономий включить код. По умолчанию для всех публичных
-		static $taxes = []; // пример: array('category', 'post_tag');
+		// 'pa_background', 'pa_graphic', 'pa_peripherals'
+		static $taxes = ['pa_background', 'pa_graphic', 'pa_peripherals']; // пример: array('category', 'post_tag');
 
 		// название мета ключа
 		static $meta_key = '_thumbnail_id';

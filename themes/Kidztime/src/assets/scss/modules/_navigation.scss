@@ -20,6 +20,8 @@
   width: 100%;
   max-width: rem-calc(1190);
   margin: 0 auto;
+  position: relative;
+  z-index: 15;
   @include breakpoint(medium down) {
     padding-right: rem-calc(16);
     padding-left: rem-calc(20);

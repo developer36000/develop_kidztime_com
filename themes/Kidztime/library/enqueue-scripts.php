@@ -66,7 +66,7 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 			'kidztime-js',
 			get_stylesheet_directory_uri() . '/dist/assets/js/' . foundationpress_asset_path( 'app.js' ),
 			array( 'jquery' ),
-			null,
+			'1.0.0',
 			true );
 
 		// Enqueue FontAwesome from CDN. Uncomment the line below if you need FontAwesome.
@@ -78,11 +78,15 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 		}
 
 
-		/*		$widget_jp = array(
-			'widget_nonce' => wp_create_nonce( 'widget_nonce' ),
-			'ajaxURL' => admin_url( 'admin-ajax.php' ),
+		$ajax_jp = array(
+			// URL to wp-admin/admin-ajax.php to process the request
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'root' => esc_url_raw( rest_url() ),
+			// generate a nonce with a unique ID
+			// so that you can check it later when an AJAX request is sent
+			'nonce_rest' => wp_create_nonce( 'wp_rest' )
 		);
-		wp_localize_script( 'eventbrite_widget_scripts', 'eventbrite_widget_ajax', $widget_jp );*/
+		wp_localize_script( 'kidztime-js', 'wpApi', $ajax_jp );
 
 
 

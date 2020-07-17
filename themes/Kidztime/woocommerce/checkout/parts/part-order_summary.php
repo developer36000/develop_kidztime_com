@@ -2,7 +2,7 @@
 
 	<div class="mobile-order-summary">
 		<h4 class="mobile-order-summary--title">
-			<?php esc_html_e('Hide Order Summary', kt_textdomain); ?>
+			<?php esc_html_e('Show Order Summary', kt_textdomain); ?>
 		</h4>
 		<div class="mobile-order-summary--total">
 			<?php wc_cart_totals_order_total_html(); ?>

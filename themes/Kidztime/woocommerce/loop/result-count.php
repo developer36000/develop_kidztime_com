@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
+
 <p class="woocommerce-result-count">
 	<?php
 	if ( 1 === $total ) {
