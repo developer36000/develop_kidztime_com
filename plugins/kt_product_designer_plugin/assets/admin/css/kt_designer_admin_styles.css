@@ -1,0 +1,46 @@
+#adminmenu li#toplevel_page_kt-product-designer-plugin .wp-menu-image img {
+  max-width: 24px; }
+
+#kt_designer-plugin * {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #58448B; }
+#kt_designer-plugin h1 {
+  font-size: 32px;
+  line-height: 1.4;
+  margin-bottom: 32px;
+  font-weight: bolder;
+  color: #38355B; }
+#kt_designer-plugin h2, #kt_designer-plugin h3, #kt_designer-plugin h4, #kt_designer-plugin h5, #kt_designer-plugin h6 {
+  color: #58448B; }
+#kt_designer-plugin p {
+  margin-bottom: 16px; }
+
+#edittag {
+  max-width: 100% !important; }
+
+.custom_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: max-content;
+  width: 100%;
+  margin: 10px;
+  padding: 10px 15px;
+  min-height: 40px;
+  min-width: 120px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #58448B;
+  border: 1px solid #58448B;
+  box-sizing: border-box;
+  border-radius: 100px;
+  transition: all .3s;
+  text-decoration: none; }
+  .custom_btn:hover, .custom_btn:focus {
+    background: #58448B;
+    color: #fff; }
+
+/*# sourceMappingURL=kt_designer_admin_styles.css.map */

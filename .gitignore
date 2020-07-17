@@ -7,6 +7,7 @@ themes/Kidztime/config.yml
 debug.log
 themes/Kidztime/*.sass-cache*
 themes/Kidztime/*.log
+uploads/
 .idea/
 *.swp
 themes/Kidztime/packaged/
