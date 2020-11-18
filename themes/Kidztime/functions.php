@@ -55,7 +55,6 @@ require_once( 'library/gutenberg.php' );
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
 // require_once( 'library/class-foundationpress-protocol-relative-theme-assets.php' );
 
-
 /**
  * Custom Column for Post Types
  * */
@@ -86,4 +85,27 @@ include_once 'library/custom-hooks.php';
  * */
 include_once 'library/woo-custom-hooks.php';
 
+/*
+$theme_includes = array(
+	'/woo-custom-hooks.php',                // Woocommerce Custom Hooks
+);
+
+foreach ( $theme_includes as $file ) {
+	$filepath = locate_template( 'library' . $file );
+	if ( ! $filepath ) {
+		trigger_error( sprintf( 'Error locating /inc%s for inclusion', $file ), E_USER_ERROR );
+	}
+	require_once $filepath;
+}*/
+
+/*
+
+# BEGIN rlrssslReallySimpleSSL rsssl_version[3.3.4]
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+# END rlrssslReallySimpleSSL
+ * */
 

@@ -626,7 +626,7 @@ ul.attribute-navigation {
 }
 
 
-#customize_product_text{
+#customize_product_text_form {
   position: relative;
   border: none;
   box-sizing: border-box;
@@ -705,7 +705,7 @@ ul.attribute-navigation {
   position: absolute;
   z-index: 10000;
   top: 30px;
-  display: none;
+ // display: none;
   span.icon {
     height: auto;
     display: flex;
@@ -719,10 +719,14 @@ ul.attribute-navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
   }
   #text-controls {
     width: 100%;
     margin-bottom: 12px;
+    @media screen and (max-width: 365px) {
+      margin-bottom: 7px;
+    }
   }
   #text-controls-style,
   #text-controls-align,
@@ -734,12 +738,16 @@ ul.attribute-navigation {
     align-items: center;
     justify-content: flex-start;
     margin-right: 12px;
+    @media screen and (max-width: 365px) {
+      margin-right: 7px;
+    }
   }
   #text-controls-additional {
     margin-right: 0;
   }
   form#fabric-texteditor {
     max-width: 381px;
+    min-width: 380px;
     padding: 10px;
     width: 100%;
     height: auto;
@@ -750,6 +758,9 @@ ul.attribute-navigation {
     justify-content: stretch;
     flex-direction: row;
     flex-wrap: wrap;
+    @include breakpoint(small down) {
+     min-width: initial;
+    }
     label {
       position: relative;
       cursor: pointer;
@@ -782,6 +793,9 @@ ul.attribute-navigation {
           margin-right: 12px;
           padding: 5px;
           border-radius: 5px;
+          @media screen and (max-width: 365px) {
+            margin-right: 7px;
+          }
           input {
             opacity: 1;
             position: relative;

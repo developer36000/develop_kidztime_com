@@ -463,7 +463,6 @@ _doc.ready(function () {
             if ( action === 'kt_edit_product_title' ) {
               location.reload();
             } else if ( action === 'kt_close_product_go_back' ) {
-              //console.log(res);
               window.location.href = res;
             }
           }

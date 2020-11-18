@@ -9,27 +9,39 @@ class KTAdminProductActionsModel extends BaseAdminProductController {
 
 	public function __construct() {
 		parent::__construct();
+		
+		
 		// Custom Product Row Action
-		add_filter('post_row_actions', array( $this, 'kt_add_action_button'), 10, 2);
+		add_filter( 'post_row_actions', array( $this, 'kt_add_action_button'), 10, 2);
+		add_filter( 'before_delete_post', array( $this, 'kt_before_product_delete'), 10, 2);
+		
 		// Custom Product column
-		add_action('admin_head', array( $this, 'ktwc_product_column_css' ) );
+		add_action( 'admin_head', array( $this, 'ktwc_product_column_css' ) );
 		add_filter( "manage_{$this->post_product}_posts_columns", array( $this, 'ktwc_product_column' ), 4);
 		add_filter( "manage_edit-{$this->post_product}_columns", array( $this, 'ktwc_remove_woo_columns' ) );
 		add_filter( "manage_{$this->post_product}_posts_custom_column", array( $this, 'ktwc_fill_product_column' ), 5, 2);
+		
 		// Custom column filter by product default status slugs
 		add_action( 'restrict_manage_posts', array( $this, 'ktwc_filter_product_meta_select' ), 10, 2 );
 		add_filter( 'parse_query', array( $this, 'ktwc_sort_product_by_meta') );
-		add_action('woocommerce_product_duplicate', array($this, 'update_product_duplicate_data'), 10, 2);
+		add_action( 'woocommerce_product_duplicate', array($this, 'update_product_duplicate_data'), 10, 2);
 
 		// Custom product ajax action
 		add_action( 'wp_ajax_make_as_default_product', array( $this, 'ajax_action') );
 		add_action( 'wp_ajax_nopriv_make_as_default_product', array( $this, 'ajax_action') );
 		
+		// cron
+		add_filter( 'cron_schedules', array( $this, 'cron_add_3_hour') );
+		add_action( 'init', array( $this, 'ktwc_cron' ) );
+		add_action( 'ktwc_remove_cutomize_product_event', array( $this, 'ktwc_remove_customize_action' ) );
+		
 	}
 	
 	
-	
-	public function kt_add_action_button( $actions, $post ){
+	/**
+	 * Add new action to the row for products
+	 * */
+	public function kt_add_action_button( $actions, $post ) {
 		
 		if( get_post_type() === $this->post_product ) {
 			$url = add_query_arg(
@@ -57,7 +69,6 @@ class KTAdminProductActionsModel extends BaseAdminProductController {
 	
 		return $actions;
 	}
-	
 	public function ajax_action() {
 		$post_id = $_POST['product_id'];
 		$is_super_product = self::get_product_tab_meta('super_product', $post_id);
@@ -190,6 +201,70 @@ class KTAdminProductActionsModel extends BaseAdminProductController {
 		$product_id = $duplicate->get_id();
 		update_post_meta($product_id, 'super_product', false );
 	}
+	
+	 /**
+	  * Delete Attachment from Media ( not for default product (super_product) )
+	  * */
+	public function kt_before_product_delete( $post_id, $post  ) {
+		// Check if our post type is being deleted
+		$post = get_post( $post_id );
+		// if not, exit.
+		if( !$post && $post->post_type !== $this->post_product )
+			return;
+		// Code that will do what we need when deleting
+		
+		// delete attachment
+		$thumb_id = get_post_thumbnail_id( $post_id );
+		$is_super_product = self::get_product_tab_meta('super_product', $post_id);
+		if ( !$is_super_product ) {
+			wp_delete_attachment( $thumb_id, true );
+			delete_post_meta( $post_id,'super_product' );
+		}
+		
+	}
+	
+	/*
+	 * Remove New Customize Product from Server every 10 min use WP Cron
+	 * */
+	// register the 3 hour interval for cron event
+	public function cron_add_3_hour( $schedules ) {
+		$schedules['3_hour'] = array(
+			'interval' => 60 * 60 * 3,
+			'display' => 'Every 3 hour'
+		);
+		return $schedules;
+	}
+	// adds new cron task
+	public function ktwc_cron() {
+		// remove cron task
+		// wp_clear_scheduled_hook( 'ktwc_remove_cutomize_product_event' );
+		// kt_delete_product(568, true);
+		if( ! wp_next_scheduled( 'ktwc_remove_cutomize_product_event' ) ) {
+			wp_schedule_event( time(), '3_hour', 'ktwc_remove_cutomize_product_event');
+		}
+	}
+	// add function to specified cron hook
+	public function ktwc_remove_customize_action(){
+		$empty_title = 'New Product';
+		$args = array(
+			'numberposts' => -1,
+			'post_status' => 'publish'
+		);
+		$_products = wc_get_products( $args );
+		
+		foreach ( $_products as $product ) {
+			$product_id = $product->get_id();
+			$product_name = $product->name;
+			$product_status = $product->status;
+			$is_super_product = $product->get_meta( 'super_product' );
+			if ( $product_name == $empty_title && $is_super_product !== 'yes'  )  {  /*$product_status == 'draft'*/
+				kt_delete_product($product_id); // if force, you can add ==> true after ','
+			}
+		}
+		
+	}
+	
+	
 	
 	
 	use NewInstance;

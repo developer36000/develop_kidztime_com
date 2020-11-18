@@ -25,12 +25,6 @@ const get_form_param = ( form ) => {
   return param;
 };
 
-let deleteObject = (eventData, target) => {
-  let canvas = target.canvas;
-  canvas.remove(target);
-  canvas.requestRenderAll();
-};
-
 // Load all fonts using Font Face Observer
 let loadAndUse = ( canvas, font ) => {
   let c_font = new FontFaceObserver( font );
@@ -42,26 +36,6 @@ let loadAndUse = ( canvas, font ) => {
     }).catch(function(e) {
     console.log(e);
   });
-};
-
-let uppercase = ( canvas ) => {
-  var active = canvas.getActiveObject();
-  if (!active) return;
-
-  var text = active.text;
-  active.text = text.toUpperCase();
-  canvas.requestRenderAll();
-};
-
-
-let lowercase = ( canvas ) => {
-  var active = canvas.getActiveObject();
-  if (!active) return;
-
-  var text = active.text;
-  active.text = text.toLowerCase();
-  canvas.requestRenderAll();
-
 };
 
 let render_delet_icon = ( event ) => {
@@ -78,8 +52,7 @@ let render_delet_icon = ( event ) => {
   //.canvas-container is the parent div to the canvas positioned relative via CSS
 };
 
-let render_texteditor_form = ( event ) => {
-  let eidtor_wrap =  _doc.find(".fabric-texteditor-wrap").clone();
+let render_texteditor_form = ( event, active ) => {
   _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
   let btnLeft = event.target.oCoords.mt.x,
     btnTop = event.target.oCoords.mt.y - 140, // +116
@@ -90,13 +63,53 @@ let render_texteditor_form = ( event ) => {
     new_btnLeft = 0;
   }
 
-  eidtor_wrap.css({
-    top: btnTop,
-    left: new_btnLeft,
-    display: 'block'
-  });
+  let eidtor_wrap = '<div class="fabric-texteditor-wrap" style="top:'+btnTop+'px; left:'+new_btnLeft+'px;' +
+    ' display:block;"><form action="/" id="fabric-texteditor" method="POST"><div id="text-controls"><label class="btn-label font-color" for="text-color"><span class="icon color"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style="fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M56.53548,14.97721c-2.91373,0.00645 -5.53358,1.77617 -6.62736,4.47682c-1.09378,2.70065 -0.44378,5.79468 1.64429,7.82689l17.07682,17.07682l-41.4043,40.11653l-0.04199,0.042c-8.26713,8.26713 -8.26713,21.93925 0,30.20637l36.5472,36.5472c8.26714,8.26713 21.58008,8.62629 29.49251,0.71386l36.54721,-36.5472c8.26713,-8.26714 8.26713,-21.93924 0,-30.20638l-13.92741,-13.91341c-0.12955,-0.14543 -0.26496,-0.28552 -0.40592,-0.41992l-53.75,-53.75c-1.35266,-1.39047 -3.21117,-2.17327 -5.15104,-2.1696zM78.74935,54.49186l26.55306,26.53907l14.33333,14.33333c1.59977,1.59976 2.39356,3.28442 2.39356,4.96907h-86.93783c-0.25887,-1.92147 0.39909,-3.85644 2.22559,-5.68294zM143.33333,117.53614c-1.13592,0 -2.27228,0.54836 -2.96744,1.63769c-4.19967,6.56467 -11.36589,18.58384 -11.36589,24.15951c0,7.88333 6.45,14.33333 14.33333,14.33333c7.88333,0 14.33333,-6.45 14.33333,-14.33333c0,-5.57567 -7.16622,-17.59484 -11.36589,-24.15951c-0.69517,-1.08933 -1.83153,-1.63769 -2.96744,-1.63769z"></path></g></g></svg></span><input type="color" value="#ffffff" id="text-color" name="text-color" size="10"></label><label class="btn-label font-size" for="text-font-size"><input type="number" value="36" min="1" step="1" id="text-font-size" name="text-font-size"></label><label class="btn-label-select" for="font-family"><select id="font-family" name="font-family"><option value="Plaster" style="font-family: \'Plaster\';">Plaster</option><option value="Engagement" style="font-family: \'Engagement\';">Engagement</option><option value="Pacifico" style="font-family: \'Pacifico\';">Pacifico</option> <option value="VT323" style="font-family: \'VT323\';">VT323</option><option value="Quicksand" style="font-family: \'Quicksand\';">Quicksand</option><option value="Inconsolata" style="font-family: \'Inconsolata\';">Inconsolata</option><option value="Oswald" style="font-family: \'Oswald\';">Oswald</option><option value="Oxygen" style="font-family: \'Oxygen\';">Oxygen</option><option value="Tangerine" style="font-family: \'Tangerine\';">Tangerine</option><option value="Ranchers" style="font-family: \'Ranchers\';">Ranchers</option><option value="Ribeye" style="font-family: \'Ribeye\';">Ribeye</option><option value="Lora" style="font-family: \'Lora\';">Lora</option><option value="Croissant One" style="font-family: \'Croissant One\';">Croissant One</option><option value="Emblema One" style="font-family: \'Emblema One\';">Emblema One</option><option value="Hammersmith One" style="font-family: \'Hammersmith One\';">Hammersmith One</option><option value="Krona One" style="font-family: \'Krona One\';">Krona One</option><option value="Graduate" style="font-family: \'Graduate\';">Graduate</option><option value="Indie Flower" style="font-family: \'Indie Flower\';">Indie Flower</option><option value="Courgette" style="font-family: \'Courgette\';">Courgette</option></select></label></div><div id="text-controls-style"><label class="btn-label" for="text-cmd-bold"><input type="checkbox" value="bold" name="fonttype" id="text-cmd-bold" ><span class="icon bold"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"  font-size="none"  style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M50.16667,21.5c-7.83362,0 -14.33333,6.49972 -14.33333,14.33333v35.83333v14.33333v50.16667c0,7.83362 6.49972,14.33333 14.33333,14.33333h45.19759c20.33453,0 38.65078,-14.89919 40.62044,-35.56739c1.63279,-17.11874 -7.93401,-32.39394 -22.21386,-39.31868c4.58645,-5.0661 8.0625,-12.33489 8.0625,-21.86393c0,-14.93056 -8.52274,-24.36863 -16.50293,-28.35872c-7.98018,-3.99009 -15.74707,-3.89128 -15.74707,-3.89128zM50.16667,35.83333h39.41667c0,0 4.77478,0.09881 9.33626,2.37956c4.56148,2.28074 8.58041,5.38433 8.58041,15.53711c0,10.15278 -4.01892,13.25637 -8.58041,15.53711c-4.56148,2.28074 -9.33626,2.37956 -9.33626,2.37956h-39.41667zM50.16667,86h39.41667h0.71386h6.4528c14.75507,0 26.41754,12.41253 24.97135,27.57487c-1.22668,12.87181 -13.00829,22.5918 -26.35709,22.5918h-45.19759z"></path></g></g></svg></span></label><label class="btn-label" for="text-cmd-italic"><input type="checkbox" value="italic" name="fonttype" id="text-cmd-italic" ><span class="icon italic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"width="24" height="24"viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M71.66667,21.5c-3.956,0 -7.16667,3.21067 -7.16667,7.16667c0,3.956 3.21067,7.16667 7.16667,7.16667h13.88542l-14.75326,100.33333h-13.46549c-3.956,0 -7.16667,3.21067 -7.16667,7.16667c0,3.956 3.21067,7.16667 7.16667,7.16667h43c3.956,0 7.16667,-3.21067 7.16667,-7.16667c0,-3.956 -3.21067,-7.16667 -7.16667,-7.16667h-14.5433l14.75326,-100.33333h14.12337c3.956,0 7.16667,-3.21067 7.16667,-7.16667c0,-3.956 -3.21067,-7.16667 -7.16667,-7.16667z"></path></g></g></svg></span></label><label class="btn-label" for="text-cmd-underline"><input type="checkbox" value="underline" name="fonttype" id="text-cmd-underline" ><span class="icon underline"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"  stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path  d="M50.05469,14.23535c-3.95253,0.06178 -7.10881,3.312 -7.05469,7.26465v64.5c0,23.66165 19.33835,43 43,43c23.66165,0 43,-19.33835 43,-43v-64.5c0.03655,-2.58456 -1.32136,-4.98858 -3.55376,-6.29153c-2.2324,-1.30295 -4.99342,-1.30295 -7.22582,0c-2.2324,1.30295 -3.59031,3.70697 -3.55376,6.29153v64.5c0,15.91269 -12.75398,28.66667 -28.66667,28.66667c-15.91268,0 -28.66667,-12.75398 -28.66667,-28.66667v-64.5c0.02653,-1.93715 -0.73227,-3.80254 -2.10349,-5.17112c-1.37122,-1.36858 -3.23806,-2.12378 -5.17516,-2.09353zM50.16667,143.33333c-3.956,0 -7.16667,3.21067 -7.16667,7.16667c0,3.956 3.21067,7.16667 7.16667,7.16667h71.66667c3.956,0 7.16667,-3.21067 7.16667,-7.16667c0,-3.956 -3.21067,-7.16667 -7.16667,-7.16667z"></path></g></g></svg></span></label></div><div id="text-controls-align"><label class="btn-label checked" for="text-align-left"><input type="checkbox" value="left" name="fontalign" id="text-align-left" checked ><span class="icon left"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g  fill="none" fill-rule="nonzero" stroke="none"  stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path  d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M28.66667,21.5c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h114.66667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM28.66667,50.16667c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h78.83333c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM28.66667,78.83333c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h114.66667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM28.66667,107.5c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h78.83333c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM28.66667,136.16667c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h114.66667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376z"></path></g></g></svg></span></label><label class="btn-label" for="text-align-center"><input type="checkbox" value="center" name="fontalign" id="text-align-center" ><span class="icon center"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none"  stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path  d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M28.66667,21.5c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h114.66667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM43,50.16667c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h86c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM28.66667,78.83333c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h114.66667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM43,107.5c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h86c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM28.66667,136.16667c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h114.66667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376z"></path></g></g></svg></span></label><label class="btn-label" for="text-align-right"><input type="checkbox" value="right" name="fontalign" id="text-align-right" ><span class="icon right"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style="fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M28.66667,21.5c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h114.66667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM64.5,50.16667c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h78.83333c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM28.66667,78.83333c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h114.66667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM64.5,107.5c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h78.83333c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376zM28.66667,136.16667c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h114.66667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376z"></path></g></g></svg></span></label></div><div id="text-controls-additional"><label class="btn-label"  for="text-cmd-capitalize"><input type="checkbox" value="capitalize" name="fonttransform"  id="text-cmd-capitalize" ><span class="icon capitalize"><svg xmlns="http://www.w3.org/2000/svg" x="0px"  y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero"  stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"  stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode:  normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M28.66667,21.5c-3.956,0 -7.16667,3.21067 -7.16667,7.16667c0,3.956 3.21067,7.16667 7.16667,7.16667h35.83333v107.5c0,3.956 3.21067,7.16667 7.16667,7.16667c3.956,0 7.16667,-3.21067 7.16667,-7.16667v-107.5h35.83333c3.956,0 7.16667,-3.21067 7.16667,-7.16667c0,-3.956 -3.21067,-7.16667 -7.16667,-7.16667zM100.33333,78.83333c-3.956,0 -7.16667,3.21067 -7.16667,7.16667c0,3.956 3.21067,7.16667 7.16667,7.16667h14.33333v50.16667c0,3.956 3.21067,7.16667 7.16667,7.16667c3.956,0 7.16667,-3.21067 7.16667,-7.16667v-50.16667h14.33333c3.956,0 7.16667,-3.21067 7.16667,-7.16667c0,-3.956 -3.21067,-7.16667 -7.16667,-7.16667z"></path></g></g></svg></span> </label> <label class="btn-label" for="text-cmd-uppercase"> <input type="checkbox" value="uppercase" name="fonttransform" id="text-cmd-uppercase" > <span class="icon uppercase"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M14.33333,28.66667c-3.956,0 -7.16667,3.21067 -7.16667,7.16667c0,3.956 3.21067,7.16667 7.16667,7.16667h21.5v93.16667c0,3.956 3.21067,7.16667 7.16667,7.16667c3.956,0 7.16667,-3.21067 7.16667,-7.16667v-93.16667h21.5c3.956,0 7.16667,-3.21067 7.16667,-7.16667c0,-3.956 -3.21067,-7.16667 -7.16667,-7.16667zM100.33333,28.66667c-3.956,0 -7.16667,3.21067 -7.16667,7.16667c0,3.956 3.21067,7.16667 7.16667,7.16667h21.5v93.16667c0,3.956 3.21067,7.16667 7.16667,7.16667c3.956,0 7.16667,-3.21067 7.16667,-7.16667v-93.16667h21.5c3.956,0 7.16667,-3.21067 7.16667,-7.16667c0,-3.956 -3.21067,-7.16667 -7.16667,-7.16667z"></path></g></g></svg></span></label><label class="btn-label" for="text-cmd-lowercase"><input type="checkbox" value="lowercase" name="fonttransform" id="text-cmd-lowercase" ><span class="icon lowercase"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"  viewBox="0 0 172 172" style="fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M50.05469,21.40202c-3.95253,0.06178 -7.10881,3.312 -7.05469,7.26465v21.5h-7.16667c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h7.16667v64.45801c0,11.02611 8.52107,20.13235 19.27441,21.27604l0.5319,0.26595h1.69368c3.21833,0 6.17641,-0.31075 8.84635,-0.82584c2.58408,-0.41156 4.73852,-2.19861 5.62057,-4.66211c0.88205,-2.4635 0.35151,-5.2119 -1.38408,-7.1701c-1.73559,-1.9582 -4.40038,-2.81498 -6.95198,-2.23517c-1.66518,0.32128 -3.6013,0.4901 -5.71094,0.51791h-0.44792c-4.03653,-0.02203 -7.13867,-3.13398 -7.13867,-7.16667v-64.45801h7.16667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376h-7.16667v-21.5c0.02653,-1.93715 -0.73227,-3.80254 -2.10349,-5.17112c-1.37122,-1.36858 -3.23806,-2.12378 -5.17516,-2.09353zM107.38802,21.40202c-3.95253,0.06178 -7.10881,3.312 -7.05469,7.26465v21.5h-7.16667c-2.58456,-0.03655 -4.98858,1.32136 -6.29153,3.55376c-1.30295,2.2324 -1.30295,4.99342 0,7.22582c1.30295,2.2324 3.70697,3.59031 6.29153,3.55376h7.16667v64.45801c0,11.02611 8.52107,20.13235 19.27441,21.27604l0.5319,0.26595h1.69368c3.14539,0 6.03529,-0.29792 8.66439,-0.79785c2.54998,-0.44198 4.66365,-2.22431 5.5299,-4.66303c0.86625,-2.43872 0.35053,-5.15503 -1.34925,-7.10656c-1.69979,-1.95153 -4.31962,-2.83516 -6.85415,-2.31179c-1.62033,0.30817 -3.5058,0.47703 -5.57097,0.50391h-0.44792c-4.03653,-0.02198 -7.13867,-3.13398 -7.13867,-7.16667v-64.45801h7.16667c2.58456,0.03655 4.98858,-1.32136 6.29153,-3.55376c1.30295,-2.2324 1.30295,-4.99342 0,-7.22582c-1.30295,-2.2324 -3.70697,-3.59031 -6.29153,-3.55376h-7.16667v-21.5c0.02653,-1.93715 -0.73227,-3.80254 -2.10349,-5.17112c-1.37122,-1.36858 -3.23806,-2.12378 -5.17516,-2.09353z"></path></g></g></svg></span></label></div></form></div>';
+
   _doc.find(".canvas-container:nth-child(2)").append(eidtor_wrap);
+
+  if ( active ) {
+    let eidtor_html = _doc.find('.main-canvas-wrap .fabric-texteditor-wrap'),
+        active_family = active.fontFamily,
+        active_align = active.textAlign,
+        active_fontSize = active.fontSize,
+        active_fill = active.fill,
+        active_fontStyle = active.fontStyle,
+        active_underline = active.underline,
+        active_fontWeight = active.fontWeight;
+
+    eidtor_html.find('[name="text-font-size"]').val( active_fontSize );
+    eidtor_html.find('[name="text-color"]').val( active_fill );
+    eidtor_html.find('[name="font-family"]').val(active_family);
+    eidtor_html.find('[name="fontalign"]').map( (index, element) => {
+      if ( $(element).val() === active_align ) {
+        eidtor_html.find('[name="fontalign"]').parent('label').removeClass('checked');
+        $(element).parent('label').addClass('checked');
+      }
+    });
+    eidtor_html.find('[name="fonttype"]').map( (index, element) => {
+      let value = $(element).val();
+      if ( value === active_fontWeight || value === active_fontStyle ) {
+        $(element).parent('label').addClass('checked');
+      } else if ( value === 'underline' && active_underline === true ) {
+        $(element).parent('label').addClass('checked');
+      }
+    });
+
+  }
+
+
+
 };
+/*
+let adjustTextWidth = (evt: fabric.IEvent) => {
+  if (evt.target instanceof fabric.IText) {
+    const text = evt.target.text || "";
+    while (evt.target.textLines.length > text.split("\n").length) {
+      evt.target.set({width: evt.target.getScaledWidth() + 1})
+    }
+  }
+};*/
 
 let attr_term_uncheck = ( target_key ) => {
   _doc.find(".deleteBtn").remove();
@@ -120,17 +133,17 @@ let attr_term_check = ( object ) => {
       }
     });
   } else if ( object.type === 'textbox' ) {
-    _doc.find('form#customize_product_text [name="customize_product_text"]').val(object.text);
+    _doc.find('form#customize_product_text_form [name="customize_product_text"]').val(object.text);
   }
 };
-let download = (url, name) => {
+let download = ( url, name ) => {
   // make the link. set the href and download. emulate dom click
   $('<a>').attr({
     href: url,
     download: name
   })[0].click();
 };
-let downloadFabric = (canvas, name) => {
+let downloadFabric = ( canvas, name ) => {
   //  convert the canvas to a data url and download it.
  // console.log(canvas);
   let _dataset = canvas.lowerCanvasEl.dataset;
@@ -146,13 +159,8 @@ let downloadFabric = (canvas, name) => {
   download(file, name + '.png');
 //  canvas.setBackgroundImage(bgImage, canvas.renderAll.bind(canvas))
 };
-let addImageToCanvas = (canvas, imgSrc) => {
-  let canvas_dataset = canvas.lowerCanvasEl.dataset,
-    print_w = canvas_dataset.print_width,
-    print_h = canvas_dataset.print_height,
-    rect_obj_str = canvas_dataset.r_acoords;
+let addImageToCanvas = ( canvas, imgSrc ) => {
   fabric.Image.fromURL(imgSrc, function(myImg) {
-    //oImg.scale(0.5).set('flipX', false);
     myImg.selectable = false;
     canvas.add(myImg);
     myImg.scaleToWidth(canvas.getWidth());
@@ -292,22 +300,64 @@ let rescale_canvas_if_needed_bg = ( canvas ) => {
 
 */
 
-let addDrawToBig = ( canvas_from, canvas_to ) => {
-  var ao = canvas_from.getObjects();
+let addDrawToBig = ( canvas_from, canvas_to, rect_aCoords, scale_ratio ) => {
+  console.log('---------addDrawToBig---------');
+  let is_bottle = canvas_from.contextTop.canvas.previousSibling.attributes[4].name;
+  const zoom  = canvas_to.getZoom() * scale_ratio;
+  console.log('--------------------');
+  console.log({scale_ratio});
+  console.log(rect_aCoords.top);
+  console.log(rect_aCoords.top/scale_ratio);
+  console.log('--------------------');
 
-  for(var i in ao) {
-    canvas_to.add(ao[i]);
+  fabric.Image.fromURL( canvas_from.toDataURL(), (oImg) => {
+    canvas_to.add(oImg);
+    oImg.center().setCoords();
+    oImg.set('width', canvas_from.getWidth());
+    oImg.set('height', canvas_from.getHeight());
+
+    if ( is_bottle !== 'data-is_bottle' ) {
+      oImg.scaleToWidth( canvas_from.getWidth() );
+      oImg.scaleToHeight( canvas_from.getHeight() );
+      oImg.set('top', (rect_aCoords.top/scale_ratio));
+    } else {
+      oImg.set('top', (rect_aCoords.top/scale_ratio));
+    //  oImg.set('top', rect_aCoords.top);
+    }
+    canvas_to.renderAll();
+  });
+
+
+/*  let sticker_png_url = c_canvas.toDataURL({
+    format: 'png'
+  });*/
+
+  let svg = canvas_from.toSVG(),
+    from_top = canvas_from._offset.top - canvas_to._offset.top,
+    from_left = canvas_from._offset.left - canvas_to._offset.left;
+  console.log(rect_aCoords.top);
+  console.log({from_top});
+  console.log({from_left});
+  console.log({svg});
+
+/*  fabric.loadSVGFromString( svg, function(objects, options) {
+      let obj = fabric.util.groupSVGElements(objects, options);
+      canvas_to.add(obj);
+      obj.scaleToWidth( canvas_from.getWidth() );
+      obj.scaleToHeight( canvas_from.getHeight() );
+      canvas_to.centerObject(obj);
+      obj.set('top', rect_aCoords.top);
+      obj.set('left', from_left);
+      obj.setCoords();
+      canvas_to.renderAll();
+
+    });*/
+
+  if ( rect_aCoords ) {
+   // canvas_to.parent().css('top', rect_aCoords.top+'px');
   }
-  //var svg = canvas_from.toSVG();
-//  var svg = canvas_from.getObjects();
-//  var group = new fabric.Group(svg);
- // canvas_to.add(group).centerObject(group);
- // console.log({group});
-  //fabric.loadSVGFromString(svg,function(objects, options) {
-  //  var obj;
-  //  obj = fabric.util.groupSVGElements(objects, options);
-  //   c.add(obj).centerObject(obj).setActiveObject(obj);
-  //});
+
+
 };
 
 let saveToStorage = ( name, obj ) => {
@@ -349,6 +399,9 @@ let loadFromStorage = ( name ) => {
    * Product Canvas Customization
    * */
   if ( _doc.find('#c_product_canvas').length > 0 ) {
+
+    $(document.body).addClass('customize_product_tmpl');
+
     //change default settings
     fabric.Canvas.prototype.freeDrawingCursor = "none";
     fabric.Canvas.prototype.rotationCursor = "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAACdElEQVQ4jZ2UTUiUURSGn/N9U4yZpYK5kMhE3BQUblq4ER0zEV2k4lgEbvqxHzc59rNy588MTIQmuGkhosNoQUKTk0qblmZBCZlhIBRWRPnTmM58p4VOmI2m864u95z73Pflcq6wpprCO+lJ3xO+dY1dXGGdyvNakxITzQwAGzrTHXQtsoVs0YXKysR8SrgLuFXlaNlvYruGaiXCMbUUgBXA6XCPI9pv2uztPYH6uY1AiS6cDreCdgkyotAJpAq8tZCgwDSAwmFBi4Ec4CsqdX0jDf1bAWdBDgBTolrfO9L4JFas6gJPiWGoVyEHtLFvuNETrRkbDKcDKsIYIgW1+U32WEDfaEMgTOQE6ChIW42jrWIT4OqeKk4Lzi/tSkiNBQTwD9/8EcGqEJhU5N7Zkrv7/oocr6oLPCVi6GNRbveOuJpjOdyRfKMNAWBShSqIHTkeBYHj5066E21nSptTrGXTp4bp8g1dfxUPTUQ+qKosR4wMI7K0Ow2VIsJWYbz2VC0BsGxiGVbE/nHtmsx4gSCHALVr5JPhf3ZlQeHl2gTEq1PAeHfQtWismlM/kFNd4CnZKcnpcJcC2Yr6Ye2VTZu9HfhiGOqtcrTs3y6sNt+bDHhBZ0Mh7fgD7AnUz6FyWSHHxBjYDrQ235v8yxZ5AGQjUvfo+Y15ADPa8Ho6OHE0q2gR5IKJcfpIZvH7N9PBqc1ihg1rAMhVpcE37Lofrf0zejWOtgpFOoE04B0wpLr6fQmShWgxkA18RrjU99T1cP35mLNcntealGg3rqpQCeRuKL9Q1B8KaUc05n+B61VW1rTHvpBwEGBpb2hmcLDp51b9vwHv/uvmHUIE9QAAAABJRU5ErkJggg==) 12 12, auto";
@@ -391,6 +444,7 @@ let loadFromStorage = ( name ) => {
     };
     WebFont.load(WebFontConfig);
 
+
     var c_canvas_obj = _doc.find('#c_product_canvas'),
       c_main_wrap = c_canvas_obj.parents('.main-canvas-wrap'),
       c_canvas_data = c_canvas_obj.get(0).dataset,
@@ -401,23 +455,20 @@ let loadFromStorage = ( name ) => {
       scale_ratio = c_canvas_data.scale_ratio,
       c_main_bg_url = c_canvas_data.default_img.toString(),
       canvas_aCoords_str = c_canvas_data.r_acoords,
-      rect_aCoords = JSON.parse( canvas_aCoords_str ),
       text_editor_form = _doc.find('#fabric-texteditor');
 
+
+    var rect_aCoords = canvas_aCoords_str ? JSON.parse( canvas_aCoords_str ) : '';
+
     var c_canvas_bg = new fabric.Canvas("c_product_canvas_bg", {selection: false}),
-      c_canvas = new fabric.Canvas("c_product_canvas");
-
-
+        c_canvas = new fabric.Canvas("c_product_canvas");
 
     addImageToCanvas(c_canvas_bg, c_main_bg_url);
 
     console.log({scale_ratio});
     console.log({devicePixelRatio});
-    console.log({rect_aCoords});
 
     //c_canvas_bg.dispose();
-    console.log( $(window).width());
-    console.log( $(window).on('load') );
     $(window).on('load resize orientationChange', function () {
 
       console.log( $(window).width());
@@ -431,7 +482,10 @@ let loadFromStorage = ( name ) => {
           height: c_canvas.getHeight() * scale_ratio
         });
         c_canvas.setViewportTransform([zoom, 0, 0, zoom, 0, 0]);
-        c_canvas_obj.parent().css('top', rect_aCoords.top+'px');
+        if ( rect_aCoords ) {
+          c_canvas_obj.parent().css('top', rect_aCoords.top+'px');
+        }
+
         c_canvas.calcOffset();
         c_canvas.renderAll();
 
@@ -493,36 +547,36 @@ let loadFromStorage = ( name ) => {
     // add custom remove button on events
     c_canvas.on('object:selected', (e) => {
       _doc.find(".deleteBtn").remove();
-      c_main_wrap.find(".fabric-texteditor-wrap").remove();
+      _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
       let active = c_canvas.getActiveObject();
       console.log( e.target );
       if( active ) {
         render_delet_icon(e);
         if ( active.type === 'textbox' ) {
-          render_texteditor_form(e);
+          render_texteditor_form(e, active);
         } else {
-          c_main_wrap.find(".fabric-texteditor-wrap").remove();
+          _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
         }
       } else {
         _doc.find(".deleteBtn").remove();
-        c_main_wrap.find(".fabric-texteditor-wrap").remove();
+        _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
       }
     });
 
     c_canvas.on('object:modified', (e) => {
       _doc.find(".deleteBtn").remove();
-      c_main_wrap.find(".fabric-texteditor-wrap").remove();
+      _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
       let active = c_canvas.getActiveObject();
       if( active ) {
         render_delet_icon(e);
         if ( active.type === 'textbox' ) {
-          render_texteditor_form(e);
+          render_texteditor_form(e, active);
         } else {
-          c_main_wrap.find(".fabric-texteditor-wrap").remove();
+          _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
         }
       }  else {
         _doc.find(".deleteBtn").remove();
-        c_main_wrap.find(".fabric-texteditor-wrap").remove();
+        _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
       }
     });
     c_canvas.on('mouse:down', (e) => {
@@ -530,18 +584,18 @@ let loadFromStorage = ( name ) => {
       if( active ) {
         render_delet_icon(e);
         if ( active.type === 'textbox' ) {
-          render_texteditor_form(e);
+          render_texteditor_form(e, active);
         } else {
-          c_main_wrap.find(".fabric-texteditor-wrap").remove();
+          _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
         }
       } else {
         _doc.find(".deleteBtn").remove();
-        c_main_wrap.find(".fabric-texteditor-wrap").remove();
+        _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
       }
     });
     c_canvas.on('object:moving', (e) => {
       _doc.find(".deleteBtn").remove();
-      c_main_wrap.find(".fabric-texteditor-wrap").remove();
+      _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
     });
     c_canvas.on('after:render', (e) => {
       let clear_btn = _doc.find('.attr-empty-canvas-data');
@@ -558,6 +612,7 @@ let loadFromStorage = ( name ) => {
       // console.log('c_canvas - object:removed ---------');
       let target_key = e.target.cacheKey;
       attr_term_uncheck( target_key );
+      _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
     });
     // history
     c_canvas_bg.on('history:clear', (e) => {
@@ -590,6 +645,8 @@ let loadFromStorage = ( name ) => {
       // Check pressed button is Y - Ctrl+Y.
       if (keyCode === 89) c_canvas.redo();
     });
+
+    //c_canvas.on("text:changed", adjustTextWidth);
 
     // ---------------------------------------------------------------------------
 
@@ -647,49 +704,44 @@ let loadFromStorage = ( name ) => {
       c_canvas.redo();
     });
 
+    // ---------------------------------------------------------------------------
     _doc.on('click', '.attribute-done-btn', function(e) {
       e.preventDefault();
       console.log('attribute-done-btn');
       let product_id = $(this).data('product_id');
       if ( product_id ) {
+
         let c_obj_name = product_id+'_canvas_storage_json',
-          c_bg_obj_name = product_id+'_canvas_bg_storage_json';
+            c_bg_obj_name = product_id+'_canvas_bg_storage_json';
+
         saveToStorage(c_obj_name, c_canvas);
         saveToStorage(c_bg_obj_name, c_canvas_bg);
-        console.log({c_canvas});
-        //   addDrawToBig(c_canvas, c_canvas_bg);
 
-        /*   fabric.Image.fromURL( c_canvas.toDataURL(), (oImg) => {
-             c_canvas_bg.add(oImg);
-             oImg.center().setCoords();
-             oImg.set('width', c_canvas.getWidth());
-             oImg.set('height', c_canvas.getHeight());
-             console.log({oImg});
-             c_canvas_bg.renderAll();
-             console.log({c_canvas_bg});
-           });*/
+        console.log({c_canvas});
+
+           addDrawToBig(c_canvas, c_canvas_bg, rect_aCoords, scale_ratio);
+
+
 
       }
 
     });
-
     // ---------------------------------------------------------------------------
 
 
 
     // add text to canvas
-    _doc.find('#customize_product_text').on('submit', function(e) {
-      $(document.body).addClass('customize_product_tmpl');
+    _doc.find('#customize_product_text_form').on('submit', function(e) {
       e.preventDefault();
       let form_param = get_form_param( $(this) ),
         form_text = form_param.customize_product_text;
-      //console.log({form_text});
+
       let text = new fabric.Textbox(form_text, {
-        // width : 70,
         cursorColor : "#58448B",
         top : 10,
         left : 10,
       });
+      text.set({width: text.getScaledWidth() + 1});
       c_canvas.add(text);
       _doc.find(".deleteBtn").remove();
       _doc.find(".main-canvas-wrap .fabric-texteditor-wrap").remove();
@@ -701,68 +753,96 @@ let loadFromStorage = ( name ) => {
     /**
      * Text Editor Actions
      * */
-    if ( text_editor_form.length > 0 ) {
-      _doc.on('change', '[name="text-color"]', function (e) {
-        let active = c_canvas.getActiveObject(),
-          value = $(this).val();
-        if ( active && active.type === 'textbox' ) {
-          active.set( 'fill', value );
-          c_canvas.renderAll();
-        }
-      });
-      _doc.on('change', '[name="text-font-size"]', function(e) {
-        let active = c_canvas.getActiveObject(),
-          value = $(this).val();
-        if ( active && active.type === 'textbox' ) {
-          active.set( 'fontSize', value );
-          c_canvas.renderAll();
-        }
-      });
-      _doc.on('change', '[name="font-family"]', function(e) {
-        let active = c_canvas.getActiveObject(),
-          value = $(this).val();
-        if ( active && active.type === 'textbox' ) {
-          loadAndUse( c_canvas, value );
-          //active.set( 'textAlign', value ); // left
-          //active.set( 'underline', value );  // true or false
-          //active.set( 'fontStyle', value );  // normal
-          //active.set( 'fontWeight', value );  // normal
-        }
-      });
-      _doc.on('change', '[name="fontalign"]', function(e) {
-        let active = c_canvas.getActiveObject(),
-          value = $(this).val();
-        if ( active && active.type === 'textbox' ) {
-          active.set( 'textAlign', value );
-          c_canvas.renderAll();
-        }
-      });
-      _doc.on('change', '[name="fonttype_bold"]', function(e) {
-        let active = c_canvas.getActiveObject(),
-          value = $(this).val();
-        if ( active && active.type === 'textbox' ) {
-          active.set( 'fontWeight', value );
-          c_canvas.renderAll();
-        }
-      });
-      _doc.on('change', '[name="fonttype_italic"]', function(e) {
-        let active = c_canvas.getActiveObject(),
-          value = $(this).val();
-        if ( active && active.type === 'textbox' ) {
-          active.set( 'fontStyle', value );
-          c_canvas.renderAll();
-        }
-      });
-      _doc.on('change', '[name="fonttype_underline"]', function(e) {
-        let active = c_canvas.getActiveObject(),
-          value = $(this).val();
-        if ( active && active.type === 'textbox' ) {
-          active.set( 'underline', value==='underline' );
-          c_canvas.renderAll();
-        }
-      });
+    _doc.on('keyup change paste', '[name="text-color"]', function (e) {
+      let active = c_canvas.getActiveObject(),
+        value = $(this).val();
+      if ( active && active.type === 'textbox' ) {
+        active.set( 'fill', value );
+        c_canvas.renderAll();
+      }
+    });
+    _doc.on('keyup change paste', '[name="text-font-size"]', function(e) {
+      let active = c_canvas.getActiveObject(),
+        value = $(this).val();
+      if ( active && active.type === 'textbox' ) {
+        active.set( 'fontSize', value );
+        c_canvas.renderAll();
+      }
+    });
+    _doc.on('keyup change paste', '[name="font-family"]', function(e) {
+      let active = c_canvas.getActiveObject(),
+        value = $(this).val();
+      if ( active && active.type === 'textbox' ) {
+        loadAndUse( c_canvas, value );
+      }
+    });
+    _doc.on('keyup change paste', '[name="fontalign"]', function(e) {
+      let active = c_canvas.getActiveObject(),
+        value = $(this).val();
+      $(this).parents('form').find('[name="fontalign"]').parent('label').removeClass('checked');
+      $(this).parent('label').toggleClass('checked');
+      if ( active && active.type === 'textbox' ) {
+        active.set( 'textAlign', value );
+        c_canvas.renderAll();
+      }
+    });
+    _doc.on('keyup change paste', '[name="fonttransform"]', function(e) {
+      let active = c_canvas.getActiveObject(),
+        value = $(this).val();
+      $(this).parents('form').find('[name="fonttransform"]').parent('label').removeClass('checked');
+      if ( active && active.type === 'textbox' ) {
+        let text = active.text;
+        if ( $(this).parent('label').hasClass('checked') ) {
+          $(this).parent('label').removeClass('checked');
+          active.text = fabric.util.string.capitalize(text);
+        } else {
+          $(this).parent('label').addClass('checked');
+          if ( value === 'uppercase' ) {
+            active.text =  text.toUpperCase();
+          } else if ( value === 'lowercase' ) {
+            active.text = text.toLowerCase();
+          } else if ( value === 'capitalize' ) {
+            active.text = fabric.util.string.capitalize(text);
+          }
 
-    } // END ==> Text Editor Actions
+        }
+        c_canvas.renderAll();
+      }
+    });
+    _doc.on('keyup change paste', '[name="fonttype"]', function(e) {
+      let active = c_canvas.getActiveObject(),
+        value = $(this).val();
+      if ( active && active.type === 'textbox' ) {
+        if ( $(this).parent('label').hasClass('checked') ) {
+
+          $(this).parent('label').removeClass('checked');
+          if ( value === 'bold' ) {
+            active.set( 'fontWeight', 'normal' );
+          } else if ( value === 'italic' ) {
+            active.set( 'fontStyle', 'normal' );
+          } else if ( value === 'underline' ) {
+            active.set( 'underline', false );
+          }
+
+        } else {
+
+          $(this).parent('label').addClass('checked');
+          if ( value === 'bold' ) {
+            active.set( 'fontWeight', value );
+          } else if ( value === 'italic' ) {
+            active.set( 'fontStyle', value );
+          } else if ( value === 'underline' ) {
+            active.set( 'underline', true );
+          }
+
+        }
+        c_canvas.renderAll();
+      }
+    });
+
+
+
+     // END ==> Text Editor Actions
 
 
     _doc.find('.term-attr-item').on('click', function(e) {

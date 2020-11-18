@@ -410,6 +410,9 @@
         .spinner {
           height: 24px;
           width: 24px;
+          .path {
+            stroke: $l-purpl;
+          }
         }
       }
     }

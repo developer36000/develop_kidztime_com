@@ -29,7 +29,7 @@ $real_product_width_mm = get_field('real_product_width',  $product_id); // mm
 $real_product_height_mm = get_field('real_product_height',  $product_id); // mm
 $real_width_print_mm = get_field('real_product_width_print',  $product_id); // mm
 $real_height_print_mm = get_field('real_product_height_print',  $product_id); // mm
-$is_bottle  = get_field('is_bottle ',  $product_id); // mm
+$is_bottle  = get_field('is_bottle',  $product_id); // mm
 
 $real_product_width = convert_mm_to_px($real_product_width_mm); // px
 $real_product_height = convert_mm_to_px($real_product_height_mm); // px
@@ -40,10 +40,10 @@ $canvas_height_print = convert_mm_to_px($real_height_print_mm); // px
 $scaleRatio = get_post_meta( $product_id, '_scaleRatio_coord_real', true );
 $r_rect_obg = get_post_meta( $product_id, '_rect_obg_coord_real', true );
 
-echo '<pre>';
+/*echo '<pre>';
 var_dump( '$is_new_product', $is_new_product );
 var_dump( '$is_edit_product', $is_edit_product );
-echo '</pre>';
+echo '</pre>';*/
 
 do_action( 'woocommerce_before_single_product' );
 
@@ -91,6 +91,7 @@ if ( post_password_required() ) {
 				</div>
 				<div class="main-canvas-wrap" >
 					<canvas id="c_product_canvas_bg" class="canvas-layer"
+									<?php echo $is_bottle ?'data-is_bottle="'.$is_bottle.'"' : ''; ?>
 					        width="<?php echo $real_product_width; ?>"
 					        height="<?php echo $real_product_height; ?>" >
 						Your browser does not support the HTML5 canvas tag.
@@ -98,6 +99,7 @@ if ( post_password_required() ) {
 					<canvas id="c_product_canvas" class="canvas-layer"
 					        width="<?php echo $canvas_width_print; ?>"
 					        height="<?php echo $canvas_height_print; ?>"
+									<?php echo $is_bottle ?'data-is_bottle="'.$is_bottle.'"' : ''; ?>
 					        data-default_img="<?php echo $main_customize_img; ?>"
 					        data-real_width="<?php echo $real_product_width; ?>"
 					        data-real_height="<?php echo $real_product_height; ?>"
@@ -153,7 +155,7 @@ if ( post_password_required() ) {
 						</div>
 					<?php endif; ?>
 				  <div id="text" class="attribute-block">
-						<form id="customize_product_text" action="customize_product_text" method="POST">
+						<form id="customize_product_text_form" action="customize_product_text" method="POST">
 							<div class="form-row">
 								<textarea placeholder="<?php echo __('Enter some text', kt_textdomain); ?>"
 								          name="customize_product_text"

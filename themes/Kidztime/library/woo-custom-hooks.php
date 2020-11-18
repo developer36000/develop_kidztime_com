@@ -966,7 +966,7 @@ function ktwc_before_customize_modals(  ) {
 	// modals
 	wc_get_template_part('single-modals/create-title');
 	wc_get_template_part('single-modals/sure-go-back');
-	wc_get_template_part('single-modals/js-texteditor');
+	//wc_get_template_part('single-modals/js-texteditor');
 }
 
 
@@ -1605,53 +1605,6 @@ function ktwc_generate_html_prod_attr_acf( $attr_tax_name, $product_attributes )
 	<?php
 	endif;
 }
-
-/*
- * Remove New Customize Product from Server every 10 min use WP Cron
- * */
-
-// register the 10 minute interval for cron event
-add_filter( 'cron_schedules', 'cron_add_3_hour' );
-function cron_add_3_hour( $schedules ) {
-	$schedules['3_hour'] = array(
-		'interval' => 60 * 60 * 3,
-		'display' => 'Every 3 hour'
-	);
-	return $schedules;
-}
-// remove cron task
-//wp_clear_scheduled_hook( 'ktwc_remove_cutomize_product_event' );
-// adds new cron task
-add_action( 'init', 'ktwc_cron' );
-function ktwc_cron() {
-	//kt_delete_product(568, true);
-	if( ! wp_next_scheduled( 'ktwc_remove_cutomize_product_event' ) ) {
-		wp_schedule_event( time(), '3_hour', 'ktwc_remove_cutomize_product_event');
-	}
-}
-
-// add function to specified cron hook
-add_action( 'ktwc_remove_cutomize_product_event', 'ktwc_remove_customize_action' );
-function ktwc_remove_customize_action(){
-	$empty_title = 'New Product';
-	$args = array(
-		'numberposts' => -1,
-		'post_status' => 'publish'
-	);
-	$_products = wc_get_products( $args );
-
-   foreach ( $_products as $product ) {
-	   $product_id = $product->get_id();
-	   $product_name = $product->name;
-	   $product_status = $product->status;
-	   $is_super_product = $product->get_meta( 'super_product' );
-	   if ( $product_name == $empty_title && $is_super_product !== 'yes'  )  {  /*$product_status == 'draft'*/
-		   kt_delete_product($product_id); // if force, you can add ==> true after ','
-	   }
-   }
-
-}
-
 
 
 

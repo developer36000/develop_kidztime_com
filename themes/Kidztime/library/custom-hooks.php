@@ -274,12 +274,12 @@ function get_tmpl_body_class() {
  * Helping add custom fields to a WooCommerce attribute term
  * */
 // Adds a custom rule type.
-add_filter( 'acf/location/rule_types', function( $choices ){
+add_filter( 'acf/location/rule_types', function( $choices ) {
 	$choices[ __("Other",'acf') ]['wc_prod_attr'] = 'WC Product Attribute';
 	return $choices;
 } );
 // Adds custom rule values.
-add_filter( 'acf/location/rule_values/wc_prod_attr', function( $choices ){
+add_filter( 'acf/location/rule_values/wc_prod_attr', function( $choices ) {
 	foreach ( wc_get_attribute_taxonomies() as $attr ) {
 		$pa_name = wc_attribute_taxonomy_name( $attr->attribute_name );
 		$choices[ $pa_name ] = $attr->attribute_label;
@@ -287,7 +287,7 @@ add_filter( 'acf/location/rule_values/wc_prod_attr', function( $choices ){
 	return $choices;
 } );
 // Matching the custom rule.
-add_filter( 'acf/location/rule_match/wc_prod_attr', function( $match, $rule, $options ){
+add_filter( 'acf/location/rule_match/wc_prod_attr', function( $match, $rule, $options ) {
 	if ( isset( $options['taxonomy'] ) ) {
 		if ( '==' === $rule['operator'] ) {
 			$match = $rule['value'] === $options['taxonomy'];
@@ -297,6 +297,17 @@ add_filter( 'acf/location/rule_match/wc_prod_attr', function( $match, $rule, $op
 	}
 	return $match;
 }, 10, 3 );
+
+
+add_action('admin_head', 'my_custom_fonts'); // admin_head is a hook my_custom_fonts is a function we are adding it to the hook
+
+function my_custom_fonts() {
+	echo '<style>
+    .acf-image-uploader .image-wrap {
+    overflow: hidden !important;
+		}
+  </style>';
+}
 
 
 
