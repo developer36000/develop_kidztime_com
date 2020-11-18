@@ -49,7 +49,6 @@ class OAuth2Client
     $this->client_secret   = $client_secret;
     $this->redirect_uri    = $redirect_uri;
     $this->curl_compressed = $compressed;
-   
   }
 
   public function authorizeUrl( $extras = array() )

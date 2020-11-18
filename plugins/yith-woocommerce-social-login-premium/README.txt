@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: social login, login, connect with social, woocommerce connect
 Requires at least: 3.5.1
-Tested up to: 5.4
-Stable tag: 1.4.8
+Tested up to: 5.5
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,6 +12,28 @@ YITH WooCommerce Social Login is a plugin that allows you to login to your e-com
 
 
 == Changelog ==
+
+= 1.6.1 - Released on 6 Jul 2020 =
+* New: Support for WooCommerce 4.4
+* New: Support for WordPress 5.5
+* Update: plugin framework
+
+= 1.6.0 - Released on 6 Jul 2020 =
+* New: Support for WooCommerce 4.3
+* New: Removed support for Instagram, due to Instagram Legacy API permission ("Basic Permission") deprecated on June 29, 2020
+* Update: plugin framework
+* Update: Language files
+
+= 1.5.0 - Released on 26 May 2020 =
+* New: Support for WooCommerce 4.2
+* New: Added French Translation
+* Update: plugin framework
+* Fix: Fixed report graph
+
+= 1.4.9 - Released on 28 April 2020 =
+* New: Support for WooCommerce 4.1
+* Update: plugin framework
+* Fix: Fixed Yahoo login callback function
 
 = 1.4.8 - Released on 10 March 2020 =
 * New: Support for WordPress 5.4

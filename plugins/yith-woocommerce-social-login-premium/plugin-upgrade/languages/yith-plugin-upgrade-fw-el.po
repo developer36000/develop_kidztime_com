@@ -4,13 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Plugin Starter 1.0.0 Plugin FW\n"
 "Report-Msgid-Bugs-To: Your Inspiration Themes <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2020-01-14 17:17+0100\n"
-"PO-Revision-Date: 2020-02-14 22:01+0200\n"
+"POT-Creation-Date: 2020-03-27 11:17+0100\n"
+"PO-Revision-Date: 2020-04-22 22:17+0100\n"
+"Last-Translator: \n"
 "Language-Team: Your Inspiration Themes <info@yithemes.com>\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
 "_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;_x;_ex\n"
@@ -18,92 +20,104 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
-"Last-Translator: \n"
-"Language: el\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: lib/yit-licence.php:116 templates/panel/activation/activation-panel.php:23
+#: lib/yit-licence.php:92 templates/panel/activation/activation-panel.php:26
 msgid "YITH License Activation"
 msgstr "Ενεργοποίηση Άδειας Χρήσης Προϊόντος YITH"
 
-#: lib/yit-licence.php:210
+#: lib/yit-licence.php:206
 #, php-format
 msgctxt "%s = field name"
 msgid "Please, insert a valid %s"
 msgstr "Παρακαλώ, εισάγετε ένα έγκυρο %s"
 
-#: lib/yit-licence.php:211
+#: lib/yit-licence.php:208
 #, php-format
 msgid "Please, insert a valid %s and a valid %s"
 msgstr "Παρακαλώ, εισάγετε ένα έγκυρο %s και ένα έγκυρο %s"
 
-#: lib/yit-licence.php:212
-msgid "Unable to contact the remote server, please try again later. Thanks!"
+#: lib/yit-licence.php:209
+msgid ""
+"Unable to contact remote server: this occurs when there are issues with "
+"connecting to our own servers. Trying again after a few minutes should solve "
+"the issue. If the problem persists please submit a support ticket and we "
+"will be happy to help you."
 msgstr ""
-"Δεν είναι δυνατή η επικοινωνία με απομακρυσμένο διακομιστή. Παρακαλώ, "
-"δοκιμάστε ξανά αργότερα. Ευχαριστούμε!"
+"Δεν είναι δυνατή η επικοινωνία με τον απομακρυσμένο διακομιστή: αυτό "
+"συμβαίνει όταν υπάρχουν προβλήματα σύνδεσης με τους δικούς μας διακομιστές. "
+"Αν προσπαθήσετε πάλι μετά από λίγα λεπτά πιθανώς το πρόβλημα να λυθεί. Εάν "
+"το πρόβλημα επιμένει παρακαλώ υποβάλλετε ένα εισιτήριο υποστήριξης και θα "
+"χαρούμε να σας βοηθήσουμε."
 
-#: lib/yit-licence.php:213
+#: lib/yit-licence.php:210
 msgid "email address"
 msgstr "διεύθυνση ηλεκτρονικού ταχυδρομείου"
 
-#: lib/yit-licence.php:214
+#: lib/yit-licence.php:211
 msgid "license key"
 msgstr "κλειδί άδειας χρήσης προϊόντος"
 
-#: lib/yit-licence.php:215
+#: lib/yit-licence.php:212
 msgid "Are you sure you want to deactivate the license for current site?"
 msgstr ""
 "Είστε σίγουρος ότι θέλετε να απενεργοποιήσετε την άδειας χρήσης προϊόντος "
 "για την συγκεκριμένη ιστοσελίδα;"
 
-#: lib/yit-licence.php:793
+#: lib/yit-licence.php:213 lib/yit-licence.php:214
+#: templates/panel/activation/activation-panel.php:61
+msgctxt "Form Label"
+msgid "Plugin"
+msgid_plural "Choose the plugin"
+msgstr[0] "Πρόσθετο"
+msgstr[1] "Επιλέξτε το πρόσθετο"
+
+#: lib/yit-licence.php:846
 msgid "Invalid Request"
 msgstr "Άκυρο Αίτημα"
 
-#: lib/yit-licence.php:794
+#: lib/yit-licence.php:847
 msgid "Invalid license key"
 msgstr "Άκυρο κλειδί άδειας χρήσης προϊόντος"
 
-#: lib/yit-licence.php:795
+#: lib/yit-licence.php:848
 msgid "Software has been deactivated"
 msgstr "Το λογισμικό απενεργοποιήθηκε"
 
-#: lib/yit-licence.php:796
-msgid "Maximum number of activations exceeded"
-msgstr "Υπερβήκατε τον μέγιστο αριθμό ενεργοποιήσεων"
+#: lib/yit-licence.php:849
+msgid "Maximum number of license activations reached"
+msgstr "Έχετε υπερβεί τον μέγιστο αριθμό ενεργοποιήσεων άδειας"
 
-#: lib/yit-licence.php:797
+#: lib/yit-licence.php:850
 msgid "Invalid instance ID"
 msgstr "Άκυρο ID περιστατικού"
 
-#: lib/yit-licence.php:798
+#: lib/yit-licence.php:851
 msgid "Invalid security key"
 msgstr "Άκυρο κλειδί ασφαλείας"
 
-#: lib/yit-licence.php:799
+#: lib/yit-licence.php:852
 msgid "License key has expired"
 msgstr "Το κλειδί άδειας χρήσης προϊόντος έχει λήξει"
 
-#: lib/yit-licence.php:800
-msgid "License key has been banned"
-msgstr "Το κλειδί άδειας χρήσης προϊόντος έχει απαγορευθεί"
+#: lib/yit-licence.php:853
+msgid "License key has been revoked"
+msgstr "Το κλειδί άδειας χρήσης έχει ανακληθεί"
 
-#: lib/yit-licence.php:801
-msgid "Current product is not included in your YITH Club Subscription key"
+#: lib/yit-licence.php:854
+msgid "This product is not included in your YITH Club Subscription Plan"
 msgstr ""
-"Το συγκεκριμένο προϊόν δεν περιλαμβάνεται στο κλειδί της YITH Club Εγγραφής "
-"σας"
+"Αυτό το προϊόν δεν περιλαμβάνεται στο πρόγραμμα συνδρομής του YITH Club"
 
-#: lib/yit-licence.php:802
+#: lib/yit-licence.php:855
 msgid "Great"
 msgstr "Τέλεια"
 
-#: lib/yit-licence.php:802
+#: lib/yit-licence.php:855
 msgid "License successfully activated"
 msgstr "Η άδειας χρήσης προϊόντος ενεργοποιήθηκε επιτυχώς"
 
-#: lib/yit-licence.php:803
+#: lib/yit-licence.php:856
 msgid "License key deactivated for website"
 msgstr "Το κλειδί άδειας χρήσης προϊόντος απενεργοποιήθηκε για την ιστοσελίδα"
 
@@ -324,116 +338,211 @@ msgstr ""
 "                    παραχωρηθεί και που μπορείτε να βρείτε στον YITH "
 "λογαριασμό σας, στην ενότητα “Οι άδειές μου”."
 
-#: templates/panel/activation/activation-panel.php:26
-msgid "License expiry date"
-msgstr "Ημερομηνία λήξης άδειας"
+#: templates/panel/activation/activation-panel.php:31
+msgctxt "Page Title"
+msgid "Activate your licenses"
+msgstr "Ενεργοποίηση των αδειών χρήσης σας"
 
-#: templates/panel/activation/activation-panel.php:29
-msgid ""
-"If you have renewed your product license key and the expiry date does not "
-"appear up-to-date, please, click on the button <em>Check Expiry Date</em> "
-"below and it will update."
-msgstr ""
-"Εάν έχετε ανανεώσει το κλειδί άδειας χρήσης προϊόντος και η ημερομηνία λήξης "
-"δεν εμφανίζεται ενημερωμένη, παρακαλούμε, κάντε κλικ στο κουμπί <em>Ελέγξτε "
-"την ημερομηνία λήξης</em> παρακάτω και θα ενημερωθεί."
+#: templates/panel/activation/activation-panel.php:35
+msgctxt "License section message"
+msgid "Your licenses are active."
+msgstr "Οι άδειες χρήσης σας είναι ενεργές."
 
-#: templates/panel/activation/activation-panel.php:32
-msgid "Check expiry date"
-msgstr "Ελέγξτε ημερομηνία λήξης"
-
-#: templates/panel/activation/activation-panel.php:46
-msgid "Product to activate"
-msgid_plural "Products to activate"
-msgstr[0] "Προϊόν για ενεργοποίηση"
-msgstr[1] ""
-
-#: templates/panel/activation/activation-panel.php:49
+#: templates/panel/activation/activation-panel.php:42
+msgctxt ""
+"[Part of]: Are you having issues with the license activation? Read this "
+"article"
 msgid "Are you having issues with the license activation?"
 msgstr "Αντιμετωπίζετε προβλήματα με την ενεργοποίηση της άδειας;"
 
-#: templates/panel/activation/activation-panel.php:49
+#: templates/panel/activation/activation-panel.php:44
 msgctxt ""
 "[Part of]: Are you having issues with the license activation? Read this "
 "article"
 msgid "Read this article"
 msgstr "Διαβάστε το άρθρο"
 
-#: templates/panel/activation/activation-panel.php:63
-msgctxt "Placeholder"
-msgid "Your email on yithemes.com"
-msgstr "Η διεύθυνση ηλεκτρονικού ταχυδρομείου σας στο yithemes.com"
+#: templates/panel/activation/activation-panel.php:82
+msgctxt "Link on activation license panel"
+msgid "E-mail account with YITH"
+msgstr "Λογαριασμός email με YITH"
 
-#: templates/panel/activation/activation-panel.php:66
-msgctxt "Placeholder"
-msgid "License Key"
-msgstr "Κλειδί Άδειας Χρήσης Προϊόντος"
+#: templates/panel/activation/activation-panel.php:84
+msgctxt "Link on activation license panel"
+msgid "or create a new account"
+msgstr "ή δημιουργήστε νέο λογαριασμό"
 
-#: templates/panel/activation/activation-panel.php:69
+#: templates/panel/activation/activation-panel.php:89
+msgctxt "Placeholder"
+msgid "Enter the e-mail address for this license"
+msgstr "Ορίστε διεύθυνση e-mail για αυτή την άδεια"
+
+#: templates/panel/activation/activation-panel.php:98
+msgctxt "Link on activation license panel"
+msgid "License key"
+msgstr "Κλειδί άδειας χρήσης προϊόντος"
+
+#: templates/panel/activation/activation-panel.php:100
+msgctxt "Link on activation license panel"
+msgid "Where to find it ?"
+msgstr "Πού μπορώ να το βρω;"
+
+#: templates/panel/activation/activation-panel.php:105
+msgctxt "Placeholder"
+msgid "Enter the license key"
+msgstr "Ορίστε το κλειδί άδειας"
+
+#: templates/panel/activation/activation-panel.php:109
+msgctxt "Button Label"
 msgid "Activate"
 msgstr "Ενεργοποίηση"
 
-#: templates/panel/activation/activation-panel.php:88
-msgid "Activated"
-msgstr "Ενεργοποιήθηκε"
+#: templates/panel/activation/activation-panel.php:125
+msgctxt "Section Title"
+msgid "Licenses Activated"
+msgstr "Ενεργοποιημένες Άδειες"
 
-#: templates/panel/activation/activation-panel.php:94
-#: templates/panel/activation/activation-panel.php:172
-#: templates/panel/activation/activation-panel.php:202
-msgid "Product Name"
-msgstr "Όνομα Προϊόντος"
+#: templates/panel/activation/activation-panel.php:129
+msgctxt "License section message"
+msgid "No licenses have been activated."
+msgstr "Δεν έχει ενεργοποιηθεί καμία άδεια."
 
-#: templates/panel/activation/activation-panel.php:96
-#: templates/panel/activation/activation-panel.php:174
-#: templates/panel/activation/activation-panel.php:205
-msgid "Email"
-msgstr "Διεύθυνση ηλεκτρονικού ταχυδρομείου"
+#: templates/panel/activation/activation-panel.php:135
+msgid ""
+"If you've already renewed a license and the expiry date is not updated, "
+"click to update."
+msgstr ""
+"Αν έχετε ήδη ανανεώσει μια άδεια αλλά η ημερομηνία λήξης της δεν έχει "
+"ανανεωθεί, κάντε κλικ για ανανέωση."
 
-#: templates/panel/activation/activation-panel.php:97
-#: templates/panel/activation/activation-panel.php:175
-#: templates/panel/activation/activation-panel.php:206
-msgid "License Key"
-msgstr "Κλειδί Άδειας Χρήσης Προϊόντος"
+#: templates/panel/activation/activation-panel.php:136
+msgctxt "button label"
+msgid "Update Expiry Dates"
+msgstr "Ανανέωση Ημερομηνιών Λήξεων"
 
-#: templates/panel/activation/activation-panel.php:100
-#: templates/panel/activation/activation-panel.php:209
-msgid "Expires"
-msgstr "Λήγει"
+#: templates/panel/activation/activation-panel.php:147
+msgid "Licenses Activated"
+msgstr "Ενεργοποιημένες Άδειες"
 
-#: templates/panel/activation/activation-panel.php:103
-msgid "Remaining"
-msgstr "Απομένει"
+#: templates/panel/activation/activation-panel.php:150
+msgctxt "Table Field"
+msgid "License:"
+msgstr "Άδεια:"
 
-#: templates/panel/activation/activation-panel.php:105
-msgid "Club Subscription"
-msgstr "Εγγραφή στο Club"
+#: templates/panel/activation/activation-panel.php:151
+msgctxt "Table Field"
+msgid "Email:"
+msgstr "Email:"
 
-#: templates/panel/activation/activation-panel.php:134
+#: templates/panel/activation/activation-panel.php:152
+msgctxt "Table Field"
+msgid "License Key:"
+msgstr "Κλειδί Άδειας:"
+
+#: templates/panel/activation/activation-panel.php:153
+msgctxt "Table Field"
+msgid "Licenses used:"
+msgstr "Χρησιμοποιημένες άδειες:"
+
+#: templates/panel/activation/activation-panel.php:154
+msgctxt "Table Field"
+msgid "Expires on:"
+msgstr "Λήγει στις:"
+
+#: templates/panel/activation/activation-row.php:4
+msgid "License:"
+msgstr "Άδεια:"
+
+#: templates/panel/activation/activation-row.php:8
+msgid "Email:"
+msgstr "Email:"
+
+#: templates/panel/activation/activation-row.php:37
+msgid "License Key:"
+msgstr "Κλειδί Άδειας:"
+
+#: templates/panel/activation/activation-row.php:41
+msgid "Licenses used:"
+msgstr "Χρησιμοποιημένες άδειες:"
+
+#: templates/panel/activation/activation-row.php:43
 #, php-format
 msgid "%1s out of %2s"
 msgstr "%1s από %2s"
 
-#: templates/panel/activation/activation-panel.php:150
-msgid "Deactivate"
-msgstr "Απενεργοποίηση"
+#: templates/panel/activation/activation-row.php:57
+msgctxt "License status"
+msgid "expired"
+msgstr "έληξε"
 
-#: templates/panel/activation/activation-panel.php:155
-#: templates/panel/activation/activation-panel.php:212
-msgid "Renew"
-msgstr "Ανανέωση"
+#: templates/panel/activation/activation-row.php:60
+msgctxt "License status"
+msgid "banned"
+msgstr "αποκλείστηκε"
 
-#: templates/panel/activation/activation-panel.php:168
-msgid "Banned"
-msgstr "Αποκλείστηκε"
+#: templates/panel/activation/activation-row.php:69
+msgid "Expires on:"
+msgstr "Λήγει στις:"
 
-#: templates/panel/activation/activation-panel.php:198
-msgid "Expired"
-msgstr "Έληξε"
+#: templates/panel/activation/activation-row.php:79
+msgctxt "button label"
+msgid "renew"
+msgstr "ανανέωση"
 
-#: templates/panel/activation/activation-panel.php:234
-msgid "Order again"
-msgstr "Επαναλάβετε παραγγελία"
+#: templates/panel/activation/activation-row.php:84
+msgctxt "this is a short text for a link"
+msgid "Or get a new license"
+msgstr "Ή αποκτήστε μια νέα άδεια"
 
-#: templates/panel/activation/activation-panel.php:236
-msgid "Renew license"
-msgstr "Ανανέωση άδειας χρήσης προϊόντος"
+#: templates/panel/activation/activation-row.php:100
+msgctxt "Button label"
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+#~ msgid "Unable to contact the remote server, please try again later. Thanks!"
+#~ msgstr ""
+#~ "Δεν είναι δυνατή η επικοινωνία με απομακρυσμένο διακομιστή. Παρακαλώ, "
+#~ "δοκιμάστε ξανά αργότερα. Ευχαριστούμε!"
+
+#~ msgid "License expiry date"
+#~ msgstr "Ημερομηνία λήξης άδειας"
+
+#~ msgid ""
+#~ "If you have renewed your product license key and the expiry date does not "
+#~ "appear up-to-date, please, click on the button <em>Check Expiry Date</em> "
+#~ "below and it will update."
+#~ msgstr ""
+#~ "Εάν έχετε ανανεώσει το κλειδί άδειας χρήσης προϊόντος και η ημερομηνία "
+#~ "λήξης δεν εμφανίζεται ενημερωμένη, παρακαλούμε, κάντε κλικ στο κουμπί "
+#~ "<em>Ελέγξτε την ημερομηνία λήξης</em> παρακάτω και θα ενημερωθεί."
+
+#~ msgid "Product to activate"
+#~ msgid_plural "Products to activate"
+#~ msgstr[0] "Προϊόν για ενεργοποίηση"
+#~ msgstr[1] "Προϊόντα για ενεργοποίηση"
+
+#~ msgctxt "Placeholder"
+#~ msgid "Your email on yithemes.com"
+#~ msgstr "Η διεύθυνση ηλεκτρονικού ταχυδρομείου σας στο yithemes.com"
+
+#~ msgctxt "Placeholder"
+#~ msgid "License Key"
+#~ msgstr "Κλειδί Άδειας Χρήσης Προϊόντος"
+
+#~ msgid "Activated"
+#~ msgstr "Ενεργοποιήθηκε"
+
+#~ msgid "Product Name"
+#~ msgstr "Όνομα Προϊόντος"
+
+#~ msgid "Remaining"
+#~ msgstr "Απομένει"
+
+#~ msgid "Club Subscription"
+#~ msgstr "Εγγραφή στο Club"
+
+#~ msgid "Deactivate"
+#~ msgstr "Απενεργοποίηση"
+
+#~ msgid "Order again"
+#~ msgstr "Επαναλάβετε παραγγελία"

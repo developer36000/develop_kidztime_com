@@ -19,7 +19,7 @@ return array(
 
 		'section_yahoo_settings' => array(
 			'name' => __( 'Yahoo settings', 'yith-woocommerce-social-login' ),
-			'desc' => __( '<strong>Callback URL</strong>: ' . site_url(), 'yith-woocommerce-social-login' ),
+			'desc' => __( '<strong>Callback URL</strong>: ' . YITH_WC_Social_Login()->get_base_url(), 'yith-woocommerce-social-login' ),
 			'type' => 'title',
 			'id'   => 'ywsl_section_yahoo'
 		),
