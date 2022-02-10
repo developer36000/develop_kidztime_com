@@ -33,7 +33,7 @@
     "jquery": "^3.5.1",
     "jsdom": "^16.2.2",
     "motion-ui": "^2.0.3",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "tls": "0.0.1",
     "webfontloader": "^1.6.28",
     "what-input": "^4.1.3"
